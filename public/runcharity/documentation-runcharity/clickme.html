@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <title>Run Charity - Documentation</title>
+    <!-- Mobile viewport optimized -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <!-- Mobile Internet Explorer allows us to activate ClearType technology for smoothing fonts for easy reading -->
+    <meta http-equiv="cleartype" content="on">
+
+    <!-- Le styles -->
+    <link href="css/bootswatch/Cosmo/bootstrap.min.css" rel="stylesheet">
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/themes/black-tie/jquery-ui.css" rel="stylesheet">
+    <link href="css/jquery.tocify.css" rel="stylesheet">
+    <link href="css/prettify.css" rel="stylesheet" type="text/css">
+    <link href="css/styles.css" rel="stylesheet" type="text/css">
+    <link href="css/rainbow/themes/zenburnesque.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="css/rainbowlines/theme.css" media="screen" />
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link href="../assets/ico/favicon.ico" rel="shortcut icon">
+    <link href="../assets/ico/apple-touch-icon-144-precomposed.png" rel="apple-touch-icon-precomposed" sizes="144x144">
+    <link href="../assets/ico/apple-touch-icon-114-precomposed.png" rel="apple-touch-icon-precomposed" sizes="114x114">
+    <link href="../assets/ico/apple-touch-icon-72-precomposed.png" rel="apple-touch-icon-precomposed" sizes="72x72">
+    <link href="../assets/ico/apple-touch-icon-57-precomposed.png" rel="apple-touch-icon-precomposed">
+	<style>pre {font-size:12px;border:0;}</style>
+  </head>
+
+  <body>
+   
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom:120px;">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://www.wowthemes.net/premium-themes-templates/"><img src="img/logo.png"></a>
+  </div>
+  
+  <div class="text-center" style="font-size: 24px;line-height: 73px;">
+  Run Charity Lite - Theme Documentation
+  </div>
+
+</nav>
+     
+
+    <div class="container-fluid" style="margin-top:50px;">
+      <div class="row">
+        <div class="tocify col-sm-3 col-md-3">
+          <div id="toc">
+          </div><!--/.well -->
+        </div><!--/span-->
+        <div class="col-sm-9 col-md-9">
+          <div class="jumbotron">
+            <h1>Run Charity</h1>
+
+             <p>Report bugs, discuss features or ask for support here:</p>        
+            
+            </p>
+            <p><a class="btn btn-primary btn-lg" href="http://www.wowthemes.net/support/" target="_blank">Item Support »</a></p>
+          </div>
+          <h2>Requirements</h2>
+          <br>
+          <p class="well">
+         No special requirements.
+          </p>
+          <br>
+          <h2>Optional Dependencies</h2>
+          <br>
+          <p class="well">
+          You may find Notepad++ useful to edit your template code (CSS, HTML, JAVA or PHP code).
+          </p>
+          <br>
+          <h2>Basic Structure</h2><br/>
+<pre style="background:#211e1e;color:#dadada">&lt;!<span style="background:#f00;color:#fff9f9;font-weight:700">d</span><span style="background:#f00;color:#fff9f9;font-weight:700">o</span><span style="background:#f00;color:#fff9f9;font-weight:700">c</span><span style="background:#f00;color:#fff9f9;font-weight:700">t</span><span style="background:#f00;color:#fff9f9;font-weight:700">y</span><span style="background:#f00;color:#fff9f9;font-weight:700">p</span><span style="background:#f00;color:#fff9f9;font-weight:700">e </span><span style="background:#f00;color:#fff9f9;font-weight:700">h</span><span style="background:#f00;color:#fff9f9;font-weight:700">t</span><span style="background:#f00;color:#fff9f9;font-weight:700">m</span><span style="background:#f00;color:#fff9f9;font-weight:700">l</span>>
+&lt;html lang=<span style="color:#ad9361">"en"</span>>
+&lt;head>
+    <span style="color:#555">&lt;!-- Meta, title, CSS, favicons, etc. --></span>
+    &lt;meta charset=<span style="color:#ad9361">"utf-8"</span>>
+    &lt;meta name=<span style="color:#ad9361">"viewport"</span> content=<span style="color:#ad9361">"width=device-width, initial-scale=1.0"</span>>
+    &lt;meta name=<span style="color:#ad9361">"description"</span> content=<span style="color:#ad9361">""</span>>
+    &lt;meta name=<span style="color:#ad9361">"author"</span> content=<span style="color:#ad9361">""</span>>
+    &lt;title>RUN CHARITY &lt;/title>
+    
+    <span style="color:#555">&lt;!-- Styles --></span>
+    &lt;link rel=<span style="color:#ad9361">'stylesheet'</span> href=<span style="color:#ad9361">'assets/css/bootstrap.min.css'</span>>
+    &lt;link rel=<span style="color:#ad9361">'stylesheet'</span> href=<span style="color:#ad9361">'assets/css/animate.min.css'</span>>
+    &lt;link rel=<span style="color:#ad9361">'stylesheet'</span> href=<span style="color:#ad9361">"assets/css/font-awesome.min.css"</span>/>
+    &lt;link rel=<span style="color:#ad9361">'stylesheet'</span> href=<span style="color:#ad9361">"assets/css/style.css"</span>/>
+    
+    <span style="color:#555">&lt;!-- Fonts --></span>
+    &lt;link href=<span style="color:#ad9361">'http://fonts.googleapis.com/css?family=Raleway:200,300,400,500,600,700,800'</span> rel=<span style="color:#ad9361">'stylesheet'</span> type=<span style="color:#ad9361">'text/css'</span>>
+
+    <span style="color:#555">&lt;!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries --></span>
+    <span style="color:#555">&lt;!--[if lt IE 9]>
+          &lt;script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js">&lt;/script>
+          &lt;script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js">&lt;/script>
+    &lt;![endif]--></span>
+            
+    <span style="color:#555">&lt;!-- Favicon --></span>
+    &lt;link rel=<span style="color:#ad9361">"shortcut icon"</span> href=<span style="color:#ad9361">"#"</span>>
+&lt;/head>
+&lt;body>
+
+SECTIONS GO HERE....
+
+&lt;script src=<span style="color:#ad9361">"assets/js/jquery.min.js"</span>>&lt;/script>
+&lt;script src=<span style="color:#ad9361">"assets/js/bootstrap.min.js"</span>>&lt;/script>
+&lt;script src=<span style="color:#ad9361">"assets/js/waypoints.min.js"</span>>&lt;/script>
+&lt;script src=<span style="color:#ad9361">"assets/js/jquery.scrollTo.min.js"</span>>&lt;/script>
+&lt;script src=<span style="color:#ad9361">"assets/js/jquery.localScroll.min.js"</span>>&lt;/script>
+&lt;script src=<span style="color:#ad9361">"assets/js/jquery.magnific-popup.min.js"</span>>&lt;/script>
+&lt;script src=<span style="color:#ad9361">"assets/js/validate.js"</span>>&lt;/script>
+&lt;script src=<span style="color:#ad9361">"assets/js/common.js"</span>>&lt;/script>
+&lt;/body>
+&lt;/html>
+
+</pre>
+          <br>
+		 
+          <h2>Sections</h2>
+		   <br>	 
+
+<pre style="background:#211e1e;color:#dadada">&lt;section id<span style="color:#47b8d6">=</span><span style="color:#ad9361">"gallery"</span> class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"parallax section"</span>  style<span style="color:#47b8d6">=</span><span style="color:#ad9361">"background-image: url(assets/img/imagename.jpg);"</span>>
+&lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"wrapper"</span>>
+	&lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"parallax-overlay"</span> style<span style="color:#47b8d6">=</span><span style="color:#ad9361">"background-color:#00c1c1;opacity:0.9;"</span>>&lt;<span style="color:#47b8d6">/</span>div>
+	&lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"container"</span>>
+		&lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"row"</span>>
+			&lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"col-md-12 sol-sm-12"</span>>
+				&lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"maintitle"</span>>
+					&lt;h3 class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"section-title"</span>>Title&lt;<span style="color:#47b8d6">/</span>h3>
+					&lt;p class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"lead"</span>>
+						description
+					&lt;<span style="color:#47b8d6">/</span>p>
+				&lt;<span style="color:#47b8d6">/</span>div>
+			&lt;<span style="color:#47b8d6">/</span>div>
+			
+			CONTENT IN A GRID SYSTEM GOES HERE . . .
+			
+		&lt;/div>
+	&lt;/div>
+&lt;/div>
+&lt;/section>
+</pre>
+
+<p>Change the background url with your actual image path. You can also change the background color from <i>00c1c1</i> to any other color you wish by replacing the <a href="http://html-color-codes.info/">color code</a>. The transparency of the image background can be easily changed setting a lower opacity. Our example defines a 0.9 opacity, you can replace it with any other value between 0.0 & 1.0 (example: 0.6).</p>
+
+		   
+		   
+          <h2>Grid System</h2>
+          <br>
+          <p class="well">
+          Grid systems are used for creating page layouts through a series of rows and columns that house your content.
+		  <br/>
+		  Using a single set of .col-md-* grid classes, you can create a basic grid system that starts out stacked on mobile devices and tablet devices (the extra small to small range) before becoming horizontal on desktop (medium) devices. Place grid columns in any .row.
+          </p>
+		  
+		  <div class="bs-docs-grid">
+    <div class="row show-grid">
+      <div class="col-md-1">.col-md-1</div>
+      <div class="col-md-1">.col-md-1</div>
+      <div class="col-md-1">.col-md-1</div>
+      <div class="col-md-1">.col-md-1</div>
+      <div class="col-md-1">.col-md-1</div>
+      <div class="col-md-1">.col-md-1</div>
+      <div class="col-md-1">.col-md-1</div>
+      <div class="col-md-1">.col-md-1</div>
+      <div class="col-md-1">.col-md-1</div>
+      <div class="col-md-1">.col-md-1</div>
+      <div class="col-md-1">.col-md-1</div>
+      <div class="col-md-1">.col-md-1</div>
+    </div>
+    <div class="row show-grid">
+      <div class="col-md-8">.col-md-8</div>
+      <div class="col-md-4">.col-md-4</div>
+    </div>
+    <div class="row show-grid">
+      <div class="col-md-4">.col-md-4</div>
+      <div class="col-md-4">.col-md-4</div>
+      <div class="col-md-4">.col-md-4</div>
+    </div>
+    <div class="row show-grid">
+      <div class="col-md-6">.col-md-6</div>
+      <div class="col-md-6">.col-md-6</div>
+    </div>
+  </div>
+          <br>
+		  
+		  <div class="highlight"><pre><code class="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-1"</span><span class="nt">&gt;</span>.col-md-1<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-1"</span><span class="nt">&gt;</span>.col-md-1<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-1"</span><span class="nt">&gt;</span>.col-md-1<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-1"</span><span class="nt">&gt;</span>.col-md-1<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-1"</span><span class="nt">&gt;</span>.col-md-1<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-1"</span><span class="nt">&gt;</span>.col-md-1<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-1"</span><span class="nt">&gt;</span>.col-md-1<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-1"</span><span class="nt">&gt;</span>.col-md-1<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-1"</span><span class="nt">&gt;</span>.col-md-1<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-1"</span><span class="nt">&gt;</span>.col-md-1<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-1"</span><span class="nt">&gt;</span>.col-md-1<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-1"</span><span class="nt">&gt;</span>.col-md-1<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-8"</span><span class="nt">&gt;</span>.col-md-8<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-4"</span><span class="nt">&gt;</span>.col-md-4<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-4"</span><span class="nt">&gt;</span>.col-md-4<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-4"</span><span class="nt">&gt;</span>.col-md-4<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-4"</span><span class="nt">&gt;</span>.col-md-4<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-6"</span><span class="nt">&gt;</span>.col-md-6<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-6"</span><span class="nt">&gt;</span>.col-md-6<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div><br/>
+
+<h2>Menu & Scroll To</h2>
+<br/><b>MENU STRUCTURE EXAMPLE:</b><br/>
+<pre style="background:#211e1e;color:#dadada">    &lt;nav class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"collapse navbar-collapse bs-navbar-collapse navbar-right"</span> role<span style="color:#47b8d6">=</span><span style="color:#ad9361">"navigation"</span>>
+    &lt;ul class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"nav navbar-nav"</span>>
+        &lt;li>
+        &lt;a href<span style="color:#47b8d6">=</span><span style="color:#ad9361">"#hero"</span>>Home&lt;<span style="color:#47b8d6">/</span>a>
+        &lt;<span style="color:#47b8d6">/</span>li>
+        &lt;li>
+        &lt;a href<span style="color:#47b8d6">=</span><span style="color:#ad9361">"#about"</span>>About&lt;<span style="color:#47b8d6">/</span>a>
+        &lt;<span style="color:#47b8d6">/</span>li>
+        &lt;li>
+        &lt;a href<span style="color:#47b8d6">=</span><span style="color:#ad9361">"#gallery"</span>>Gallery&lt;<span style="color:#47b8d6">/</span>a>
+        &lt;<span style="color:#47b8d6">/</span>li>
+        &lt;li>
+        &lt;a href<span style="color:#47b8d6">=</span><span style="color:#ad9361">"#slider"</span>>Testimonials&lt;<span style="color:#47b8d6">/</span>a>
+        &lt;<span style="color:#47b8d6">/</span>li>
+        &lt;li>
+        &lt;a href<span style="color:#47b8d6">=</span><span style="color:#ad9361">"#faq"</span>>FAQ&lt;<span style="color:#47b8d6">/</span>a>
+        &lt;<span style="color:#47b8d6">/</span>li>
+        &lt;li>
+        &lt;a href<span style="color:#47b8d6">=</span><span style="color:#ad9361">"#contactarea"</span>>Contact&lt;<span style="color:#47b8d6">/</span>a>
+        &lt;<span style="color:#47b8d6">/</span>li>
+    &lt;<span style="color:#47b8d6">/</span>ul>
+    &lt;<span style="color:#47b8d6">/</span>nav>
+</pre>
+<p class="well">
+<span class="note">
+This template is a single HTML page, split in sections. Each menu link relates to a section. In example, the "#about" menu link scrolls to "about" id section and so on:
+<pre>&lt;section id=&quot;gallery&quot;&gt;gallery page here&lt;/section&gt;</pre><br/>
+<pre>&lt;section id=&quot;about&quot;&gt;about page here&lt;/section&gt;</pre><br/>
+<pre>&lt;section id=&quot;services&quot;&gt;services page here&lt;/section&gt;</pre><br/>
+etc.
+</span>
+</p>
+
+	<br/>	  
+	<h2>Pages</h2> 
+		  
+	<h3>Home</h3>
+<pre style="background:#211e1e;color:#dadada">&lt;section id<span style="color:#47b8d6">=</span><span style="color:#ad9361">"hero"</span> class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"section"</span>>
+&lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"container"</span>>
+    &lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"row"</span>>
+        &lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"col-md-5"</span>>
+            &lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"herotext"</span>>
+                &lt;h1 class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"wow bounceInDown"</span> <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span>wow<span style="color:#47b8d6">-</span><span style="color:#a1a1ff">duration</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"1s"</span> <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span>wow<span style="color:#47b8d6">-</span>delay<span style="color:#47b8d6">=</span><span style="color:#ad9361">"0.1s"</span>>RUN &lt;span class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"lighter"</span>>CHARITY&lt;<span style="color:#47b8d6">/</span>span>&lt;<span style="color:#47b8d6">/</span>h1>
+                &lt;p class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"lead wow zoomIn"</span> <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span>wow<span style="color:#47b8d6">-</span><span style="color:#a1a1ff">duration</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"2s"</span> <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span>wow<span style="color:#47b8d6">-</span>delay<span style="color:#47b8d6">=</span><span style="color:#ad9361">"0.5s"</span>>
+                    When we give cheerfully <span style="color:#a1a1ff">and</span> accept gratefully, everyone is blessed.
+                &lt;<span style="color:#47b8d6">/</span>p>
+                &lt;p>
+                    &lt;a href<span style="color:#47b8d6">=</span><span style="color:#ad9361">"#"</span> class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"btn btn-default btn-lg wow fadeInLeft"</span> role<span style="color:#47b8d6">=</span><span style="color:#ad9361">"button"</span>> View Gallery &lt;<span style="color:#47b8d6">/</span>a> <span style="color:#47b8d6">&amp;</span>nbsp; &lt;a href<span style="color:#47b8d6">=</span><span style="color:#ad9361">"#"</span> class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"btn btn-default btn-lg wow fadeInRight"</span> role<span style="color:#47b8d6">=</span><span style="color:#ad9361">"button"</span>>Find a Cause&lt;<span style="color:#47b8d6">/</span>a>
+                &lt;<span style="color:#47b8d6">/</span>p>
+            &lt;<span style="color:#47b8d6">/</span>div>
+        &lt;<span style="color:#47b8d6">/</span>div>
+        &lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"col-md-7"</span>>
+        &lt;<span style="color:#47b8d6">/</span>div>
+    &lt;<span style="color:#47b8d6">/</span>div>
+&lt;<span style="color:#47b8d6">/</span>div>
+&lt;<span style="color:#47b8d6">/</span>section>
+</pre>
+  
+	  
+	  
+	<h3>About Us</h3>
+Basic Box Structure:
+
+<pre style="background:#211e1e;color:#dadada">    &lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"service-box wow flipInY"</span> <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span>wow<span style="color:#47b8d6">-</span><span style="color:#a1a1ff">duration</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"1.5s"</span> <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span>wow<span style="color:#47b8d6">-</span>delay<span style="color:#47b8d6">=</span><span style="color:#ad9361">"0.1s"</span>>
+                &lt;span class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"glyphicon glyphicon-stats"</span>>&lt;<span style="color:#47b8d6">/</span>span>
+                &lt;h3><span style="color:#ccc">1.386</span> Participants&lt;<span style="color:#47b8d6">/</span>h3>
+                &lt;p>
+                    Nullam posuere, libero id interdum hendrerit, tortor nisl consectetur elit.
+                &lt;<span style="color:#47b8d6">/</span>p>
+                &lt;button <span style="color:#a1a1ff">type</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"button"</span> class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"btn btn-info btn-md"</span>>Learn More&lt;<span style="color:#47b8d6">/</span>button>
+            &lt;<span style="color:#47b8d6">/</span>div>
+</pre>
+
+	  
+	<h3>Gallery</h3>
+	<p>Image Box</p>
+<pre style="background:#211e1e;color:#dadada">            &lt;a href=<span style="color:#ad9361">"assets/img/imagename.jpg"</span> title=<span style="color:#ad9361">"This is the description"</span>>
+                &lt;img src=<span style="color:#ad9361">"assets/img/imagename.jpg"</span> alt=<span style="color:#ad9361">""</span> class=<span style="color:#ad9361">"image-responsive"</span>>
+                &lt;div class=<span style="color:#ad9361">"description"</span>>
+                    &lt;span class=<span style="color:#ad9361">"caption"</span>>This is &lt;b>awesome&lt;/b>&lt;/span> 
+                    &lt;span class=<span style="color:#ad9361">"camera"</span>>&lt;i class=<span style="color:#ad9361">"fa fa-camera"</span>>&lt;/i>&lt;/span>
+                    &lt;div class=<span style="color:#ad9361">"clearfix"</span>>&lt;/div>
+                &lt;/div>          
+            &lt;/a>
+</pre>
+
+
+
+
+	
+	<h3>Testimonials</h3>
+	<p>Slider</p>
+<pre style="background:#211e1e;color:#dadada">            &lt;div id<span style="color:#47b8d6">=</span><span style="color:#ad9361">"Carousel"</span> class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"carousel slide"</span>>
+                &lt;ol class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"carousel-indicators"</span>>
+                    &lt;li <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span><span style="color:#a1a1ff">target</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"#Carousel"</span> <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span>slide<span style="color:#47b8d6">-</span>to<span style="color:#47b8d6">=</span><span style="color:#ad9361">"0"</span> class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"active"</span>>&lt;<span style="color:#47b8d6">/</span>li>
+                    &lt;li <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span><span style="color:#a1a1ff">target</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"#Carousel"</span> <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span>slide<span style="color:#47b8d6">-</span>to<span style="color:#47b8d6">=</span><span style="color:#ad9361">"1"</span>>&lt;<span style="color:#47b8d6">/</span>li>
+                    &lt;li <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span><span style="color:#a1a1ff">target</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"#Carousel"</span> <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span>slide<span style="color:#47b8d6">-</span>to<span style="color:#47b8d6">=</span><span style="color:#ad9361">"2"</span>>&lt;<span style="color:#47b8d6">/</span>li>
+                &lt;<span style="color:#47b8d6">/</span>ol>
+                &lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"carousel-inner"</span>>
+                    &lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"item active"</span>>
+                        &lt;blockquote>
+                            &lt;p class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"lead"</span>>
+                                You have <span style="color:#a1a1ff">not</span> lived today until you have done something <span style="color:#6969fa;font-weight:700">for</span> someone who can never repay you.
+                            &lt;<span style="color:#47b8d6">/</span>p>
+                            &lt;small>John Bunyan, Marathon&lt;<span style="color:#47b8d6">/</span>small>
+                        &lt;<span style="color:#47b8d6">/</span>blockquote>
+                    &lt;<span style="color:#47b8d6">/</span>div>
+                    &lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"item"</span>>
+                        &lt;blockquote>
+                            &lt;p class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"lead"</span>>
+                                The simplest acts of kindness are by far more powerful then a thousand heads bowing <span style="color:#a1a1ff">in</span> prayer.
+                            &lt;<span style="color:#47b8d6">/</span>p>
+                            &lt;small>Mahatma Gandhi&lt;<span style="color:#47b8d6">/</span>small>
+                        &lt;<span style="color:#47b8d6">/</span>blockquote>
+                    &lt;<span style="color:#47b8d6">/</span>div>
+                    &lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"item"</span>>
+                        &lt;blockquote>
+                            &lt;p class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"lead"</span>>
+                                There is no exercise better <span style="color:#6969fa;font-weight:700">for</span> the heart than reaching down <span style="color:#a1a1ff">and</span> lifting people up.
+                            &lt;<span style="color:#47b8d6">/</span>p>
+                            &lt;small>John Holmes, Organizer&lt;<span style="color:#47b8d6">/</span>small>
+                        &lt;<span style="color:#47b8d6">/</span>blockquote>
+                    &lt;<span style="color:#47b8d6">/</span>div>
+                &lt;<span style="color:#47b8d6">/</span>div>
+                &lt;a class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"left carousel-control"</span> href<span style="color:#47b8d6">=</span><span style="color:#ad9361">"#Carousel"</span> <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span>slide<span style="color:#47b8d6">=</span><span style="color:#ad9361">"prev"</span>>
+                &lt;span class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"glyphicon glyphicon-chevron-left"</span>>&lt;<span style="color:#47b8d6">/</span>span>
+                &lt;<span style="color:#47b8d6">/</span>a>
+                &lt;a class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"right carousel-control"</span> href<span style="color:#47b8d6">=</span><span style="color:#ad9361">"#Carousel"</span> <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span>slide<span style="color:#47b8d6">=</span><span style="color:#ad9361">"next"</span>>
+                &lt;span class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"glyphicon glyphicon-chevron-right"</span>>&lt;<span style="color:#47b8d6">/</span>span>
+                &lt;<span style="color:#47b8d6">/</span>a>
+            &lt;<span style="color:#47b8d6">/</span>div>
+</pre>
+
+<p>Single Slide</span></p>
+<pre style="background:#211e1e;color:#dadada">                    &lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"item"</span>>
+                        &lt;blockquote>
+                            &lt;p class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"lead"</span>>
+                                The simplest acts of kindness are by far more powerful then a thousand heads bowing <span style="color:#a1a1ff">in</span> prayer.
+                            &lt;<span style="color:#47b8d6">/</span>p>
+                            &lt;small>Mahatma Gandhi&lt;<span style="color:#47b8d6">/</span>small>
+                        &lt;<span style="color:#47b8d6">/</span>blockquote>
+                    &lt;<span style="color:#47b8d6">/</span>div>
+</pre>
+
+<br/>
+
+<h3>FAQ</h3>
+<p>Accordion Group</p>
+
+<pre style="background:#211e1e;color:#dadada">            &lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"faq-block wow bounceInDown"</span> <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span>wow<span style="color:#47b8d6">-</span><span style="color:#a1a1ff">duration</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"1.5s"</span> <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span>wow<span style="color:#47b8d6">-</span>delay<span style="color:#47b8d6">=</span><span style="color:#ad9361">"0.1s"</span>>
+                &lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"panel-group"</span>>
+                    &lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"panel panel-default"</span>>
+                        &lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"panel-heading"</span>>
+                            &lt;h4 class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"panel-title"</span>>
+                            &lt;a <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span><span style="color:#a1a1ff">toggle</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"collapse"</span> <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span>parent<span style="color:#47b8d6">=</span><span style="color:#ad9361">"#accordion"</span> href<span style="color:#47b8d6">=</span><span style="color:#ad9361">"#collapseFour"</span>>
+                            Can we <span style="color:#a1a1ff">show</span> sponsors<span style="color:#47b8d6">?</span> &lt;<span style="color:#47b8d6">/</span>a>
+                            &lt;<span style="color:#47b8d6">/</span>h4>
+                        &lt;<span style="color:#47b8d6">/</span>div>
+                        &lt;div id<span style="color:#47b8d6">=</span><span style="color:#ad9361">"collapseFour"</span> class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"panel-collapse collapse"</span>>
+                            &lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"panel-body"</span>>
+                                 Sponsors. This is the detailed answer. 
+                            &lt;<span style="color:#47b8d6">/</span>div>
+                        &lt;<span style="color:#47b8d6">/</span>div>
+                    &lt;<span style="color:#47b8d6">/</span>div>
+                    &lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"panel panel-default"</span>>
+                        &lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"panel-heading"</span>>
+                            &lt;h4 class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"panel-title"</span>>
+                            &lt;a <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span><span style="color:#a1a1ff">toggle</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"collapse"</span> <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span>parent<span style="color:#47b8d6">=</span><span style="color:#ad9361">"#accordion"</span> href<span style="color:#47b8d6">=</span><span style="color:#ad9361">"#collapseFive"</span>>
+                            Are there free drinks<span style="color:#47b8d6">?</span> &lt;<span style="color:#47b8d6">/</span>a>
+                            &lt;<span style="color:#47b8d6">/</span>h4>
+                        &lt;<span style="color:#47b8d6">/</span>div>
+                        &lt;div id<span style="color:#47b8d6">=</span><span style="color:#ad9361">"collapseFive"</span> class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"panel-collapse collapse"</span>>
+                            &lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"panel-body"</span>>
+                                 Drinks. This is the detailed answer. 
+                            &lt;<span style="color:#47b8d6">/</span>div>
+                        &lt;<span style="color:#47b8d6">/</span>div>
+                    &lt;<span style="color:#47b8d6">/</span>div>
+                    &lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"panel panel-default"</span>>
+                        &lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"panel-heading"</span>>
+                            &lt;h4 class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"panel-title"</span>>
+                            &lt;a <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span><span style="color:#a1a1ff">toggle</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"collapse"</span> <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span>parent<span style="color:#47b8d6">=</span><span style="color:#ad9361">"#accordion"</span> href<span style="color:#47b8d6">=</span><span style="color:#ad9361">"#collapseSix"</span>>
+                            Is medical exam free <span style="color:#47b8d6">?</span> &lt;<span style="color:#47b8d6">/</span>a>
+                            &lt;<span style="color:#47b8d6">/</span>h4>
+                        &lt;<span style="color:#47b8d6">/</span>div>
+                        &lt;div id<span style="color:#47b8d6">=</span><span style="color:#ad9361">"collapseSix"</span> class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"panel-collapse collapse"</span>>
+                            &lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"panel-body"</span>>
+                                 Medical. This is the detailed answer. 
+                            &lt;<span style="color:#47b8d6">/</span>div>
+                        &lt;<span style="color:#47b8d6">/</span>div>
+                    &lt;<span style="color:#47b8d6">/</span>div>
+                &lt;<span style="color:#47b8d6">/</span>div>
+            &lt;<span style="color:#47b8d6">/</span>div>
+</pre>
+
+
+<p class="well"><span class="note">Notice how the href# must be identical with the id: </span></p>
+<pre style="background:#211e1e;color:#dadada">&lt;a data-toggle=<span style="color:#ad9361">"collapse"</span> data-parent=<span style="color:#ad9361">"#accordion"</span> href=<span style="color:#ad9361">"#collapseFour"</span>>
+</pre>
+
+<pre style="background:#211e1e;color:#dadada">&lt;div id=<span style="color:#ad9361">"collapseFour"</span> class=<span style="color:#ad9361">"panel-collapse collapse"</span>>
+</pre>
+	
+
+	<br/>
+	<h3>Contact</h3>
+          <p class="well note">
+              <span class="note">Open process.php file and replace the current e-mail address with your own:</span>
+          </p>
+		<pre style='color:#d1d1d1;background:#000000;'>$to <span style='color:#d2cd86; '>=</span> <span style='color:#02d045; '>"</span><span style='color:#00c4c4; '>wowthemesnet@gmail.com</span><span style='color:#02d045; '>"</span><span style='color:#b060b0; '>;</span></pre>
+         <p class="well note">
+              <span class="note">In order to change the error messages, open js/validate.js at the bottom at the document and replace the preset messages with your own (around line 2492):</span>
+          </p>
+		  
+		  <pre style='color:#d1d1d1;background:#000000;'>
+<span style='color:#e34adc; '>messages:</span> <span style='color:#b060b0; '>{</span>
+<span style='color:#e34adc; '>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;name:</span> <span style='color:#b060b0; '>{</span>
+<span style='color:#e34adc; '>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;required:</span> <span style='color:#02d045; '>"</span><span style='color:#00c4c4; '>Please, add your name.</span><span style='color:#02d045; '>"</span><span style='color:#d2cd86; '>,</span>
+<span style='color:#e34adc; '>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;minlength:</span> <span style='color:#02d045; '>"</span><span style='color:#00c4c4; '>Your name must consist of at least 2 characters</span><span style='color:#02d045; '>"</span>
+            <span style='color:#b060b0; '>}</span><span style='color:#d2cd86; '>,</span>
+<span style='color:#e34adc; '>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;email:</span> <span style='color:#b060b0; '>{</span>
+<span style='color:#e34adc; '>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;required:</span> <span style='color:#02d045; '>"</span><span style='color:#00c4c4; '>Please, add your e-mail address.</span><span style='color:#02d045; '>"</span>
+            <span style='color:#b060b0; '>}</span><span style='color:#d2cd86; '>,</span>
+<span style='color:#e34adc; '>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;message:</span> <span style='color:#b060b0; '>{</span>
+<span style='color:#e34adc; '>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;required:</span> <span style='color:#02d045; '>"</span><span style='color:#00c4c4; '>Please, add your message.</span><span style='color:#02d045; '>"</span><span style='color:#d2cd86; '>,</span>
+<span style='color:#e34adc; '>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;minlength:</span> <span style='color:#02d045; '>"</span><span style='color:#00c4c4; '>Your message is too short.</span><span style='color:#02d045; '>"</span>
+            <span style='color:#b060b0; '>}</span><span style='color:#d2cd86; '>,</span>
+<span style='color:#e34adc; '>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;answer:</span> <span style='color:#b060b0; '>{</span>
+<span style='color:#e34adc; '>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;required:</span> <span style='color:#02d045; '>"</span><span style='color:#00c4c4; '>sorry, wrong answer!</span><span style='color:#02d045; '>"</span>
+            <span style='color:#b060b0; '>}</span>
+        <span style='color:#b060b0; '>}</span><span style='color:#d2cd86; '>,</span>
+</pre>
+
+<p class="well note"><span class="note">Basic Contact Form (do not change the id, name, method unless you know what you're doing):</span></p>
+<pre style="background:#211e1e;color:#dadada">        &lt;form id<span style="color:#47b8d6">=</span><span style="color:#ad9361">"contact"</span> <span style="color:#a1a1ff">name</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"contact"</span> <span style="color:#a1a1ff">method</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"post"</span> class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"text-left"</span>>
+            &lt;fieldset>
+                &lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"row"</span>>
+                    &lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"col-md-4 wow fadeIn animated animated"</span> <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span>wow<span style="color:#47b8d6">-</span>delay<span style="color:#47b8d6">=</span><span style="color:#ad9361">"0.1s"</span> <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span>wow<span style="color:#47b8d6">-</span><span style="color:#a1a1ff">duration</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"2s"</span>>
+                        &lt;<span style="color:#a1a1ff">label</span> <span style="color:#6969fa;font-weight:700">for</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"name"</span>>Name&lt;span class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"required"</span>><span style="color:#47b8d6">*</span>&lt;<span style="color:#47b8d6">/</span>span>&lt;<span style="color:#47b8d6">/</span><span style="color:#a1a1ff">label</span>>
+                        &lt;<span style="color:#a1a1ff">input</span> <span style="color:#a1a1ff">type</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"text"</span> <span style="color:#a1a1ff">name</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"name"</span> id<span style="color:#47b8d6">=</span><span style="color:#ad9361">"name"</span> <span style="color:#a1a1ff">size</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"30"</span> <span style="color:#a1a1ff">value</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">""</span> required<span style="color:#47b8d6">/</span>>
+                    &lt;<span style="color:#47b8d6">/</span>div>
+                    &lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"col-md-4 wow fadeIn animated"</span> <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span>wow<span style="color:#47b8d6">-</span>delay<span style="color:#47b8d6">=</span><span style="color:#ad9361">"0.3s"</span> <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span>wow<span style="color:#47b8d6">-</span><span style="color:#a1a1ff">duration</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"2s"</span>>
+                        &lt;<span style="color:#a1a1ff">label</span> <span style="color:#6969fa;font-weight:700">for</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"email"</span>>Email&lt;span class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"required"</span>><span style="color:#47b8d6">*</span>&lt;<span style="color:#47b8d6">/</span>span>&lt;<span style="color:#47b8d6">/</span><span style="color:#a1a1ff">label</span>>
+                        &lt;<span style="color:#a1a1ff">input</span> <span style="color:#a1a1ff">type</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"text"</span> <span style="color:#a1a1ff">name</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"email"</span> id<span style="color:#47b8d6">=</span><span style="color:#ad9361">"email"</span> <span style="color:#a1a1ff">size</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"30"</span> <span style="color:#a1a1ff">value</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">""</span> required<span style="color:#47b8d6">/</span>>
+                    &lt;<span style="color:#47b8d6">/</span>div>
+                    &lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"col-md-4 wow fadeIn animated"</span> <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span>wow<span style="color:#47b8d6">-</span>delay<span style="color:#47b8d6">=</span><span style="color:#ad9361">"0.3s"</span> <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span>wow<span style="color:#47b8d6">-</span><span style="color:#a1a1ff">duration</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"2s"</span>>
+                        &lt;<span style="color:#a1a1ff">label</span> <span style="color:#6969fa;font-weight:700">for</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"phone"</span>>Phone&lt;<span style="color:#47b8d6">/</span><span style="color:#a1a1ff">label</span>>
+                        &lt;<span style="color:#a1a1ff">input</span> <span style="color:#a1a1ff">type</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"text"</span> <span style="color:#a1a1ff">name</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"phone"</span> id<span style="color:#47b8d6">=</span><span style="color:#ad9361">"phone"</span> <span style="color:#a1a1ff">size</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"30"</span> <span style="color:#a1a1ff">value</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">""</span><span style="color:#47b8d6">/</span>>
+                    &lt;<span style="color:#47b8d6">/</span>div>
+                &lt;<span style="color:#47b8d6">/</span>div>
+                &lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"wow fadeIn animated"</span> <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span>wow<span style="color:#47b8d6">-</span>delay<span style="color:#47b8d6">=</span><span style="color:#ad9361">"0.3s"</span> <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span>wow<span style="color:#47b8d6">-</span><span style="color:#a1a1ff">duration</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"1.5"</span> style<span style="color:#47b8d6">=</span><span style="color:#ad9361">"margin-top:15px;"</span>>
+                    &lt;<span style="color:#a1a1ff">label</span> <span style="color:#6969fa;font-weight:700">for</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"message"</span>>Message&lt;span class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"required"</span>><span style="color:#47b8d6">*</span>&lt;<span style="color:#47b8d6">/</span>span>&lt;<span style="color:#47b8d6">/</span><span style="color:#a1a1ff">label</span>>
+                    &lt;textarea <span style="color:#a1a1ff">name</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"message"</span> id<span style="color:#47b8d6">=</span><span style="color:#ad9361">"message"</span> required>&lt;<span style="color:#47b8d6">/</span>textarea>
+                &lt;<span style="color:#47b8d6">/</span>div>
+                &lt;div class<span style="color:#47b8d6">=</span><span style="color:#ad9361">"wow fadeIn animated"</span> <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span>wow<span style="color:#47b8d6">-</span>delay<span style="color:#47b8d6">=</span><span style="color:#ad9361">"0.3"</span> <span style="color:#a1a1ff">data</span><span style="color:#47b8d6">-</span>wow<span style="color:#47b8d6">-</span><span style="color:#a1a1ff">duration</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"1.5s"</span>>
+                    &lt;<span style="color:#a1a1ff">input</span> id<span style="color:#47b8d6">=</span><span style="color:#ad9361">"submit"</span> <span style="color:#a1a1ff">type</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"submit"</span> <span style="color:#a1a1ff">name</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"submit"</span> <span style="color:#a1a1ff">value</span><span style="color:#47b8d6">=</span><span style="color:#ad9361">"Send"</span><span style="color:#47b8d6">/</span>>
+                &lt;<span style="color:#47b8d6">/</span>div>
+            &lt;<span style="color:#47b8d6">/</span>fieldset>
+        &lt;<span style="color:#47b8d6">/</span>form>
+</pre>
+
+<br/>
+<h2>Icons</h2>
+<p class="well note"><span class="note">You can find a full list of available icons supported by this theme <a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">here</a> The template is also packed with all Bootstrap's Glyphicons available <a href="http://getbootstrap.com/components/">here</a>.
+</p>
+
+<br/>
+	<h2>Animations</h2>
+	<p class="well note"><span class="note">The CSS animation allows you to create the following preset animations:</span>
+		 <ul>
+<li>bounce</li>
+<li>bounce In</li>
+<li>bounce In Up</li>
+<li>bounce In Down</li>
+<li>bounce In Left</li>
+<li>bounce In Right</li>
+<li>bounce Out</li>
+<li>bounce Out Up</li>
+<li>bounce Out Down</li>
+<li>bounce Out Left</li>
+<li>bounce Out Right</li>
+<li>fade In</li>
+<li>fade In Up</li>
+<li>fade In Down</li>
+<li>fade In Left</li>
+<li>fade In Right</li>
+<li>fade In Up Big</li>
+<li>fade In Down Big</li>
+<li>fade In Left Big</li>
+<li>fade In Right Big</li>
+<li>fade Out</li>
+<li>fade Out Up</li>
+<li>fade Out Down</li>
+<li>fade Out Left</li>
+<li>fade Out Right</li>
+<li>fade Out Up Big</li>
+<li>fade Out Down Big</li>
+<li>fade Out Left Big</li>
+<li>fade Out Right Big</li>
+<li>flash</li>
+<li>flip</li>
+<li>flip In X</li>
+<li>flip Out X</li>
+<li>flip In Y</li>
+<li>flip Out Y</li>
+<li>hinge</li>
+<li>light Speed In</li>
+<li>light Speed Out</li>
+<li>pulse</li>
+<li>rotate In</li>
+<li>rotate In Up Left</li>
+<li>rotate In Down Left</li>
+<li>rotate In Up Right</li>
+<li>rotate In Down Right</li>
+<li>rotate Out</li>
+<li>rotate Out Up Left</li>
+<li>rotate Out Down Left</li>
+<li>rotate Out Up Right</li>
+<li>rotate Out Down Right</li>
+<li>roll In</li>
+<li>roll Out</li>
+<li>shake</li>
+<li>swing</li>
+<li>tada</li>
+<li>wiggle</li>
+<li>wobble</li>
+</ul>
+</p>
+<p class="well">
+<span class="note">To any div element you can add an animation. In the following example, the class <code>bounceIn animated</code> is added to the div class <code>col-md-4</code>:</span>
+</p>
+<pre style='color:#d1d1d1;background:#000000;'>
+<span style='color:#d2cd86; '>&lt;</span><span style='color:#e66170; font-weight:bold; '>div</span> class<span style='color:#d2cd86; '>=</span><span style='color:#02d045; '>"</span><span style='color:#00c4c4; '>col-md-4 bounceIn animated</span><span style='color:#02d045; '>"</span><span style='color:#d2cd86; '>></span>
+</pre>
+
+
+<p class="well"><span class="note">TIP: Add the CSS class <code>.wow</code>; the element will be invisible until the user scrolls to reveal it. Example:</span></p>
+<pre style='color:#d1d1d1;background:#000000;'>
+<span style='color:#d2cd86; '>&lt;</span><span style='color:#e66170; font-weight:bold; '>div</span> class<span style='color:#d2cd86; '>=</span><span style='color:#02d045; '>"</span><span style='color:#00c4c4; '>col-md-4 wow bounceIn animated</span><span style='color:#02d045; '>"</span><span style='color:#d2cd86; '>></span>
+</pre>	
+
+<p class="well"><span class="note">Advanced Options</span></p>
+<pre style='color:#d1d1d1;background:#000000;'>
+data<span style='color:#d2cd86; '>-</span>wow<span style='color:#d2cd86; '>-</span>duration<span style='color:#b060b0; '>:</span> Change the animation duration
+data<span style='color:#d2cd86; '>-</span>wow<span style='color:#d2cd86; '>-</span>delay<span style='color:#b060b0; '>:</span> Delay before the animation starts
+data<span style='color:#d2cd86; '>-</span>wow<span style='color:#d2cd86; '>-</span>offset<span style='color:#b060b0; '>:</span> Distance to start the animation <span style='color:#d2cd86; '>(</span>related to the browser bottom<span style='color:#d2cd86; '>)</span>
+data<span style='color:#d2cd86; '>-</span>wow<span style='color:#d2cd86; '>-</span>iteration<span style='color:#b060b0; '>:</span> Number of times the animation is repeated
+</pre>	
+
+<p class="well"><span class="note">Example</span></p>
+<pre style='color:#d1d1d1;background:#000000;'>
+<span style='color:#d2cd86; '>&lt;</span><span style='color:#e66170; font-weight:bold; '>div</span> class<span style='color:#d2cd86; '>=</span><span style='color:#02d045; '>"</span><span style='color:#00c4c4; '>col-md-4 wow bounceIn animated</span><span style='color:#02d045; '>"</span> data<span style='color:#d2cd86; '>-</span>wow<span style='color:#d2cd86; '>-</span>duration<span style='color:#d2cd86; '>=</span><span style='color:#02d045; '>"</span><span style='color:#00c4c4; '>2s</span><span style='color:#02d045; '>"</span> data<span style='color:#d2cd86; '>-</span>wow<span style='color:#d2cd86; '>-</span>delay<span style='color:#d2cd86; '>=</span><span style='color:#02d045; '>"</span><span style='color:#00c4c4; '>5s</span><span style='color:#02d045; '>"</span><span style='color:#d2cd86; '>></span>
+</pre>
+         
+          <br>
+          <h2>Credits</h2>
+          
+          <p class="well">
+              <span class="note">
+                 Bootstrap: Twitter, Inc<br/>
+				 Waypoints: Caleb Troughton<br/>
+				 Local Scroll & Scroll To: Ariel Flesler<br/>
+				 Magnific Popup: Dmitry Semenov<br/>
+				 Validate Form: M. Alsup<br/>
+				 Animate: Daniel Eden<br/>
+				 Font Awesome: davegandy
+              </span>
+          </p>
+		  
+		  <h2>Premium Version</h2>
+		  Take a look at 
+		  <a href="http://wowthemes.net/preview/index.php?theme=runcharityhtml">
+		  Run Charity Premium Demo
+		  </a>
+		  
+		  
+		 </div>
+      </div><!--/row-->
+          
+    </div><!--/.fluid-container-->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/rainbow/rainbow.min.js"></script>
+    <script src="js/rainbow/language/generic.js"></script>
+    <script src="js/rainbow/language/html.js"></script>
+    <script src="js/rainbow/language/css.js"></script>
+    <script src="js/rainbow/language/javascript.js"></script>
+    <script src="js/rainbowlines/rainbow.linenumbers.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.tocify.min.js"></script>
+    <script src="js/prettify.js"></script>
+
+    <script>
+        $(function() {
+
+          $("#toc").tocify({ selectors: "h2, h3, h4", scrollTo: 60, highlightOffset: 60, extendPage: true });
+
+          prettyPrint();
+
+          $(".optionName").popover({ trigger: "hover", container: "body" });
+
+          $("a[href='#']").click(function(event) {
+
+              event.preventDefault();
+
+          });
+
+          Rainbow.color();
+        });
+    </script>
+  
+</div></body></html>
