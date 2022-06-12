@@ -18,7 +18,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Login Basic - Pages | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>Login Sistem Presensi</title>
 
     <meta name="description" content="" />
 
@@ -67,7 +67,7 @@
                                 <span class="app-brand-logo demo">
                                     <img src="{{ asset('images/logo.jpeg') }}" alt="" style="height: 45px; width=45px;">
                                 </span>
-                                <span class="app-brand-text text-body fw-bolder">YADANA</span>
+                                <span class="app-brand-text text-body fw-bolder">PRESENSI</span>
                             </a>
                         </div>
                         <!-- /Logo -->

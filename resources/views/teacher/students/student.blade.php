@@ -1,7 +1,7 @@
-@extends('admin.layout.base')
+@extends('teacher.layout.base')
 @section('navbar')
-    @include('admin.layout.navbar')
-    @include('admin.layout.toast')
+    @include('teacher.layout.navbar')
+    @include('teacher.layout.toast')
 @endsection
 
 @section('content')

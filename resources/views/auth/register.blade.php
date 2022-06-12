@@ -79,12 +79,12 @@
                   <span class="app-brand-logo demo">
                     <img src="{{ asset('images/logo.jpeg') }}" alt="" style="height: 45px; width=45px;">
                   </span>
-                  <span class="app-brand-text text-body fw-bolder">YADANA</span>
+                  <span class="app-brand-text text-body fw-bolder">PRESENSI</span>
                 </a>
               </div>
               <!-- /Logo -->
               <h4 class="mb-2">Adventure starts here 🚀</h4>
-              <p class="mb-4">"Berlomba - lomba dalam kebaikan"</p>
+              <p class="mb-4">"Hadirmu bahagia untuk ku!"</p>
 
               <form id="formAuthentication" class="mb-3" action="{{ route('auth.do_register') }}" method="POST">
                 @csrf

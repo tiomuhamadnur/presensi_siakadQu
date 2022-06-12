@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Admin
-Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'namespace' => 'App\Http\Controllers\Admin'], function ($route) {
+Route::group(['moddleware' => 'role:admin', 'prefix' => 'admin', 'middleware' => ['auth', 'role:admin'], 'namespace' => 'App\Http\Controllers\Admin'], function ($route) {
     $route->get('/', 'DashboardController@index')->name('admin.dashboard');
 
     //Student
@@ -41,7 +41,34 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'namespace' => 'App\H
         $route->delete('/','ClassController@delete')->name('admin.class.delete');
     });
 
+    //Course
+    $route->group(['prefix' => 'course', 'namespace' => 'Course'], function($route){
+        $route->get('/','CourseController@index')->name('admin.course.index');
+        $route->post('/','CourseController@store')->name('admin.course.store');
+        $route->put('/','CourseController@update')->name('admin.course.update');
+        $route->delete('/','CourseController@delete')->name('admin.course.delete');
+    });
+});
 
+//Teacher
+Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'role:teacher'], 'namespace' => 'App\Http\Controllers\Teacher'], function ($route) {
+    $route->get('/', 'DashboardController@index')->name('teacher.dashboard');
+
+    //Student
+    $route->group(['prefix' => 'student', 'namespace' => 'Student'], function($route){
+        $route->get('/','StudentController@index')->name('teacher.student.index');
+        $route->post('/','StudentController@store')->name('teacher.student.store');
+        $route->put('/','StudentController@update')->name('teacher.student.update');
+        $route->delete('/','StudentController@delete')->name('teacher.student.delete');
+    });
+
+    //Class
+    $route->group(['prefix' => 'class', 'namespace' => 'StudentClass'], function($route){
+        $route->get('/','ClassController@index')->name('teacher.class.index');
+        $route->post('/','ClassController@store')->name('teacher.class.store');
+        $route->put('/','ClassController@update')->name('teacher.class.update');
+        $route->delete('/','ClassController@delete')->name('teacher.class.delete');
+    });
 });
 
 Route::group(['prefix' => 'auth', 'namespace' => 'App\Http\Controllers\Auth'], function ($route) {

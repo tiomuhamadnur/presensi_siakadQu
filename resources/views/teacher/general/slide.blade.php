@@ -1,7 +1,7 @@
-@extends('admin.layout.base')
+@extends('layout.base')
 @section('navbar')
-    @include('admin.layout.navbar')
-    @include('admin.layout.toast')
+    @include('layout.navbar')
+    @include('layout.toast')
 @endsection
 
 @section('content')
@@ -10,24 +10,24 @@
         <div class="card">
             <div class="row card-header">
                 <div class="col-4 d-flex justify-content-start flex-column">
-                    <h5 class="">Data Guru</h5>
+                    <h5 class="">Slide</h5>
                 </div>
                 <div class="col-8 d-flex align-items-end flex-column" style="padding-right: 4%;">
                     <button type="button" class="btn btn-icon btn-outline-primary" data-bs-toggle="modal"
-                        data-bs-target="#modalStore">
+                        data-bs-target="#modalAdminAdd">
                         <span class="tf-icons bx bx-plus"></span>
                     </button>
                 </div>
             </div>
 
-            <div class="table-responsive text-nowrap table-min-height">
+            <div class="table-responsive text-nowrap">
                 <table class="table">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Kode</th>
                             <th>Nama</th>
-                            <th>Wali Kelas</th>
+                            <th>Email</th>
+                            <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -35,14 +35,20 @@
                         @php
                             $no = 1;
                         @endphp
-                        @foreach ($classes as $item)
+                        @foreach ($data as $item)
                             <tr class="table-default">
                                 <td>{{ $no++ }}</td>
-                                <td>{{ $item->code }}</td>
                                 <td><i class="fab fa-sketch fa-lg text-warning me-3"></i>
                                     <strong>{{ $item->name }}</strong>
                                 </td>
-                                <td>{{ $item->teacherGuider ? $item->teacherGuider->name : '-' }}</td>
+                                <td>{{ $item->email }}</td>
+                                <td>
+                                    @if ($item->deleted_at)
+                                        <span class="badge bg-label-danger me-1">Deleted</span>
+                                    @else
+                                        <span class="badge bg-label-primary me-1">Active</span>
+                                    @endif
+                                </td>
                                 <td>
                                     <div class="dropdown">
                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -51,10 +57,9 @@
                                         </button>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
-                                                data-bs-target="#modalUpdate" data-name="{{ $item->name }}"
-                                                data-id="{{ $item->id }}" data-code="{{ $item->code }}"
-                                                data-name="{{ $item->name }}" data-teachers="{{ $teachers }}"
-                                                data-teacher_guider_id="{{ $item->teacher_guider_id }}">
+                                                data-bs-target="#modalAdmin" data-name="{{ $item->name }}"
+                                                data-email="{{ $item->email }}" data-id="{{ $item->id }}"
+                                                data-status="{{ $item->status }}">
                                                 <i class="bx bx-edit-alt me-1">
                                                 </i>
                                                 Edit</a>
@@ -78,37 +83,39 @@
     <!-- Update Admin Vertically Centered Modal -->
     <div class="col-lg-4 col-md-6">
         <!-- Modal -->
-        <div class="modal fade" id="modalUpdate" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal fade" id="modalAdmin" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalAdminTitle">Pratinjau Data</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{ route('admin.class.update') }}" method="POST">
+                    <form action="{{ route('admin.users.admin.update') }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="modal-body">
-                            <div class="row g-2">
-                                <input type="text" name="id" id="update_id" hidden>
-                                <div class="col mb-1">
-                                    <label for="" class="form-label">Kode</label>
-                                    <input type="text" id="update_code" name="code" class="form-control"
-                                        placeholder="Kode Kelas" />
-                                </div>
-                                <div class="col mb-1">
-                                    <label for="" class="form-label">Nama Kelas</label>
-                                    <input type="text" id="update_name" class="form-control" name="name"
-                                        placeholder="Masukan Nama Kelas" />
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="nameWithTitle" class="form-label">Name</label>
+                                    <input type="text" id="update_name" name="name" class="form-control"
+                                        placeholder="Enter Name" />
                                 </div>
                             </div>
                             <div class="row g-2">
-                                <div class="col mb-1">
-                                    <label for="" class="form-label">Wali Kelas</label>
-                                    <select name="teacher_guider_id" class="form-control" id="update_teacher_guider_id">
-                                    </select>
+                                <div class="col mb-0">
+                                    <label for="emailWithTitle" class="form-label">Email</label>
+                                    <input type="text" id="update_email" class="form-control" name="email"
+                                        placeholder="xxxx@xxx.xx" />
+                                </div>
+                                <div class="col mb-0">
+                                    <input type="checkbox" id="is_change_password">&nbsp;
+                                    <label for="dobWithTitle" class="form-label">Ubah Pasword</label>
+                                    <input type="password" id="update_password" name="password" class="form-control"
+                                        placeholder="Masukan Password Baru" />
+                                    <input type="text" hidden id="update_id" name="id" class="form-control" />
                                 </div>
                             </div>
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
@@ -125,39 +132,37 @@
     <!-- Add Admin Vertically Centered Modal -->
     <div class="col-lg-4 col-md-6">
         <!-- Modal -->
-        <div class="modal fade" id="modalStore" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal fade" id="modalAdminAdd" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalAdminTitle">Tambah Data</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{ route('admin.class.store') }}" method="POST">
+                    <form action="{{ route('admin.users.admin.add') }}" method="POST">
                         @csrf
                         @method('POST')
                         <div class="modal-body">
-                            <div class="row g-2">
-                                <div class="col mb-1">
-                                    <label for="" class="form-label">Kode</label>
-                                    <input type="text" id="code" name="code" class="form-control"
-                                        placeholder="Kode Kelas" />
-                                </div>
-                                <div class="col mb-1">
-                                    <label for="" class="form-label">Nama Kelas</label>
-                                    <input type="text" id="class" class="form-control" name="name"
-                                        placeholder="Masukan Nama Kelas" />
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="nameWithTitle" class="form-label">Nama</label>
+                                    <input type="text" id="" name="name" class="form-control"
+                                        placeholder="Masukan Nama" />
                                 </div>
                             </div>
                             <div class="row g-2">
-                                <div class="col mb-1">
-                                    <label for="" class="form-label">Wali Kelas</label>
-                                    <select name="teacher_guider_id" class="form-control" id="teacher_guider_id">
-                                        @foreach ($teachers as $item)
-                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
+                                <div class="col mb-0">
+                                    <label for="emailWithTitle" class="form-label">Email</label>
+                                    <input type="text" id="" class="form-control" name="email"
+                                        placeholder="xxxx@xxx.xx" />
+                                </div>
+                                <div class="col mb-0">
+                                    <label for="dobWithTitle" class="form-label">Pasword</label>
+                                    <input type="password" id="" name="password" class="form-control"
+                                        placeholder="Masukan Password Baru" />
                                 </div>
                             </div>
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
@@ -177,33 +182,33 @@
             $('#modalDelete').on('show.bs.modal', function(e) {
                 var id = $(e.relatedTarget).data('id');
                 $('#delete_id').val(id);
-                $('#form_delete_id').attr('action', "{{ route('admin.class.delete') }}");
+                $('#form_delete_id').attr('action', "{{route('admin.users.admin.delete')}}");
             });
 
 
-            $('#modalUpdate').on('show.bs.modal', function(e) {
+            $('#modalAdmin').on('show.bs.modal', function(e) {
                 var id = $(e.relatedTarget).data('id');
-                var code = $(e.relatedTarget).data('code');
                 var name = $(e.relatedTarget).data('name');
-                var teacher_guider_id = $(e.relatedTarget).data('teacher_guider_id');
+                var status = $(e.relatedTarget).data('status');
+                var email = $(e.relatedTarget).data('email');
 
-                $('#update_id').val(id);
                 $('#update_name').val(name);
-                $('#update_code').val(code);
+                $('#update_status').val(status);
+                $('#update_email').val(email);
+                $('#update_id').val(id);
 
-                var teachers = $(e.relatedTarget).data('teachers');
-                console.log(teachers);
-                teachers.forEach(element => {
-                    var optionText = element.name;
-                    var optionValue = element.id;
-                    if (element.id == teacher_guider_id) {
-                        $('#update_teacher_guider_id').append(`<option selected value="${optionValue}">
-                                       ${optionText}
-                                  </option>`);
+                $('#is_change_password').prop(function() {
+                    alert('Checkbox checked!');
+                });
+
+                $('#update_password').hide();
+                $('#is_change_password').prop('checked', false);
+                $("#is_change_password").click(function() {
+                    if ($("#is_change_password").is(
+                            ":checked")) {
+                        $('#update_password').show();
                     } else {
-                        $('#update_teacher_guider_id').append(`<option value="${optionValue}">
-                                       ${optionText}
-                                  </option>`);
+                        $('#update_password').hide();
                     }
                 });
 

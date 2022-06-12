@@ -1,7 +1,7 @@
-@extends('admin.layout.base')
+@extends('teacher.layout.base')
 @section('navbar')
-    @include('admin.layout.navbar')
-    @include('admin.layout.toast')
+    @include('teacher.layout.navbar')
+    @include('teacher.layout.toast')
 @endsection
 
 @section('content')
@@ -42,7 +42,7 @@
                                 <td><i class="fab fa-sketch fa-lg text-warning me-3"></i>
                                     <strong>{{ $item->name }}</strong>
                                 </td>
-                                <td>{{ $item->teacherGuider ? $item->teacherGuider->name : '-' }}</td>
+                                <td>{{ $item->classGuider ? $item->classGuider->name : '-' }}</td>
                                 <td>
                                     <div class="dropdown">
                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -52,9 +52,15 @@
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
                                                 data-bs-target="#modalUpdate" data-name="{{ $item->name }}"
-                                                data-id="{{ $item->id }}" data-code="{{ $item->code }}"
-                                                data-name="{{ $item->name }}" data-teachers="{{ $teachers }}"
-                                                data-teacher_guider_id="{{ $item->teacher_guider_id }}">
+                                                data-email="{{ $item->email }}" data-id="{{ $item->id }}"
+                                                data-status="{{ $item->status }}"
+                                                data-class_id="{{ $item->class_id }}" data-phone="{{ $item->phone }}"
+                                                data-gender="{{ $item->gender }}" data-nisn="{{ $item->nisn }}"
+                                                data-father_name="{{ $item->father_name }}"
+                                                data-parent_phone="{{ $item->parent_phone }}"
+                                                data-address="{{ $item->address }}" data-photo="{{ $item->photo }}"
+                                                data-classes="{{ $classes }}"
+                                                data-class_guiding="{{ $item->classGuiding ? $item->classGuiding->id : null }}">
                                                 <i class="bx bx-edit-alt me-1">
                                                 </i>
                                                 Edit</a>
@@ -89,24 +95,17 @@
                         @csrf
                         @method('PUT')
                         <div class="modal-body">
+                            <input type="text" id="update_id" hidden name="id">
                             <div class="row g-2">
-                                <input type="text" name="id" id="update_id" hidden>
                                 <div class="col mb-1">
-                                    <label for="" class="form-label">Kode</label>
+                                    <label for="nameWithTitle" class="form-label">Kode</label>
                                     <input type="text" id="update_code" name="code" class="form-control"
                                         placeholder="Kode Kelas" />
                                 </div>
                                 <div class="col mb-1">
                                     <label for="" class="form-label">Nama Kelas</label>
-                                    <input type="text" id="update_name" class="form-control" name="name"
+                                    <input type="text" id="update_class" class="form-control" name="class"
                                         placeholder="Masukan Nama Kelas" />
-                                </div>
-                            </div>
-                            <div class="row g-2">
-                                <div class="col mb-1">
-                                    <label for="" class="form-label">Wali Kelas</label>
-                                    <select name="teacher_guider_id" class="form-control" id="update_teacher_guider_id">
-                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -144,18 +143,8 @@
                                 </div>
                                 <div class="col mb-1">
                                     <label for="" class="form-label">Nama Kelas</label>
-                                    <input type="text" id="class" class="form-control" name="name"
+                                    <input type="text" id="class" class="form-control" name="class"
                                         placeholder="Masukan Nama Kelas" />
-                                </div>
-                            </div>
-                            <div class="row g-2">
-                                <div class="col mb-1">
-                                    <label for="" class="form-label">Wali Kelas</label>
-                                    <select name="teacher_guider_id" class="form-control" id="teacher_guider_id">
-                                        @foreach ($teachers as $item)
-                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -182,26 +171,56 @@
 
 
             $('#modalUpdate').on('show.bs.modal', function(e) {
-                var id = $(e.relatedTarget).data('id');
-                var code = $(e.relatedTarget).data('code');
                 var name = $(e.relatedTarget).data('name');
-                var teacher_guider_id = $(e.relatedTarget).data('teacher_guider_id');
+                var email = $(e.relatedTarget).data('email');
+                var id = $(e.relatedTarget).data('id');
+                var status = $(e.relatedTarget).data('status');
+                var class_id = $(e.relatedTarget).data('class_id');
+                var class_guiding = $(e.relatedTarget).data('class_guiding');
+                var phone = $(e.relatedTarget).data('phone');
+                var gender = $(e.relatedTarget).data('gender');
+                var nisn = $(e.relatedTarget).data('nisn');
+                var father_name = $(e.relatedTarget).data('father_name');
+                var parent_phone = $(e.relatedTarget).data('parent_phone');
+                var address = $(e.relatedTarget).data('address');
+                var photo = $(e.relatedTarget).data('photo');
 
-                $('#update_id').val(id);
                 $('#update_name').val(name);
-                $('#update_code').val(code);
+                $('#update_email').val(email);
+                $('#update_id').val(id);
+                $('#update_status').val(status);
+                $('#update_class_id').val(class_id);
+                $('#update_phone').val(phone);
+                $('#update_gender').val(gender);
+                $('#update_nisn').val(nisn);
+                $('#update_father_name').val(father_name);
+                $('#update_parent_phone').val(parent_phone);
+                $('#update_address').val(address);
+                $('#update_photo').val(photo);
 
-                var teachers = $(e.relatedTarget).data('teachers');
-                console.log(teachers);
-                teachers.forEach(element => {
+                const jk = ['Laki-laki', 'Perempuan'];
+                jk.forEach(element => {
+                    if (element == gender) {
+                        $('#update_gender').append(`<option selected value="${element}">
+                                       ${element}
+                                  </option>`);
+                    } else {
+                        $('#update_gender').append(`<option value="${element}">
+                                       ${element}
+                                  </option>`);
+                    }
+                });
+
+                var classes = $(e.relatedTarget).data('classes');
+                classes.forEach(element => {
                     var optionText = element.name;
                     var optionValue = element.id;
-                    if (element.id == teacher_guider_id) {
-                        $('#update_teacher_guider_id').append(`<option selected value="${optionValue}">
+                    if (element.id == class_guiding) {
+                        $('#update_class_id').append(`<option selected value="${optionValue}">
                                        ${optionText}
                                   </option>`);
                     } else {
-                        $('#update_teacher_guider_id').append(`<option value="${optionValue}">
+                        $('#update_class_id').append(`<option value="${optionValue}">
                                        ${optionText}
                                   </option>`);
                     }

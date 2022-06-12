@@ -1,6 +1,6 @@
-@extends('admin.layout.base')
+@extends('teacher.layout.base')
 @section('navbar')
-    @include('admin.layout.navbar')
+    @include('teacher.layout.navbar')
 @endsection
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">

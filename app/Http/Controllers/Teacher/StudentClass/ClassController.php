@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin\StudentClass;
+namespace App\Http\Controllers\Teacher\StudentClass;
 
 use App\Http\Controllers\Controller;
 use App\Models\TblClasses;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class ClassController extends Controller
@@ -12,8 +11,7 @@ class ClassController extends Controller
     public function index()
     {
         $classes = TblClasses::with(['students', 'teacherGuider'])->paginate();
-        $teachers = User::where('role', self::ROLE_TEACHER)->get();
-        return view('admin.classes.class', ['classes' => $classes, 'teachers' => $teachers]);
+        return view('admin.classes.class', ['classes' => $classes, 'classes' => $classes]);
     }
 
     public function store(Request $req)
@@ -32,9 +30,9 @@ class ClassController extends Controller
     {
         $class = TblClasses::where('id', $req->id)->first();
         if ($class) {
-            $req->code ? $class->code = $req->code : null;
-            $req->name ? $class->name = $req->name : null;
-            $req->teacher_guider_id ? $class->teacher_guider_id = $req->teacher_guider_id : null;
+            $req ? $class->code = $req->code : null;
+            $req ? $class->name = $req->name : null;
+            $req ? $class->teacher_guider_id = $req->teacher_guider_id : null;
             $class->save();
             return back()->with('success', ['message' => 'update berhasil!']);
         }

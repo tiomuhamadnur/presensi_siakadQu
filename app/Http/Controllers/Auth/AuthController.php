@@ -39,9 +39,11 @@ class AuthController extends Controller
             if (Hash::check($req->password, $user->password)) {
                 Auth::attempt(['email' => $req->email, 'password' => $req->password]);
                 if ($user->role == 'admin') {
-                    return redirect(session('url')['intended']);
+                    // return redirect(session('url')['intended']);
+                    return redirect()->route('admin.dashboard');
+                } else {
+                    return redirect()->route('teacher.dashboard');
                 }
-                return route('user');
             }
         }
         return back()->with('401', 'Login Gagal, email atau password salah!');

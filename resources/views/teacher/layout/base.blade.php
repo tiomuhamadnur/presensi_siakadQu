@@ -55,7 +55,7 @@
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
             <!-- Menu -->
-                @include('layout.asside')
+                @include('teacher.layout.asside')
             <!-- / Menu -->
             <!-- Layout container -->
             <div class="layout-page">
