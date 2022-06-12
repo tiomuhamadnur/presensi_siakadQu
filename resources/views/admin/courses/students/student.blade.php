@@ -53,7 +53,7 @@
                                         @else
                                             <a class="" href="javascript:void(0);" data-bs-toggle="modal"
                                                 data-bs-target="#modalPresent" data-id="{{ $item->id }}">
-                                                <i class='bx bxs-check-circle bx-tada' style='color:#f32844'></i>
+                                                <i class='bx bxs-check-circle bx-tada' style='color:#f3e528'></i>
                                             </a>&nbsp;
                                             <a class="" href="javascript:void(0);" data-bs-toggle="modal"
                                                 data-bs-target="#modalNotPresent" data-id="{{ $item->id }}">
@@ -63,7 +63,7 @@
                                     @else
                                         <a class="" href="javascript:void(0);" data-bs-toggle="modal"
                                             data-bs-target="#modalPresent" data-id="{{ $item->id }}">
-                                            <i class='bx bxs-check-circle bx-tada' style='color:#f32844'></i>
+                                            <i class='bx bxs-check-circle bx-tada' style='color:#f3e528'></i>
                                         </a>&nbsp;
                                         <a class="" href="javascript:void(0);" data-bs-toggle="modal"
                                             data-bs-target="#modalUnPresent" data-id="{{ $item->id }}">
