@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 12, 2022 at 08:55 PM
+-- Generation Time: Jun 12, 2022 at 10:28 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -109,7 +109,8 @@ CREATE TABLE `tbl_courses` (
 --
 
 INSERT INTO `tbl_courses` (`id`, `name`, `teacher_id`, `class_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Fisika', 1, 1, '2022-06-12 11:14:28', '2022-06-12 11:14:28', NULL);
+(1, 'Fisika', 1, 1, '2022-06-12 11:14:28', '2022-06-12 11:14:28', NULL),
+(2, 'Kimia', 4, 1, '2022-06-12 13:25:31', '2022-06-12 13:25:31', NULL);
 
 -- --------------------------------------------------------
 
@@ -126,6 +127,7 @@ CREATE TABLE `trans_courses` (
   `quiz_score` double(8,2) NOT NULL DEFAULT 0.00,
   `assesment_score` double(8,2) NOT NULL DEFAULT 0.00,
   `final_score` double(8,2) NOT NULL DEFAULT 0.00,
+  `total_score` float NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -135,8 +137,10 @@ CREATE TABLE `trans_courses` (
 -- Dumping data for table `trans_courses`
 --
 
-INSERT INTO `trans_courses` (`id`, `class_id`, `course_id`, `student_id`, `mid_score`, `quiz_score`, `assesment_score`, `final_score`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 1, 3, 0.00, 0.00, 0.00, 0.00, '2020-06-18 06:03:33', '2020-03-31 08:08:38', NULL);
+INSERT INTO `trans_courses` (`id`, `class_id`, `course_id`, `student_id`, `mid_score`, `quiz_score`, `assesment_score`, `final_score`, `total_score`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 1, 3, 92.00, 90.00, 80.00, 98.00, 94, '2020-06-18 06:03:33', '2022-06-12 13:24:40', NULL),
+(2, 1, 1, 3, 0.00, 0.00, 0.00, 0.00, 0, '2022-06-12 12:59:59', '2022-06-12 13:21:57', '2022-06-12 13:21:57'),
+(3, 1, 2, 3, 0.00, 0.00, 80.00, 0.00, 0, '2022-06-12 13:25:42', '2022-06-12 13:25:55', NULL);
 
 -- --------------------------------------------------------
 
@@ -276,13 +280,13 @@ ALTER TABLE `tbl_classes`
 -- AUTO_INCREMENT for table `tbl_courses`
 --
 ALTER TABLE `tbl_courses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `trans_courses`
 --
 ALTER TABLE `trans_courses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `trans_presents`

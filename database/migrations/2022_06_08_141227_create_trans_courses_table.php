@@ -22,6 +22,7 @@ class CreateTransCoursesTable extends Migration
             $table->float('quiz_score')->default(0);
             $table->float('assesment_score')->default(0);
             $table->float('final_score')->default(0);
+            $table->float('total_score')->default(0);
             $table->timestamps();
             $table->softDeletes();
 

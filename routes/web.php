@@ -47,6 +47,13 @@ Route::group(['moddleware' => 'role:admin', 'prefix' => 'admin', 'middleware' =>
         $route->post('/','CourseController@store')->name('admin.course.store');
         $route->put('/','CourseController@update')->name('admin.course.update');
         $route->delete('/','CourseController@delete')->name('admin.course.delete');
+        //Student
+        $route->group(['prefix' => 'student', 'namespace' => 'Student'], function($route){
+            $route->get('/','StudentController@index')->name('admin.course.student.index');
+            $route->post('/','StudentController@store')->name('admin.course.student.store');
+            $route->put('/','StudentController@update')->name('admin.course.student.update');
+            $route->delete('/','StudentController@delete')->name('admin.course.student.delete');
+        });
     });
 });
 

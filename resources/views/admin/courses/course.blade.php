@@ -83,6 +83,10 @@
                                             <i class="bx bx-dots-vertical-rounded"></i>
                                         </button>
                                         <div class="dropdown-menu">
+                                            <a class="dropdown-item"
+                                                href="{{ route('admin.course.student.index', ['course_id' => $item->id]) }}">
+                                                <i class='bx bxs-user-badge bx-tada'></i> Siswa
+                                            </a>
                                             <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
                                                 data-bs-target="#modalUpdate" data-name="{{ $item->name }}"
                                                 data-id="{{ $item->id }}" data-teachers="{{ $teachers }}"

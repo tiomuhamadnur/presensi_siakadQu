@@ -19,6 +19,7 @@ class TransCourses extends Model
         'quiz_score',
         'assesment_score',
         'final_score',
+        'total_score'
     ];
 
     public function course()
