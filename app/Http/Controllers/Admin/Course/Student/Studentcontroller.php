@@ -13,7 +13,7 @@ class StudentController extends Controller
 {
     public function index(Request $req)
     {
-        $transCourse = TransCourses::where('course_id', $req->course_id)->with(['course', 'student'])->paginate(10);
+        $transCourse = TransCourses::where('course_id', $req->course_id)->with(['course', 'student', 'present'])->paginate(10);
         $tblCourse = TblCourses::find($req->course_id);
         $students = [];
         if ($tblCourse) {

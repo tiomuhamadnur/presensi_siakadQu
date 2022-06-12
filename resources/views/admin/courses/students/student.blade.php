@@ -27,6 +27,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>Absen</th>
                             <th>name</th>
                             <th>Kelas</th>
                             <th>email</th>
@@ -45,6 +46,31 @@
                         @foreach ($transCourse as $item)
                             <tr class="table-default">
                                 <td>{{ $no++ }}</td>
+                                <td>
+                                    @if ($item->present)
+                                        @if (\Carbon\Carbon::parse($item->present->on)->equalsTo(\Carbon\Carbon::now()))
+                                            <i class='bx bxs-check-circle bx-burst' style='color:#22bb43'></i>
+                                        @else
+                                            <a class="" href="javascript:void(0);" data-bs-toggle="modal"
+                                                data-bs-target="#modalPresent" data-id="{{ $item->id }}">
+                                                <i class='bx bxs-check-circle bx-tada' style='color:#f32844'></i>
+                                            </a>&nbsp;
+                                            <a class="" href="javascript:void(0);" data-bs-toggle="modal"
+                                                data-bs-target="#modalNotPresent" data-id="{{ $item->id }}">
+                                                <i class='bx bx-user-x bx-flashing' style='color:#f32844'></i>
+                                            </a>&nbsp;
+                                        @endif
+                                    @else
+                                        <a class="" href="javascript:void(0);" data-bs-toggle="modal"
+                                            data-bs-target="#modalPresent" data-id="{{ $item->id }}">
+                                            <i class='bx bxs-check-circle bx-tada' style='color:#f32844'></i>
+                                        </a>&nbsp;
+                                        <a class="" href="javascript:void(0);" data-bs-toggle="modal"
+                                            data-bs-target="#modalUnPresent" data-id="{{ $item->id }}">
+                                            <i class='bx bx-user-x bx-flashing' style='color:#f32844'></i>
+                                        </a>&nbsp;
+                                    @endif
+                                </td>
                                 <td><i class="fab fa-sketch fa-lg text-warning me-3"></i>
                                     <strong>{{ $item->student->name }}</strong>
                                 </td>
@@ -204,6 +230,86 @@
             </div>
         </div>
     </div>
+
+    {{-- Modal Present --}}
+    <div class="modal fade" id="modalPresent" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="present_title">Siswa ini hadir ?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="form_present_id" action="#" method="POST">
+                    @csrf
+                    @method('POST')
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col mb-3">
+                                <input type="text" name="student_id" id="present_student_id" hidden class="form-control">
+                                <input type="text" name="trans_course_id" id="present_trans_course_id" hidden
+                                    class="form-control">
+                                <input type="text" name="status" id="present_status" hidden class="form-control">
+                                <input type="text" name="description" id="present_description" hidden
+                                    class="form-control">
+                                <input type="datetime" name="on" id="present_on" hidden class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger">Hapus</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{-- END MODAL UNPRESENT --}}
+
+    {{-- Modal Present --}}
+    <div class="modal fade" id="modalUnPresent" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel2">Tidak Hadir ?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="form_unpresent_id" action="#" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-mb-2">
+                                <small class="text-light fw-semibold d-block">Status Kehadiran</small>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="status" id="unpresent_id" value="0">
+                                    <label class="form-check-label" for="unpresent_id">Tidak Hadir</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="status" id="sick_id" value="2">
+                                    <label class="form-check-label" for="sick_id">Sakit</label>
+                                </div>
+                            </div>
+                            <div class="col mb-2">
+                                <label for="" class="form-label">Deskripsi</label>
+                                <input type="text" name="description" id="unpresent_description" class="form-control">
+
+                                <input type="text" value="{{ \Carbon\Carbon::now()->toDateTimeString() }}" name="on" id="unpresent_on" hidden class="form-control">
+                                <input type="text" name="student_id" id="unpresent_student_id" hidden
+                                    class="form-control">
+                                <input type="text" name="trans_course_id" id="unpresent_trans_course_id" hidden
+                                    class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger">Hapus</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{-- END MODAL UNPRESENT --}}
 
     <script>
         $(document).ready(function() {

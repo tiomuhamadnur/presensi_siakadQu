@@ -37,4 +37,14 @@ class TransCourses extends Model
     {
         return $this->belongsTo(TblClasses::class, 'class_id');
     }
+
+    public function present()
+    {
+        return $this->hasOne(TransPresents::class, 'trans_course_id')->orderBy('on', 'desc');
+    }
+
+    public function presents()
+    {
+        return $this->hasMany(TransPresents::class, 'trans_course_id')->orderBy('on', 'asc');
+    }
 }
