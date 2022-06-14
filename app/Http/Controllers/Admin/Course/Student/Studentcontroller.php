@@ -19,7 +19,6 @@ class StudentController extends Controller
         if ($tblCourse) {
             $students = User::where('role', self::ROLE_STUDENT)->where('class_id', $tblCourse->class_id)->get();
         }
-
         $classes = TblClasses::all();
         return view('admin.courses.students.student', ['transCourse' => $transCourse, 'classes' => $classes, 'students' => $students, 'course' => $tblCourse]);
     }
