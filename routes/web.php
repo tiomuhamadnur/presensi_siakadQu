@@ -13,8 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function(){
+    return redirect()->route('admin.dashboard');
+});
+
 //Admin
-Route::group(['moddleware' => 'role:admin', 'prefix' => 'admin', 'middleware' => ['auth', 'role:admin'], 'namespace' => 'App\Http\Controllers\Admin'], function ($route) {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin'], 'namespace' => 'App\Http\Controllers\Admin'], function ($route) {
     $route->get('/', 'DashboardController@index')->name('admin.dashboard');
 
     //Student
@@ -88,6 +92,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'App\Http\Controllers\Auth'], f
 });
 
 Route::group(['prefix' => '/', 'namespace' => 'App\Http\Controllers\Users'], function ($route) {
+
     $route->group(['prefix' => 'users'], function ($route) {
         $route->get('/', 'UserController@login')->name('user');
     });
