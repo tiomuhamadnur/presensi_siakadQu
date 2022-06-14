@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function(){
+Route::get('/', function () {
     return redirect()->route('admin.dashboard');
 });
 
@@ -22,47 +22,47 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin'], 'name
     $route->get('/', 'DashboardController@index')->name('admin.dashboard');
 
     //Student
-    $route->group(['prefix' => 'student', 'namespace' => 'Student'], function($route){
-        $route->get('/','StudentController@index')->name('admin.student.index');
-        $route->post('/','StudentController@store')->name('admin.student.store');
-        $route->put('/','StudentController@update')->name('admin.student.update');
-        $route->delete('/','StudentController@delete')->name('admin.student.delete');
+    $route->group(['prefix' => 'student', 'namespace' => 'Student'], function ($route) {
+        $route->get('/', 'StudentController@index')->name('admin.student.index');
+        $route->post('/', 'StudentController@store')->name('admin.student.store');
+        $route->put('/', 'StudentController@update')->name('admin.student.update');
+        $route->delete('/', 'StudentController@delete')->name('admin.student.delete');
     });
 
     //Teacher
-    $route->group(['prefix' => 'teacher', 'namespace' => 'Teacher'], function($route){
-        $route->get('/','TeacherController@index')->name('admin.teacher.index');
-        $route->post('/','TeacherController@store')->name('admin.teacher.store');
-        $route->put('/','TeacherController@update')->name('admin.teacher.update');
-        $route->delete('/','TeacherController@delete')->name('admin.teacher.delete');
+    $route->group(['prefix' => 'teacher', 'namespace' => 'Teacher'], function ($route) {
+        $route->get('/', 'TeacherController@index')->name('admin.teacher.index');
+        $route->post('/', 'TeacherController@store')->name('admin.teacher.store');
+        $route->put('/', 'TeacherController@update')->name('admin.teacher.update');
+        $route->delete('/', 'TeacherController@delete')->name('admin.teacher.delete');
     });
 
     //Teacher
-    $route->group(['prefix' => 'class', 'namespace' => 'StudentClass'], function($route){
-        $route->get('/','ClassController@index')->name('admin.class.index');
-        $route->post('/','ClassController@store')->name('admin.class.store');
-        $route->put('/','ClassController@update')->name('admin.class.update');
-        $route->delete('/','ClassController@delete')->name('admin.class.delete');
+    $route->group(['prefix' => 'class', 'namespace' => 'StudentClass'], function ($route) {
+        $route->get('/', 'ClassController@index')->name('admin.class.index');
+        $route->post('/', 'ClassController@store')->name('admin.class.store');
+        $route->put('/', 'ClassController@update')->name('admin.class.update');
+        $route->delete('/', 'ClassController@delete')->name('admin.class.delete');
     });
 
     //Course
-    $route->group(['prefix' => 'course', 'namespace' => 'Course'], function($route){
-        $route->get('/','CourseController@index')->name('admin.course.index');
-        $route->post('/','CourseController@store')->name('admin.course.store');
-        $route->put('/','CourseController@update')->name('admin.course.update');
-        $route->delete('/','CourseController@delete')->name('admin.course.delete');
+    $route->group(['prefix' => 'course', 'namespace' => 'Course'], function ($route) {
+        $route->get('/', 'CourseController@index')->name('admin.course.index');
+        $route->post('/', 'CourseController@store')->name('admin.course.store');
+        $route->put('/', 'CourseController@update')->name('admin.course.update');
+        $route->delete('/', 'CourseController@delete')->name('admin.course.delete');
 
         //Student
-        $route->group(['prefix' => 'student', 'namespace' => 'Student'], function($route){
-            $route->get('/','StudentController@index')->name('admin.course.student.index');
-            $route->post('/','StudentController@store')->name('admin.course.student.store');
-            $route->put('/','StudentController@update')->name('admin.course.student_update');
-            $route->delete('/','StudentController@delete')->name('admin.course.student.delete');
+        $route->group(['prefix' => 'student', 'namespace' => 'Student'], function ($route) {
+            $route->get('/', 'StudentController@index')->name('admin.course.student.index');
+            $route->post('/', 'StudentController@store')->name('admin.course.student.store');
+            $route->put('/', 'StudentController@update')->name('admin.course.student.update');
+            $route->delete('/', 'StudentController@delete')->name('admin.course.student.delete');
 
             //PRESENT
-            $route->post('/','StudentPresentController@store')->name('admin.course.student.present.store');
-            $route->put('/','StudentPresentController@update')->name('admin.course.student.present.update');
-            $route->delete('/','StudentPresentController@delete')->name('admin.course.student.present.delete');
+            $route->post('present', 'StudentPresentController@store')->name('admin.course.student.present.store');
+            $route->put('present', 'StudentPresentController@update')->name('admin.course.student.present.update');
+            $route->delete('present', 'StudentPresentController@delete')->name('admin.course.student.present.delete');
         });
     });
 });
@@ -72,19 +72,19 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'role:teacher'], '
     $route->get('/', 'DashboardController@index')->name('teacher.dashboard');
 
     //Student
-    $route->group(['prefix' => 'student', 'namespace' => 'Student'], function($route){
-        $route->get('/','StudentController@index')->name('teacher.student.index');
-        $route->post('/','StudentController@store')->name('teacher.student.store');
-        $route->put('/','StudentController@update')->name('teacher.student.update');
-        $route->delete('/','StudentController@delete')->name('teacher.student.delete');
+    $route->group(['prefix' => 'student', 'namespace' => 'Student'], function ($route) {
+        $route->get('/', 'StudentController@index')->name('teacher.student.index');
+        $route->post('/', 'StudentController@store')->name('teacher.student.store');
+        $route->put('/', 'StudentController@update')->name('teacher.student.update');
+        $route->delete('/', 'StudentController@delete')->name('teacher.student.delete');
     });
 
     //Class
-    $route->group(['prefix' => 'class', 'namespace' => 'StudentClass'], function($route){
-        $route->get('/','ClassController@index')->name('teacher.class.index');
-        $route->post('/','ClassController@store')->name('teacher.class.store');
-        $route->put('/','ClassController@update')->name('teacher.class.update');
-        $route->delete('/','ClassController@delete')->name('teacher.class.delete');
+    $route->group(['prefix' => 'class', 'namespace' => 'StudentClass'], function ($route) {
+        $route->get('/', 'ClassController@index')->name('teacher.class.index');
+        $route->post('/', 'ClassController@store')->name('teacher.class.store');
+        $route->put('/', 'ClassController@update')->name('teacher.class.update');
+        $route->delete('/', 'ClassController@delete')->name('teacher.class.delete');
     });
 });
 

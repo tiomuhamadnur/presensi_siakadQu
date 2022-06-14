@@ -126,7 +126,7 @@
                         <h5 class="modal-title" id="modalAdminTitle">Pratinjau Data</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{ route('admin.course.student_update') }}" method="POST">
+                    <form action="{{ route('admin.course.student.update') }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="modal-body">
