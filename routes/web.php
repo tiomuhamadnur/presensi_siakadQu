@@ -56,7 +56,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin'], 'name
         $route->group(['prefix' => 'student', 'namespace' => 'Student'], function($route){
             $route->get('/','StudentController@index')->name('admin.course.student.index');
             $route->post('/','StudentController@store')->name('admin.course.student.store');
-            $route->put('/','StudentController@update')->name('admin.course.student.update');
+            $route->put('/','StudentController@update')->name('admin.course.student_update');
             $route->delete('/','StudentController@delete')->name('admin.course.student.delete');
 
             //PRESENT
