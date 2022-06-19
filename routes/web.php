@@ -60,9 +60,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin'], 'name
             $route->delete('/', 'StudentController@delete')->name('admin.course.student.delete');
 
             //PRESENT
-            $route->post('present', 'StudentPresentController@store')->name('admin.course.student.present.store');
-            $route->put('present', 'StudentPresentController@update')->name('admin.course.student.present.update');
-            $route->delete('present', 'StudentPresentController@delete')->name('admin.course.student.present.delete');
+            $route->post('present', 'StudentPresentController@present')->name('admin.course.student.present');
+            $route->put('present', 'StudentPresentController@presentUpdate')->name('admin.course.student.present.update');
+            // $route->post('unpresent', 'StudentPresentController@unPresent')->name('admin.course.student.unpresent');
+            // $route->put('unpresent', 'StudentPresentController@unPresentUpdate')->name('admin.course.student.unpresent.update');
+            
         });
     });
 });

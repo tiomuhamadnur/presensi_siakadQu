@@ -28,7 +28,7 @@
                         <tr>
                             <th>No</th>
                             <th>Absen</th>
-                            <th>name</th>
+                            <th>nama</th>
                             <th>Kelas</th>
                             <th>email</th>
                             <th>Nilai Tugas</th>
@@ -48,25 +48,28 @@
                                 <td>{{ $no++ }}</td>
                                 <td>
                                     @if ($item->present)
-                                        @if (\Carbon\Carbon::parse($item->present->on)->equalsTo(\Carbon\Carbon::now()))
-                                            <i class='bx bxs-check-circle bx-burst' style='color:#22bb43'></i>
+                                        @php
+                                            $dateCreated = \Carbon\Carbon::parse($item->present->on)->toDateString();
+                                            $dateNow = \Carbon\Carbon::now()->toDateString();
+                                        @endphp
+                                        @if (\Carbon\Carbon::parse($dateCreated)->equalTo($dateNow) && (int) $item->present->status == 1)
+                                            {{-- hadir --}}
+                                            <i class='bx bxs-check-circle bx-burst' style='color:#22bb43'>hadir</i>
+                                        @elseif(\Carbon\Carbon::parse($dateCreated)->equalTo($dateNow) && (int) $item->present->status == 2)
+                                            {{-- tidak hadir --}}
+                                            <i class='bx bx-plus-medical bx-flashing' style='color:#f32844'>Sakit</i>
                                         @else
-                                            <a class="" href="javascript:void(0);" data-bs-toggle="modal"
-                                                data-bs-target="#modalPresent" data-id="{{ $item->id }}">
-                                                <i class='bx bxs-check-circle bx-tada' style='color:#f3e528'></i>
-                                            </a>&nbsp;
-                                            <a class="" href="javascript:void(0);" data-bs-toggle="modal"
-                                                data-bs-target="#modalNotPresent" data-id="{{ $item->id }}">
-                                                <i class='bx bx-user-x bx-flashing' style='color:#f32844'></i>
-                                            </a>&nbsp;
+                                            <i class='bx bx-user-x bx-flashing' style='color:#f32844'>absen</i>
                                         @endif
                                     @else
                                         <a class="" href="javascript:void(0);" data-bs-toggle="modal"
-                                            data-bs-target="#modalPresent" data-id="{{ $item->id }}">
+                                            data-bs-target="#modalPresent" data-id="{{ $item->id }}"
+                                            data-student_id="{{ $item->student_id }}">
                                             <i class='bx bxs-check-circle bx-tada' style='color:#f3e528'></i>
                                         </a>&nbsp;
                                         <a class="" href="javascript:void(0);" data-bs-toggle="modal"
-                                            data-bs-target="#modalUnPresent" data-id="{{ $item->id }}">
+                                            data-bs-target="#modalUnPresent" data-id="{{ $item->id }}"
+                                            data-student_id="{{ $item->student_id }}">
                                             <i class='bx bx-user-x bx-flashing' style='color:#f32844'></i>
                                         </a>&nbsp;
                                     @endif
@@ -239,7 +242,7 @@
                     <h5 class="modal-title" id="present_title">Siswa ini hadir ?</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="form_present_id" action="#" method="POST">
+                <form id="form_present_id" action="{{ route('admin.course.student.present') }}" method="POST">
                     @csrf
                     @method('POST')
                     <div class="modal-body">
@@ -248,24 +251,26 @@
                                 <input type="text" name="student_id" id="present_student_id" hidden class="form-control">
                                 <input type="text" name="trans_course_id" id="present_trans_course_id" hidden
                                     class="form-control">
-                                <input type="text" name="status" id="present_status" hidden class="form-control">
+                                <input type="text" name="status" id="present_status" value="1" hidden
+                                    class="form-control">
                                 <input type="text" name="description" id="present_description" hidden
                                     class="form-control">
-                                <input type="datetime" name="on" id="present_on" hidden class="form-control">
+                                <input type="datetime" name="on" value="{{ \Carbon\Carbon::now()->toDateTimeString() }}"
+                                    id="present_on" hidden class="form-control">
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-danger">Hapus</button>
+                        <button type="submit" class="btn btn-success">Hadir</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    {{-- END MODAL UNPRESENT --}}
+    {{-- END MODAL PRESENT --}}
 
-    {{-- Modal Present --}}
+    {{-- Modal Un Present --}}
     <div class="modal fade" id="modalUnPresent" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
@@ -273,9 +278,9 @@
                     <h5 class="modal-title" id="exampleModalLabel2">Tidak Hadir ?</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="form_unpresent_id" action="#" method="POST">
+                <form id="form_unpresent_id" action="{{ route('admin.course.student.present') }}" method="POST">
                     @csrf
-                    @method('PUT')
+                    @method('POST')
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-mb-2">
@@ -293,7 +298,8 @@
                                 <label for="" class="form-label">Deskripsi</label>
                                 <input type="text" name="description" id="unpresent_description" class="form-control">
 
-                                <input type="text" value="{{ \Carbon\Carbon::now()->toDateTimeString() }}" name="on" id="unpresent_on" hidden class="form-control">
+                                <input type="text" value="{{ \Carbon\Carbon::now()->toDateTimeString() }}" name="on"
+                                    id="unpresent_on" hidden class="form-control">
                                 <input type="text" name="student_id" id="unpresent_student_id" hidden
                                     class="form-control">
                                 <input type="text" name="trans_course_id" id="unpresent_trans_course_id" hidden
@@ -303,7 +309,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-danger">Hapus</button>
+                        <button type="submit" class="btn btn-danger">Kirim</button>
                     </div>
                 </form>
             </div>
@@ -341,6 +347,27 @@
                 $('#update_total_score').val(total_score);
 
             });
+
+            $('#modalPresent').on('show.bs.modal', function(e) {
+                var student_id = $(e.relatedTarget).data('student_id');
+                var trans_course_id = $(e.relatedTarget).data('id');
+
+                $('#present_student_id').val(student_id);
+                $('#present_trans_course_id').val(trans_course_id);
+
+
+            });
+
+            $('#modalUnPresent').on('show.bs.modal', function(e) {
+                var student_id = $(e.relatedTarget).data('student_id');
+                var trans_course_id = $(e.relatedTarget).data('id');
+
+                $('#unpresent_student_id').val(student_id);
+                $('#unpresent_trans_course_id').val(trans_course_id);
+
+
+            });
+
         });
     </script>
 @endsection

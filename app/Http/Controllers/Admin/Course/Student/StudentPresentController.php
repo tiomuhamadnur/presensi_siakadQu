@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Admin\Course\Student;
 
 use App\Http\Controllers\Controller;
 use App\Models\TransPresents;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class StudentPresentController extends Controller
 {
-    public function store(Request $req)
+    public function present(Request $req)
     {
         $present = new TransPresents();
         $present->student_id = $req->student_id;
