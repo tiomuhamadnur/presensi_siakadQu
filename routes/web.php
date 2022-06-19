@@ -99,12 +99,12 @@ Route::group(['prefix' => 'auth', 'namespace' => 'App\Http\Controllers\Auth'], f
     $route->post('register', 'AuthController@doRegister')->name('auth.do_register');
 });
 
-Route::group(['prefix' => '/', 'namespace' => 'App\Http\Controllers\Users'], function ($route) {
+// Route::group(['prefix' => '/', 'namespace' => 'App\Http\Controllers\Users'], function ($route) {
 
-    $route->group(['prefix' => 'users'], function ($route) {
-        $route->get('/', 'UserController@login')->name('user');
-    });
-});
+//     $route->group(['prefix' => 'users'], function ($route) {
+//         $route->get('/', 'UserController@login')->name('user');
+//     });
+// });
 
 
 /**

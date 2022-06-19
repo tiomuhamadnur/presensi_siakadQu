@@ -24,8 +24,8 @@ class Controller extends BaseController
     {
     	$response = [
             'success' => true,
-            'data'    => $result,
             'message' => $message,
+            'data'    => $result
         ];
 
 
@@ -43,6 +43,7 @@ class Controller extends BaseController
     	$response = [
             'success' => false,
             'message' => $error,
+            'data' => null
         ];
 
 

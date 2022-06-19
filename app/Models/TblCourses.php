@@ -15,6 +15,8 @@ class TblCourses extends Model
         'name',
         'teacher_id',
         'class_id',
+        'schedule',
+        'time'
     ];
 
     public function class()

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -27,7 +28,7 @@ class AuthController extends Controller
             if (Hash::check($req->password, $user->password)) {
                 Auth::attempt(['email' => $req->email, 'password' => $req->password]);
                 if ($user->role == 'guru') {
-                    $token = $user->createToken('MyApp')->plainTextToken;
+                    $token = $user->createToken('auth_token')->plainTextToken;
                     return $this->sendResponse([
                         'access_token' => [
                             'token_type' => 'Bearer',
