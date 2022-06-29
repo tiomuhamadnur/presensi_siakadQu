@@ -67,6 +67,22 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin'], 'name
             
         });
     });
+
+    //Present
+    $route->group(['prefix' => 'present', 'namespace' => 'Present'], function ($route) {
+        $route->get('/', 'PresentController@index')->name('admin.present.index');
+        $route->post('/', 'PresentController@store')->name('admin.present.store');
+        $route->put('/', 'PresentController@update')->name('admin.present.update');
+        $route->delete('/', 'PresentController@delete')->name('admin.present.delete');
+
+        //Student
+        $route->group(['prefix' => 'present_by_class', 'namespace' => 'PresentByClass'], function ($route) {
+            $route->get('/', 'PresentByClassController@index')->name('admin.present.by_class.index');
+            $route->post('/', 'PresentByClassController@store')->name('admin.present.by_class.store');
+            $route->put('/', 'PresentByClassController@update')->name('admin.present.by_class.update');
+            $route->delete('/', 'PresentByClassController@delete')->name('admin.present.by_class.delete');
+        });
+    });
 });
 
 //Teacher

@@ -255,7 +255,7 @@
                                     <label for="emailWithTitle" class="form-label">Kelas</label>
                                     <select class="form-control" name="class_id" id="">
                                         @foreach ($classes as $item)
-                                            <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>

@@ -27,6 +27,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>Absen</th>
                             <th>nama</th>
                             <th>Kelas</th>
                             <th>email</th>
@@ -45,6 +46,34 @@
                         @foreach ($transCourse as $item)
                             <tr class="table-default">
                                 <td>{{ $no++ }}</td>
+                                <td>
+                                    @if ($item->present)
+                                        @php
+                                            $dateCreated = \Carbon\Carbon::parse($item->present->on)->toDateString();
+                                            $dateNow = \Carbon\Carbon::now()->toDateString();
+                                        @endphp
+                                        @if (\Carbon\Carbon::parse($dateCreated)->equalTo($dateNow) && (int) $item->present->status == 1)
+                                            {{-- hadir --}}
+                                            <i class='bx bxs-check-circle bx-burst' style='color:#22bb43'>hadir</i>
+                                        @elseif(\Carbon\Carbon::parse($dateCreated)->equalTo($dateNow) && (int) $item->present->status == 2)
+                                            {{-- tidak hadir --}}
+                                            <i class='bx bx-plus-medical bx-flashing' style='color:#f32844'>Sakit</i>
+                                        @else
+                                            <i class='bx bx-user-x bx-flashing' style='color:#f32844'>absen</i>
+                                        @endif
+                                    @else
+                                        <a class="" href="javascript:void(0);" data-bs-toggle="modal"
+                                            data-bs-target="#modalPresent" data-id="{{ $item->id }}"
+                                            data-student_id="{{ $item->student_id }}">
+                                            <i class='bx bxs-check-circle bx-tada' style='color:#f3e528'></i>
+                                        </a>&nbsp;
+                                        <a class="" href="javascript:void(0);" data-bs-toggle="modal"
+                                            data-bs-target="#modalUnPresent" data-id="{{ $item->id }}"
+                                            data-student_id="{{ $item->student_id }}">
+                                            <i class='bx bx-user-x bx-flashing' style='color:#f32844'></i>
+                                        </a>&nbsp;
+                                    @endif
+                                </td>
                                 <td><i class="fab fa-sketch fa-lg text-warning me-3"></i>
                                     <strong>{{ $item->student->name }}</strong>
                                 </td>
@@ -177,18 +206,11 @@
                         <div class="modal-body">
                             <div class="row g-2">
                                 <div class="col mb-1">
-                                    <label for="" class="form-label">Mata Pelajaran</label>
-                                    <input type="text" disabled id="" class="form-control"
-                                        value="{{ $course ? $course->name : null }}" />
+                                    <label for="" class="form-label">Kelas</label>
                                     <input type="text" hidden id="" class="form-control" name="class_id"
                                         value="{{ $course ? $course->class_id : null }}" />
                                     <input type="text" hidden id="" class="form-control" name="course_id"
                                         value="{{ $course ? $course->id : null }}" />
-                                </div>
-                                <div class="col mb-1">
-                                    <label for="" class="form-label">Mata Pelajaran</label>
-                                    <input type="text" disabled id="" class="form-control"
-                                        value="{{ $course ? $course->class->name : null }}" />
                                 </div>
                                 <div class="col mb-1">
                                     <label for="" class="form-label">Pilih Siswa</label>

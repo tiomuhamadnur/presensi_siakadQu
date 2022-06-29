@@ -1,30 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Course\Student;
+namespace App\Http\Controllers\Admin\Present\PresentByClass;
 
 use App\Http\Controllers\Controller;
 use App\Models\TblClasses;
 use App\Models\TblCourses;
 use App\Models\TransCourses;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class StudentController extends Controller
+class PresentByClassController extends Controller
 {
     public function index(Request $req)
     {
-        $transCourse = TransCourses::where('course_id', $req->course_id)->with(['course', 'student', 'present'])->paginate(10);
-        $studentIds = [];
-        foreach ($transCourse as $item) {
-            $studentIds[] = $item->student_id;
-        }
         $tblCourse = TblCourses::find($req->course_id);
-        $students = [];
-        if ($tblCourse) {
-            $students = User::where('role', self::ROLE_STUDENT)->whereNotIn('id', $studentIds)->where('class_id', $tblCourse->class_id)->get();
+        $transCourse = TransCourses::where('trans_courses.class_id', $req->class_id)->where('trans_courses.course_id', $req->course_id)
+            ->join('tbl_courses', 'tbl_courses.id', 'trans_courses.course_id');
+        if ($req->schedule) {
+            $transCourse->where('tbl_courses.schedule', $req->schedule);
         }
-        $classes = TblClasses::all();
-        return view('admin.courses.students.student', ['transCourse' => $transCourse, 'classes' => $classes, 'students' => $students, 'course' => $tblCourse]);
+        $transCourse = $transCourse->get();
+        return view('admin.present.present_by_class.present_by_class', ['transCourse' => $transCourse, 'course' => $tblCourse]);
     }
 
     public function store(Request $req)

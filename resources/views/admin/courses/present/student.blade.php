@@ -30,11 +30,6 @@
                             <th>nama</th>
                             <th>Kelas</th>
                             <th>email</th>
-                            <th>Nilai Tugas</th>
-                            <th>Nilai Quiz</th>
-                            <th>Nilai UTS</th>
-                            <th>Nilai UAS</th>
-                            <th>Nilai Akhir</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -50,35 +45,19 @@
                                 </td>
                                 <td>{{ $item->student->class ? $item->student->class->name : null }}</td>
                                 <td>{{ $item->student->email }}</td>
-                                <td>{{ $item->assesment_score }}</td>
-                                <td>{{ $item->quiz_score }}</td>
-                                <td>{{ $item->mid_score }}</td>
-                                <td>{{ $item->final_score }}</td>
-                                <td>{{ $item->total_score }}</td>
                                 <td>
-                                    <div class="dropdown">
-                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                            data-bs-toggle="dropdown">
-                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
-                                                data-bs-target="#modalUpdate" data-name="{{ $item->student->name }}"
-                                                data-email="{{ $item->student->email }}" data-id="{{ $item->id }}"
-                                                data-assesment_score="{{ $item->assesment_score }}"
-                                                data-quiz_score="{{ $item->quiz_score }}"
-                                                data-mid_score="{{ $item->mid_score }}"
-                                                data-final_score="{{ $item->final_score }}"
-                                                data-total_score="{{ $item->total_score }}">
-                                                <i class="bx bx-edit-alt me-1">
-                                                </i>
-                                                Edit</a>
-                                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
-                                                data-bs-target="#modalDelete" data-id="{{ $item->id }}">
-                                                <i class="bx bx-trash me-1"></i>Delete
-                                            </a>
-                                        </div>
-                                    </div>
+
+                                    <a class="btn btn-primary" href="javascript:void(0);" data-bs-toggle="modal"
+                                        data-bs-target="#modalUpdate" data-name="{{ $item->student->name }}"
+                                        data-email="{{ $item->student->email }}" data-id="{{ $item->id }}"
+                                        data-assesment_score="{{ $item->assesment_score }}"
+                                        data-quiz_score="{{ $item->quiz_score }}"
+                                        data-mid_score="{{ $item->mid_score }}"
+                                        data-final_score="{{ $item->final_score }}"
+                                        data-total_score="{{ $item->total_score }}">
+                                        <i class="bx bx-edit-alt me-1">
+                                        </i>
+                                        Absen</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -137,15 +116,15 @@
                                 </div>
                                 <div class="col mb-1">
                                     <label for="nameWithTitle" class="form-label">Nilai UAS</label>
-                                    <input type="text" id="update_final_score" name="final_score" class="form-control"
-                                        placeholder="Masukan Nilai Tugas" />
+                                    <input type="text" id="update_final_score" name="final_score"
+                                        class="form-control" placeholder="Masukan Nilai Tugas" />
                                 </div>
                             </div>
                             <div class="row g-2">
                                 <div class="col mb-1">
                                     <label for="nameWithTitle" class="form-label">Nilai Akhir</label>
-                                    <input type="text" id="update_total_score" name="total_score" class="form-control"
-                                        placeholder="Masukan Nilai Tugas" />
+                                    <input type="text" id="update_total_score" name="total_score"
+                                        class="form-control" placeholder="Masukan Nilai Tugas" />
                                 </div>
                             </div>
                         </div>
@@ -177,18 +156,11 @@
                         <div class="modal-body">
                             <div class="row g-2">
                                 <div class="col mb-1">
-                                    <label for="" class="form-label">Mata Pelajaran</label>
-                                    <input type="text" disabled id="" class="form-control"
-                                        value="{{ $course ? $course->name : null }}" />
+                                    <label for="" class="form-label">Kelas</label>
                                     <input type="text" hidden id="" class="form-control" name="class_id"
                                         value="{{ $course ? $course->class_id : null }}" />
                                     <input type="text" hidden id="" class="form-control" name="course_id"
                                         value="{{ $course ? $course->id : null }}" />
-                                </div>
-                                <div class="col mb-1">
-                                    <label for="" class="form-label">Mata Pelajaran</label>
-                                    <input type="text" disabled id="" class="form-control"
-                                        value="{{ $course ? $course->class->name : null }}" />
                                 </div>
                                 <div class="col mb-1">
                                     <label for="" class="form-label">Pilih Siswa</label>
@@ -226,15 +198,17 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col mb-3">
-                                <input type="text" name="student_id" id="present_student_id" hidden class="form-control">
+                                <input type="text" name="student_id" id="present_student_id" hidden
+                                    class="form-control">
                                 <input type="text" name="trans_course_id" id="present_trans_course_id" hidden
                                     class="form-control">
                                 <input type="text" name="status" id="present_status" value="1" hidden
                                     class="form-control">
                                 <input type="text" name="description" id="present_description" hidden
                                     class="form-control">
-                                <input type="datetime" name="on" value="{{ \Carbon\Carbon::now()->toDateTimeString() }}"
-                                    id="present_on" hidden class="form-control">
+                                <input type="datetime" name="on"
+                                    value="{{ \Carbon\Carbon::now()->toDateTimeString() }}" id="present_on" hidden
+                                    class="form-control">
                             </div>
                         </div>
                     </div>
@@ -264,20 +238,23 @@
                             <div class="col-mb-2">
                                 <small class="text-light fw-semibold d-block">Status Kehadiran</small>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="status" id="unpresent_id" value="0">
+                                    <input class="form-check-input" type="radio" name="status" id="unpresent_id"
+                                        value="0">
                                     <label class="form-check-label" for="unpresent_id">Tidak Hadir</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="status" id="sick_id" value="2">
+                                    <input class="form-check-input" type="radio" name="status" id="sick_id"
+                                        value="2">
                                     <label class="form-check-label" for="sick_id">Sakit</label>
                                 </div>
                             </div>
                             <div class="col mb-2">
                                 <label for="" class="form-label">Deskripsi</label>
-                                <input type="text" name="description" id="unpresent_description" class="form-control">
+                                <input type="text" name="description" id="unpresent_description"
+                                    class="form-control">
 
-                                <input type="text" value="{{ \Carbon\Carbon::now()->toDateTimeString() }}" name="on"
-                                    id="unpresent_on" hidden class="form-control">
+                                <input type="text" value="{{ \Carbon\Carbon::now()->toDateTimeString() }}"
+                                    name="on" id="unpresent_on" hidden class="form-control">
                                 <input type="text" name="student_id" id="unpresent_student_id" hidden
                                     class="form-control">
                                 <input type="text" name="trans_course_id" id="unpresent_trans_course_id" hidden

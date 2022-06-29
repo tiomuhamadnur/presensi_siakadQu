@@ -11,9 +11,13 @@ use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
-    public function index()
+    public function index(Request $req)
     {
-        $students = User::where('role', self::ROLE_STUDENT)->with(['class'])->paginate(10);
+        $students = User::where('role', self::ROLE_STUDENT)->with(['class']);
+        if($req->class_id) {
+            $students->where('class_id', $req->class_id);
+        }
+        $students = $students->paginate(10);
         $classes = TblClasses::all();
         return view('admin.students.student', ['students' => $students, 'classes' => $classes]);
     }
