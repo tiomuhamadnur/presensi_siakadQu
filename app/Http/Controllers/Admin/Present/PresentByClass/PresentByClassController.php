@@ -3,11 +3,8 @@
 namespace App\Http\Controllers\Admin\Present\PresentByClass;
 
 use App\Http\Controllers\Controller;
-use App\Models\TblClasses;
 use App\Models\TblCourses;
 use App\Models\TransCourses;
-use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PresentByClassController extends Controller
@@ -21,6 +18,7 @@ class PresentByClassController extends Controller
             $transCourse->where('tbl_courses.schedule', $req->schedule);
         }
         $transCourse = $transCourse->get();
+        return $transCourse;
         return view('admin.present.present_by_class.present_by_class', ['transCourse' => $transCourse, 'course' => $tblCourse]);
     }
 
