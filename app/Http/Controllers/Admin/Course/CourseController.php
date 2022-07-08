@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Course;
 use App\Http\Controllers\Controller;
 use App\Models\TblClasses;
 use App\Models\TblCourses;
+use App\Models\TransCourses;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -34,7 +35,15 @@ class CourseController extends Controller
         $course->teacher_id = $req->teacher_id;
         $course->class_id = $req->class_id;
         $course->save();
-        return back()->with('success', 'tambah data berhasil!');
+        $students = User::where('class_id', $req->class_id)->where('role', self::ROLE_STUDENT)->get();
+        foreach($students as $student) {
+            $transCourse = new TransCourses();
+            $transCourse->class_id = $req->class_id;
+            $transCourse->course_id = $course->id;
+            $transCourse->student_id = $student->id;
+            $transCourse->save();
+        }
+        return back()->with('message', ['message' => 'tambah data berhasil!']);
     }
 
     public function update(Request $req)
@@ -46,7 +55,7 @@ class CourseController extends Controller
             $req->teacher_id ? $course = $req->teacher_id : null;
             $req->class_id ? $course = $req->class_id : null;
             $course->save();
-            return back()->with('success', ['message' => 'update berhasil!']);
+            return back()->with('message', ['message' => 'update berhasil!']);
         }
         return back()->with('404', ['message' => 'data tidak ditemuka!']);
     }

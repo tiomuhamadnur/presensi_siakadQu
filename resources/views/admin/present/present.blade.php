@@ -61,6 +61,7 @@
                             <th>Nama Mata Pelajaran</th>
                             <th>Pengampu</th>
                             <th>Kelas</th>
+                            <th>Jadwal</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -76,6 +77,11 @@
                                 </td>
                                 <td>{{ $item->teacher ? $item->teacher->name : '-' }}</td>
                                 <td>{{ $item->class->name }}</td>
+                                @php
+                                    $presentController = new \App\Http\Controllers\Admin\Present\PresentController();
+                                    $scheduleDay = $presentController->getDayString($item->schedule);
+                                @endphp
+                                <td>{{ $scheduleDay }}, {{ $item->start_time }} - {{ $item->end_time }}</td>
                                 <td>
                                     <a class="btn rounded-pill btn-primary"
                                         href="{{ route('admin.present.by_class.index', ['course_id' => $item->id, 'class_id' => $item->class_id]) }}">
@@ -83,7 +89,7 @@
                                     </a>
                                     <a class="btn rounded-pill btn-info"
                                         href="{{ route('admin.course.student.index', ['course_id' => $item->id]) }}">
-                                        <i class='bx bx-history' ></i> Riwayat Absensi
+                                        <i class='bx bx-history'></i> Riwayat Absensi
                                     </a>
                                 </td>
                             </tr>

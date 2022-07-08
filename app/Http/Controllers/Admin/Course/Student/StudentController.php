@@ -34,7 +34,7 @@ class StudentController extends Controller
         $course->course_id = $req->course_id;
         $course->student_id = $req->student_id;
         $course->save();
-        return back()->with('success', 'tambah data berhasil!');
+        return back()->with('message', ['message' => 'tambah data berhasil!']);
     }
 
     public function update(Request $req)
@@ -50,7 +50,7 @@ class StudentController extends Controller
             $req->final_score ? $course->final_score = $req->final_score : null;
             $req->total_score ? $course->total_score = $req->total_score : null;
             $course->save();
-            return back()->with('success', ['message' => 'update berhasil!']);
+            return back()->with('message', ['message' => 'update berhasil!']);
         }
         return back()->with('404', ['message' => 'data tidak ditemuka!']);
     }

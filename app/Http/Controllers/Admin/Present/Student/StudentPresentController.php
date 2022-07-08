@@ -18,7 +18,7 @@ class StudentPresentController extends Controller
         $present->description = $req->description;
         $present->on = $req->on;
         $present->save();
-        return back()->with('success', 'tambah data berhasil!');
+        return back()->with('message', ['message' => 'tambah data berhasil!']);
     }
 
     public function update(Request $req)
@@ -31,7 +31,7 @@ class StudentPresentController extends Controller
             $req->description ? $present->description = $req->description : null;
             $req->on ? $present->on = $req->on : null;
             $present->save();
-            return back()->with('success', ['message' => 'update berhasil!']);
+            return back()->with('message', ['message' => 'update berhasil!']);
         }
         return back()->with('404', ['message' => 'data tidak ditemuka!']);
     }

@@ -14,6 +14,7 @@ class StudentController extends Controller
     public function index(Request $req)
     {
         $students = User::where('role', self::ROLE_STUDENT)->with(['class']);
+        return $students;
         if($req->class_id) {
             $students->where('class_id', $req->class_id);
         }
@@ -43,7 +44,7 @@ class StudentController extends Controller
             }
             $student->photo = $path;
             $student->save();
-            return back()->with('success', 'tambah data berhasil!');
+            return back()->with('message', ['message' => 'tambah data berhasil!']);
         }
     }
 
@@ -70,7 +71,7 @@ class StudentController extends Controller
             }
             $req->photo ? $student->photo = $path : null;
             $student->save();
-            return back()->with('success', ['message' => 'update berhasil!']);
+            return back()->with('message', ['message' => 'update berhasil!']);
         }
         return back()->with('404', ['message' => 'data tidak ditemuka!']);
     }

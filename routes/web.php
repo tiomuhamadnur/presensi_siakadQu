@@ -76,9 +76,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin'], 'name
         $route->delete('/', 'PresentController@delete')->name('admin.present.delete');
 
         //Student
-        $route->group(['prefix' => 'present_by_class', 'namespace' => 'PresentByClass'], function ($route) {
+        $route->group(['prefix' => 'present_by_class', 'namespace' => 'Student'], function ($route) {
             $route->get('/', 'PresentByClassController@index')->name('admin.present.by_class.index');
             $route->post('/', 'PresentByClassController@store')->name('admin.present.by_class.store');
+            $route->post('present', 'PresentByClassController@doPresent')->name('admin.present.by_class.do_present');
             $route->put('/', 'PresentByClassController@update')->name('admin.present.by_class.update');
             $route->delete('/', 'PresentByClassController@delete')->name('admin.present.by_class.delete');
         });

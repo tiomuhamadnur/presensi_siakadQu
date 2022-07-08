@@ -22,7 +22,7 @@ class ClassController extends Controller
             $class->name = $req->name;
             $class->teacher_guider_id = $req->teacher_guider_id;
             $class->save();
-            return back()->with('success', 'tambah data berhasil!');
+            return back()->with('message', ['message' => 'tambah data berhasil!']);
         }
     }
 
@@ -34,7 +34,7 @@ class ClassController extends Controller
             $req ? $class->name = $req->name : null;
             $req ? $class->teacher_guider_id = $req->teacher_guider_id : null;
             $class->save();
-            return back()->with('success', ['message' => 'update berhasil!']);
+            return back()->with('message', ['message' => 'update berhasil!']);
         }
         return back()->with('404', ['message' => 'data tidak ditemuka!']);
     }

@@ -40,7 +40,7 @@ class TeacherController extends Controller
             }
             $teacher->photo = $path;
             $teacher->save();
-            return back()->with('success', 'tambah data berhasil!');
+            return back()->with('message', ['message' => 'tambah data berhasil!']);
         }
     }
 
@@ -67,7 +67,7 @@ class TeacherController extends Controller
             }
             $req->photo ? $teacher->photo = $path : null;
             $teacher->save();
-            return back()->with('success', ['message' => 'update berhasil!']);
+            return back()->with('message', ['message' => 'update berhasil!']);
         }
         return back()->with('404', ['message' => 'data tidak ditemuka!']);
     }

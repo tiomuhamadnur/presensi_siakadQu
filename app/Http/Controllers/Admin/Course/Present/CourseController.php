@@ -31,7 +31,7 @@ class CourseController extends Controller
         $course->teacher_id = $req->teacher_id;
         $course->class_id = $req->class_id;
         $course->save();
-        return back()->with('success', 'tambah data berhasil!');
+        return back()->with('message', ['message' => 'tambah data berhasil!']);
     }
 
     public function update(Request $req)
@@ -43,7 +43,7 @@ class CourseController extends Controller
             $req->teacher_id ? $course = $req->teacher_id : null;
             $req->class_id ? $course = $req->class_id : null;
             $course->save();
-            return back()->with('success', ['message' => 'update berhasil!']);
+            return back()->with('message', ['message' => 'update berhasil!']);
         }
         return back()->with('404', ['message' => 'data tidak ditemuka!']);
     }

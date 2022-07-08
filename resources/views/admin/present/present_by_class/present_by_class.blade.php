@@ -13,10 +13,47 @@
                     <h5 class="fw-bold py-3 mb-4">Absensi Matpel {{ $course ? $course->name : null }}</h5>
                 </div>
                 <div class="col-8 d-flex align-items-end flex-column" style="padding-right: 4%;">
-                    <button type="button" class="btn btn-icon btn-outline-primary" data-bs-toggle="modal"
-                        data-bs-target="#modalStore">
-                        <span class="tf-icons bx bx-plus"></span>
-                    </button>
+                    <div class="row">
+                        <form
+                            action="{{ route('admin.present.by_class.index', ['course_id' => $course_id, 'class_id' => $class_id]) }}"
+                            class="col-md-10" id="date_filter">
+                            <div class="input-group">
+                                <input type="date" value="{{ $schedule }}" name="schedule" class="form-control">
+                                &nbsp;
+                                <button form="date_filter" class="btn btn-primary" id="filter_btn_id"><i
+                                        class="bx bx-filter-alt"></i>
+                                </button>
+                            </div>
+                        </form>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-icon btn-outline-primary" data-bs-toggle="modal"
+                                data-bs-target="#modalStore">
+                                <span class="tf-icons bx bx-plus"></span>
+                                <div class="col-2">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 d-flex justify-content-start flex-column">
+                    <form action="{{route('admin.present.by_class.do_present')}}" method="POST" class="form-inline">
+                        @csrf
+                        <div class="input-group">
+                            <select name="status" class="form-select" id="inputGroupSelect04"
+                                aria-label="Example select with button addon">
+                                <option selected="">Pilih Kehadiran</option>
+                                <option value="1">Hadir</option>
+                                <option value="0">Tidak Hadir</option>
+                                <option value="2">Sakit</option>
+                                <option value="3">Izin</option>
+                            </select>
+                            <input type="hidden" value="{{$schedule}}" name="schedule">
+                            <input type="hidden" value="{{$course_id}}" name="course_id">
+                            <input type="hidden" value="{{$class_id}}" name="class_id">
+                            <div id="new_present_form"></div>
+                            <button id="btn_present_form" class="btn btn-outline-primary" type="submit"><i
+                                    class='bx bxs-badge-check'></i></button>
+                        </div>
+                    </form>
                 </div>
             </div>
 
@@ -25,67 +62,70 @@
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th class="active">
+                                <input type="checkbox" class="select-all checkbox" name="select-all" />
+                            </th>
                             <th>nama</th>
                             <th>Kelas</th>
                             <th>Absen</th>
-                            <th>Actions</th>
+                            {{-- <th>Actions</th> --}}
                         </tr>
                     </thead>
-                    <tbody class="table-border-bottom-0">
-                        @php
-                            $no = 1;
-                        @endphp
-                        @foreach ($transCourse as $item)
-                            <tr class="table-default">
-                                <td>{{ $no++ }}</td>
-                                <td><i class="fab fa-sketch fa-lg text-warning me-3"></i>
-                                    <strong>{{ $item->student->name }}</strong>
-                                </td>
-                                <td>{{ $item->student->class ? $item->student->class->name : null }}</td>
-                                <td>
-                                    <div class="btn-group" role="group" aria-label="First group">
-                                        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" title="" data-bs-original-title="<span>Hadir</span>">
-                                            <i class='bx bxs-badge-check' ></i>
-                                        </button>
-                                        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" title="" data-bs-original-title="<span>Sakit</span>">
-                                            <i class='bx bx-plus-medical'></i>
-                                        </button>
-                                        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" title="" data-bs-original-title="<span>Izin</span>">
-                                            <i class='bx bxs-envelope' ></i>
-                                        </button>
-                                        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" title="" data-bs-original-title="<span>Tidak Ada Keterangan</span>">
-                                            <i class='bx bx-calendar-x' ></i>
-                                        </button>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                            data-bs-toggle="dropdown">
-                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
-                                                data-bs-target="#modalUpdate" data-name="{{ $item->student->name }}"
-                                                data-email="{{ $item->student->email }}" data-id="{{ $item->id }}"
-                                                data-assesment_score="{{ $item->assesment_score }}"
-                                                data-quiz_score="{{ $item->quiz_score }}"
-                                                data-mid_score="{{ $item->mid_score }}"
-                                                data-final_score="{{ $item->final_score }}"
-                                                data-total_score="{{ $item->total_score }}">
-                                                <i class="bx bx-edit-alt me-1">
-                                                </i>
-                                                Edit</a>
-                                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
-                                                data-bs-target="#modalDelete" data-id="{{ $item->id }}">
-                                                <i class="bx bx-trash me-1"></i>Delete
-                                            </a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
+
+                        <input type="text" name="count_student" value="{{ count($transCourse) }}" hidden>
+                        <tbody class="table-border-bottom-0">
+                            @php
+                                $no = 1;
+                            @endphp
+                            @foreach ($transCourse as $key => $item)
+                                <tr class="table-default">
+                                    <td>{{ $no++ }}</td>
+                                    <td class="active">
+                                        <input type="checkbox" class="select-item checkbox" name="select-item"
+                                            value="{{ $item->id }}" />
+                                    </td>
+                                    <td><i class="fab fa-sketch fa-lg text-warning me-3"></i>
+                                        <strong>{{ $item->student->name }}</strong>
+                                    </td>
+                                    <td>{{ $item->student->class ? $item->student->class->name : null }}</td>
+                                    <td>
+                                        @if ($item->present)
+                                            @if ($item->present->status == 1)
+                                                <button type="button" class="btn btn-outline-secondary"
+                                                    data-bs-toggle="tooltip" id="btn_hadir_id" data-bs-offset="0,4"
+                                                    data-bs-placement="top" data-bs-html="true" title=""
+                                                    data-bs-original-title="<span>Hadir</span>">
+                                                    <i class='bx bxs-badge-check'></i>
+                                                </button>
+                                            @elseif($item->present->status == 2)
+                                                <button type="button" class="btn btn-outline-secondary"
+                                                    data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
+                                                    data-bs-html="true" title=""
+                                                    data-bs-original-title="<span>Sakit</span>">
+                                                    <i class='bx bx-plus-medical'></i>
+                                                </button>
+                                            @elseif($item->present->status == 3)
+                                                <button type="button" class="btn btn-outline-secondary"
+                                                    data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
+                                                    data-bs-html="true" title=""
+                                                    data-bs-original-title="<span>Izin</span>">
+                                                    <i class='bx bxs-envelope'></i>
+                                                </button>
+                                            @else
+                                                <button type="button" class="btn btn-outline-secondary"
+                                                    data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
+                                                    data-bs-html="true" title=""
+                                                    data-bs-original-title="<span>Tidak Ada Keterangan </span>">
+                                                    <i class='bx bx-calendar-x'></i>
+                                                </button>
+                                            @endif
+                                        @else
+                                            Belum ada presensi
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
                 </table>
             </div>
         </div>
@@ -231,6 +271,90 @@
 
             });
 
+        });
+
+        $(function() {
+            $('#btn_present_form').attr('disabled', true);
+            //button select all or cancel
+            $("#select-all").click(function() {
+                var all = $("input.select-all")[0];
+                all.checked = !all.checked
+                var checked = all.checked;
+                $("input.select-item").each(function(index, item) {
+                    item.checked = checked;
+                });
+            });
+
+            //button select invert
+            $("#select-invert").click(function() {
+                $("input.select-item").each(function(index, item) {
+                    item.checked = !item.checked;
+                });
+                checkSelected();
+            });
+
+            //button get selected info
+            $("#selected").click(function() {
+                var items = [];
+                $("input.select-item:checked:checked").each(function(index, item) {
+                    items[index] = item.value;
+                });
+                if (items.length < 1) {
+                    alert("no selected items!!!");
+                } else {
+                    var values = items.join(',');
+                    console.log(values);
+                    var html = $("<div></div>");
+                    html.html("selected:" + values);
+                    html.appendTo("body");
+                }
+                console.log(items);
+            });
+
+            //column checkbox select all or cancel
+            $("input.select-all").click(function() {
+                var checked = this.checked;
+                $("input.select-item").each(function(index, item) {
+                    item.checked = checked;
+                });
+            });
+
+            //check selected items
+            $("input.select-item").click(function() {
+                var checked = this.checked;
+                var items = [];
+                if (checked) {
+                    $("input.select-item:checked:checked").each(function(index, item) {
+                        items[index] = item.value;
+                        $("#new_present_form").append('<input type="hidden" name="ids[]" value="' +
+                            $(
+                                this).val() + '">');
+                    });
+                } else {
+                    var check = $(this).val();
+                    $('[name="ids[]"]').each(function() {
+                        if ($(this).val() == check) {
+                            $(this).remove();
+                        }
+                    });
+                }
+                checkSelected();
+            });
+
+            //check is all selected
+            function checkSelected() {
+                var all = $("input.select-all")[0];
+                var total = $("input.select-item").length;
+                var len = $("input.select-item:checked:checked").length;
+                if (len < 1) {
+                    $('#btn_present_form').attr('disabled', true);
+                } else {
+                    $('#btn_present_form').attr('disabled', false);
+                }
+                console.log("total:" + total);
+                console.log("len:" + len);
+                all.checked = len === total;
+            }
         });
     </script>
 @endsection

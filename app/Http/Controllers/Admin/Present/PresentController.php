@@ -24,6 +24,33 @@ class PresentController extends Controller
         return view('admin.present.present', ['courses' => $courses, 'teachers' => $teachers, 'classes' => $classes, 'teacher' => $teacher]);
     }
 
+    public function getDayString($dayInt)
+    {
+        switch (strtolower($dayInt)) {
+            case 2:
+                $dayString = 'selasa';
+                break;
+            case 3:
+                $dayString = 'rabu';
+                break;
+            case 4:
+                $dayString = 'kamis';
+                break;
+            case 5:
+                $dayString = 'jumat';
+                break;
+            case 6:
+                $dayString = 'sabtu';
+                break;
+            case 7:
+                $dayString = 'minggu';
+                break;
+            default:
+                $dayString = 'senin';
+        }
+        return $dayString;
+    }
+
     public function store(Request $req)
     {
         $course = new TblCourses();
@@ -31,7 +58,7 @@ class PresentController extends Controller
         $course->teacher_id = $req->teacher_id;
         $course->class_id = $req->class_id;
         $course->save();
-        return back()->with('success', 'tambah data berhasil!');
+        return back()->with('message', ['message' => 'tambah data berhasil!']);
     }
 
     public function update(Request $req)
@@ -43,7 +70,7 @@ class PresentController extends Controller
             $req->teacher_id ? $course = $req->teacher_id : null;
             $req->class_id ? $course = $req->class_id : null;
             $course->save();
-            return back()->with('success', ['message' => 'update berhasil!']);
+            return back()->with('message', ['message' => 'update berhasil!']);
         }
         return back()->with('404', ['message' => 'data tidak ditemuka!']);
     }

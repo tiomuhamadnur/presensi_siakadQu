@@ -25,7 +25,7 @@ class UserController extends Controller
             $req->email ? $user->email = $req->email : null;
             $req->password ? $user->password = Hash::make($req->password) : null;
             $user->save();
-            return back()->with('success', ['message' => 'update berhasil!']);
+            return back()->with('message', ['message' => 'update berhasil!']);
         }
         return back()->with('404', ['message' => 'data tidak ditemuka!']);
     }

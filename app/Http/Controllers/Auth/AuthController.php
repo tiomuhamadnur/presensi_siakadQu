@@ -64,6 +64,6 @@ class AuthController extends Controller
         $newUser->role = 'admin';
         $newUser->save();
 
-        return redirect()->route('login')->with('success', 'pendaftaran berhasil!');
+        return redirect()->route('login')->with('message', 'pendaftaran berhasil!');
     }
 }
