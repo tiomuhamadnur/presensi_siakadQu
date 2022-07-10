@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Utils;
 use App\Http\Resources\Course\CourseResource;
 use App\Http\Resources\Course\StudentResource;
 use App\Models\TblCourses;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Validator;
 
 class CourseController extends Controller
 {
+    use Utils;
     public function index(Request $req)
     {
         $courses = TransSchedule::with(['teacher', 'class.teacherGuider', 'course.transCourses'])->where('teacher_id', Auth::user()->id);
@@ -112,8 +114,10 @@ class CourseController extends Controller
             return $this->sendError($validator->getMessageBag(), null, 422);
         }
 
+        $text = 'Assalamualaikum Bpk/i, ananda ';
+        $time = Carbon::now()->today();
         foreach ($req->ids as $transCourseId) {
-            $transPresent = TransPresents::where('trans_course_id', $transCourseId)->first();
+            $transPresent = TransPresents::where('trans_course_id', $transCourseId)->with(['transCourse.student'])->first();
             if (!$transPresent) {
                 $transPresent = new TransPresents();
             }
@@ -123,6 +127,9 @@ class CourseController extends Controller
             $transPresent->description = $this->getDescPresent($req->status);
             $transPresent->on = $req->schedule;
             $transPresent->save();
+
+            $student = $transPresent->transCourse->student;
+            $this->sendWa("$text $student->name pada hari ini $time $this->getDescPresent($req->status)\nKeterangan: $transPresent->description", $student->phone);
         }
         return $this->sendResponse(null, 'success');
     }
