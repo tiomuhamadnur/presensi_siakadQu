@@ -82,6 +82,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin'], 'name
             $route->post('present', 'PresentByClassController@doPresent')->name('admin.present.by_class.do_present');
             $route->put('/', 'PresentByClassController@update')->name('admin.present.by_class.update');
             $route->delete('/', 'PresentByClassController@delete')->name('admin.present.by_class.delete');
+            $route->put('present', 'PresentByClassController@updatePresent')->name('admin.present.by_class.update_present');
+        });
+
+        //Present History
+        $route->group(['prefix' => 'present-history', 'namespace' => 'Student'], function ($route) {
+            $route->get('/', 'PresentHistoryController@index')->name('admin.present.history.index');
+            $route->post('/', 'PresentHistoryController@store')->name('admin.present.history.store');
+            $route->post('present', 'PresentHistoryController@doPresent')->name('admin.present.history.do_present');
+            $route->put('/', 'PresentHistoryController@update')->name('admin.present.history.update');
+            $route->delete('/', 'PresentHistoryController@delete')->name('admin.present.history.delete');
+            $route->put('present', 'PresentHistoryController@updatePresent')->name('admin.present.history.update_present');
         });
     });
 });

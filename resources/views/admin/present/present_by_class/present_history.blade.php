@@ -10,27 +10,33 @@
         <div class="card">
             <div class="row card-header">
                 <div class="col-4 d-flex justify-content-start flex-column">
-                    <h5 class="fw-bold py-3 mb-4">Absensi Matpel {{ $course ? $course->name : null }}</h5>
+                    <h6 class="fw py-3 mb-4">Riwayat Presensi : {{ $transPresents->first()->transCourse->student->name }} <br>
+                        Matpel : {{ $transPresents->first()->transCourse->course->name }}</h5>
                 </div>
                 <div class="col-8 d-flex align-items-end flex-column" style="padding-right: 4%;">
                     <div class="row">
-                        <form
-                            action="{{ route('admin.present.by_class.index', ['course_id' => $course_id, 'class_id' => $class_id]) }}"
+                        {{-- <form
+                            action="{{ route('admin.present.history.index', ['trans_course_id' => $trans_course_id]) }}"
                             class="col-md-10" id="date_filter">
                             <div class="input-group">
                                 <input type="date" value="{{ $schedule }}" name="schedule" class="form-control">
-                                <input type="hidden" value="{{ $class_id }}" name="class_id" class="form-control">
-                                <input type="hidden" value="{{ $course_id }}" name="course_id" class="form-control">
                                 &nbsp;
                                 <button form="date_filter" class="btn btn-primary" id="filter_btn_id"><i
                                         class="bx bx-filter-alt"></i>
                                 </button>
                             </div>
-                        </form>
+                        </form> --}}
+                        {{-- <div class="col-md-2">
+                            <button type="button" class="btn btn-icon btn-outline-primary" data-bs-toggle="modal"
+                                data-bs-target="#modalStore">
+                                <span class="tf-icons bx bx-plus"></span>
+                                <div class="col-2">
+                            </button>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="col-4 d-flex justify-content-start flex-column">
-                    <form action="{{ route('admin.present.by_class.do_present') }}" method="POST" class="form-inline">
+                    {{-- <form action="{{ route('admin.present.history.do_present') }}" method="POST" class="form-inline">
                         @csrf
                         <div class="input-group">
                             <select name="status" class="form-select" id="inputGroupSelect04"
@@ -42,13 +48,11 @@
                                 <option value="3">Izin</option>
                             </select>
                             <input type="hidden" value="{{ $schedule }}" name="schedule">
-                            <input type="hidden" value="{{ $course_id }}" name="course_id">
-                            <input type="hidden" value="{{ $class_id }}" name="class_id">
                             <div id="new_present_form"></div>
                             <button id="btn_present_form" class="btn btn-outline-primary" type="submit"><i
                                     class='bx bxs-badge-check'></i></button>
                         </div>
-                    </form>
+                    </form> --}}
                 </div>
             </div>
 
@@ -63,16 +67,15 @@
                             <th>nama</th>
                             <th>Kelas</th>
                             <th>Absen</th>
-                            <th>Riwayat</th>
+                            <th>Tanggal</th>
                         </tr>
                     </thead>
 
-                    <input type="text" name="count_student" value="{{ count($transCourse) }}" hidden>
                     <tbody class="table-border-bottom-0">
                         @php
                             $no = 1;
                         @endphp
-                        @foreach ($transCourse as $key => $item)
+                        @foreach ($transPresents as $key => $item)
                             <tr class="table-default">
                                 <td>{{ $no++ }}</td>
                                 <td class="active">
@@ -80,36 +83,35 @@
                                         value="{{ $item->id }}" />
                                 </td>
                                 <td><i class="fab fa-sketch fa-lg text-warning me-3"></i>
-                                    <strong>{{ $item->student->name }}</strong>
+                                    <strong>{{ $item->transCourse->student->name }}</strong>
                                 </td>
-                                <td>{{ $item->student->class ? $item->student->class->name : null }}</td>
+                                <td>{{ $item->transCourse->student->class ? $item->transCourse->student->class->name : null }}</td>
                                 <td>
-                                    @if ($item->present)
-                                        @if ($item->present->status == 1)
+                                        @if ($item->status == 1)
                                             <button type="button" class="btn btn-outline-secondary"
                                                 data-bs-toggle="tooltip" id="btn_hadir_id" data-bs-offset="0,4"
                                                 data-bs-placement="top" data-bs-html="true" title=""
                                                 data-bs-original-title="<span>Hadir</span>">
                                                 <i class='bx bxs-badge-check'></i>
                                             </button>
-                                        @elseif($item->present->status == 2)
+                                        @elseif($item->status == 2)
                                             <a href="#" data-item="{{ $item->present }}" data-bs-toggle="modal"
                                                 data-bs-target="#modalPresent">
                                                 <button type="button" class="btn btn-outline-secondary"
                                                     data-bs-toggle="tooltip" data-toggle="modal" data-target="#modalPresent"
                                                     data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
                                                     title=""
-                                                    data-bs-original-title="<span>Sakit : {{ $item->present->description }}</span>">
+                                                    data-bs-original-title="<span>Sakit : {{ $item->description }}</span>">
                                                     <i class='bx bx-plus-medical'></i>
                                                 </button>
                                             </a>
-                                        @elseif($item->present->status == 3)
+                                        @elseif($item->status == 3)
                                             <a href="#" data-item="{{ $item->present }}" data-bs-toggle="modal"
                                                 data-bs-target="#modalPresent">
                                                 <button type="button" class="btn btn-outline-secondary"
                                                     data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
                                                     data-bs-html="true" title=""
-                                                    data-bs-original-title="<span>Izin : {{ $item->present->description }}</span>">
+                                                    data-bs-original-title="<span>Izin : {{ $item->description }}</span>">
                                                     <i class='bx bxs-envelope'></i>
                                                 </button>
                                             </a>
@@ -121,13 +123,8 @@
                                                 <i class='bx bx-calendar-x'></i>
                                             </button>
                                         @endif
-                                    @else
-                                        Belum ada presensi
-                                    @endif
                                 </td>
-                                <td>
-                                    <a href="{{route('admin.present.history.index', ['trans_course_id' => $item->id])}}"><i class='bx bx-history'></i></a>
-                                </td>
+                                <td>{{\Carbon\Carbon::parse($item->on)->format('d M Y')}}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -145,7 +142,7 @@
                     <h5 class="modal-title" id="present_title">Ubah Keterangan</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="form_present_id" action="{{ route('admin.present.by_class.update_present') }}"
+                <form id="form_present_id" action="{{ route('admin.present.history.update_present') }}"
                     method="POST">
                     @csrf
                     @method('PUT')

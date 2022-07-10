@@ -9,21 +9,18 @@ use App\Models\TransPresents;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class PresentByClassController extends Controller
+class PresentHistoryController extends Controller
 {
     public function index(Request $req)
     {
         $schedule = Carbon::now()->toDateString();
-
-        $on = Carbon::now()->toDateString();
         if ($req->schedule) {
-            $on = $req->schedule;
             $schedule = $req->schedule;
         }
-        $tblCourse = TblCourses::find($req->course_id);
-        $transCourse = $this->presentCheck($req, $on);
-        return view('admin.present.present_by_class.present_by_class', [
-            'transCourse' => $transCourse, 'course' => $tblCourse, 'schedule' => $schedule, 'course_id' => $req->course_id, 'class_id' => $req->class_id
+        $transPresents = TransPresents::where('trans_course_id', $req->trans_course_id)
+            ->with(['transCourse.student', 'transCourse.course'])->get();
+        return view('admin.present.present_by_class.present_history', [
+            'transPresents' => $transPresents, 'trans_course_id' => $req->trans_course_id
         ]);
     }
 

@@ -17,4 +17,9 @@ class TransPresents extends Model
         'description',
         'on',
     ];
+
+    public function transCourse()
+    {
+        return $this->belongsTo(TransCourses::class, 'trans_course_id');
+    }
 }

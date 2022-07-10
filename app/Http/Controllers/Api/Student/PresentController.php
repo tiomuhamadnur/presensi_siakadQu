@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Present\Student;
+namespace App\Http\Controllers\Api\Student;
 
 use App\Http\Controllers\Controller;
 use App\Models\TblCourses;
@@ -9,7 +9,7 @@ use App\Models\TransPresents;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class PresentByClassController extends Controller
+class PresentController extends Controller
 {
     public function index(Request $req)
     {

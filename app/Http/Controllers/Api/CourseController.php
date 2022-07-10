@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Course\CourseResource;
 use App\Http\Resources\Course\StudentResource;
+use App\Models\TblCourses;
 use App\Models\TransCourses;
+use App\Models\TransPresents;
 use App\Models\TransSchedule;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -56,7 +59,7 @@ class CourseController extends Controller
 
     public function presentByClass(Request $req)
     {
-        $validator = Validator::make($req->all(),[
+        $validator = Validator::make($req->all(), [
             'class_id' => 'required',
             'course_id' => 'required'
         ]);
@@ -64,13 +67,82 @@ class CourseController extends Controller
         if ($validator->fails()) {
             return $this->sendError($validator->getMessageBag(), null, 422);
         }
-        $date = $req->date;
 
-        $students = TransCourses::where('class_id', $req->class_id)->where('course_id', $req->course_id)->with(['student', 'present' => function($q)use($date) {
-            if($date){
-                $q->where('on', $date);
-            }
-        }])->get();
+        $schedule = Carbon::now()->toDateString();
+
+        $on = Carbon::now()->toDateString();
+        if ($req->schedule) {
+            $on = $req->schedule;
+            $schedule = $req->schedule;
+        }
+        $tblCourse = TblCourses::find($req->course_id);
+        $students = TransCourses::where('trans_courses.class_id', $req->class_id)
+            ->where('course_id', $req->course_id)->with(['student', 'course', 'present' => function ($q) use ($on) {
+                if ($on) {
+                    $q->whereDate('on', '=', $on);
+                }
+            }]);
+        $students = $students->get();
         return $this->sendResponse(StudentResource::collection($students), 'success');
+    }
+
+    public function presentHistory(Request $req)
+    {
+        $validator = Validator::make($req->all(), [
+            'trans_course_id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError($validator->getMessageBag(), null, 422);
+        }
+        $transPresents = TransPresents::where('trans_course_id', $req->trans_course_id)
+            ->with(['transCourse.student', 'transCourse.course'])->get();
+        return $this->sendResponse($transPresents, 'success');
+    }
+
+    public function doPresent(Request $req)
+    {
+        $validator = Validator::make($req->all(), [
+            'ids' => 'required|array',
+            'status' => 'required',
+            'schedule' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError($validator->getMessageBag(), null, 422);
+        }
+
+        foreach ($req->ids as $transCourseId) {
+            $transPresent = TransPresents::where('trans_course_id', $transCourseId)->first();
+            if (!$transPresent) {
+                $transPresent = new TransPresents();
+            }
+
+            $transPresent->trans_course_id = $transCourseId;
+            $transPresent->status = $req->status;
+            $transPresent->description = $this->getDescPresent($req->status);
+            $transPresent->on = $req->schedule;
+            $transPresent->save();
+        }
+        return $this->sendResponse(null, 'success');
+    }
+
+    public function getDescPresent($status)
+    {
+        $desc = null;
+        switch ($status) {
+            case 1:
+                $desc = 'hadir';
+                break;
+            case 0:
+                $desc = 'tidak hadir';
+                break;
+            case 2:
+                $desc = 'sakit';
+                break;
+            default:
+                $desc = 'izin';
+        }
+        return $desc;
     }
 }
