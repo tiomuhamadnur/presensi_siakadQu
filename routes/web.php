@@ -98,25 +98,69 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin'], 'name
 });
 
 //Teacher
-Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'role:teacher'], 'namespace' => 'App\Http\Controllers\Teacher'], function ($route) {
+Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'role:guru'], 'namespace' => 'App\Http\Controllers\Teacher'], function ($route) {
     $route->get('/', 'DashboardController@index')->name('teacher.dashboard');
 
-    //Student
-    $route->group(['prefix' => 'student', 'namespace' => 'Student'], function ($route) {
-        $route->get('/', 'StudentController@index')->name('teacher.student.index');
-        $route->post('/', 'StudentController@store')->name('teacher.student.store');
-        $route->put('/', 'StudentController@update')->name('teacher.student.update');
-        $route->delete('/', 'StudentController@delete')->name('teacher.student.delete');
-    });
-
-    //Class
+    //Teacher
     $route->group(['prefix' => 'class', 'namespace' => 'StudentClass'], function ($route) {
         $route->get('/', 'ClassController@index')->name('teacher.class.index');
         $route->post('/', 'ClassController@store')->name('teacher.class.store');
         $route->put('/', 'ClassController@update')->name('teacher.class.update');
         $route->delete('/', 'ClassController@delete')->name('teacher.class.delete');
     });
+
+    //Course
+    $route->group(['prefix' => 'course', 'namespace' => 'Course'], function ($route) {
+        $route->get('/', 'CourseController@index')->name('teacher.course.index');
+        $route->post('/', 'CourseController@store')->name('teacher.course.store');
+        $route->put('/', 'CourseController@update')->name('teacher.course.update');
+        $route->delete('/', 'CourseController@delete')->name('teacher.course.delete');
+
+        //Student
+        $route->group(['prefix' => 'student', 'namespace' => 'Student'], function ($route) {
+            $route->get('/', 'StudentController@index')->name('teacher.course.student.index');
+            $route->post('/', 'StudentController@store')->name('teacher.course.student.store');
+            $route->put('/', 'StudentController@update')->name('teacher.course.student.update');
+            $route->delete('/', 'StudentController@delete')->name('teacher.course.student.delete');
+
+            //PRESENT
+            $route->post('present', 'StudentPresentController@present')->name('teacher.course.student.present');
+            $route->put('present', 'StudentPresentController@presentUpdate')->name('teacher.course.student.present.update');
+            // $route->post('unpresent', 'StudentPresentController@unPresent')->name('teacher.course.student.unpresent');
+            // $route->put('unpresent', 'StudentPresentController@unPresentUpdate')->name('teacher.course.student.unpresent.update');
+            
+        });
+    });
+
+    //Present
+    $route->group(['prefix' => 'present', 'namespace' => 'Present'], function ($route) {
+        $route->get('/', 'PresentController@index')->name('teacher.present.index');
+        $route->post('/', 'PresentController@store')->name('teacher.present.store');
+        $route->put('/', 'PresentController@update')->name('teacher.present.update');
+        $route->delete('/', 'PresentController@delete')->name('teacher.present.delete');
+
+        //Student
+        $route->group(['prefix' => 'present_by_class', 'namespace' => 'Student'], function ($route) {
+            $route->get('/', 'PresentByClassController@index')->name('teacher.present.by_class.index');
+            $route->post('/', 'PresentByClassController@store')->name('teacher.present.by_class.store');
+            $route->post('present', 'PresentByClassController@doPresent')->name('teacher.present.by_class.do_present');
+            $route->put('/', 'PresentByClassController@update')->name('teacher.present.by_class.update');
+            $route->delete('/', 'PresentByClassController@delete')->name('teacher.present.by_class.delete');
+            $route->put('present', 'PresentByClassController@updatePresent')->name('teacher.present.by_class.update_present');
+        });
+
+        //Present History
+        $route->group(['prefix' => 'present-history', 'namespace' => 'Student'], function ($route) {
+            $route->get('/', 'PresentHistoryController@index')->name('teacher.present.history.index');
+            $route->post('/', 'PresentHistoryController@store')->name('teacher.present.history.store');
+            $route->post('present', 'PresentHistoryController@doPresent')->name('teacher.present.history.do_present');
+            $route->put('/', 'PresentHistoryController@update')->name('teacher.present.history.update');
+            $route->delete('/', 'PresentHistoryController@delete')->name('teacher.present.history.delete');
+            $route->put('present', 'PresentHistoryController@updatePresent')->name('teacher.present.history.update_present');
+        });
+    });
 });
+
 
 Route::group(['prefix' => 'auth', 'namespace' => 'App\Http\Controllers\Auth'], function ($route) {
     $route->get('login', 'AuthController@login')->name('login');

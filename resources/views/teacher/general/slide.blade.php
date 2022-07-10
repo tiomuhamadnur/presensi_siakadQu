@@ -90,7 +90,7 @@
                         <h5 class="modal-title" id="modalAdminTitle">Pratinjau Data</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{ route('admin.users.admin.update') }}" method="POST">
+                    <form action="{{ route('teacher.users.admin.update') }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="modal-body">
@@ -139,7 +139,7 @@
                         <h5 class="modal-title" id="modalAdminTitle">Tambah Data</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{ route('admin.users.admin.add') }}" method="POST">
+                    <form action="{{ route('teacher.users.admin.add') }}" method="POST">
                         @csrf
                         @method('POST')
                         <div class="modal-body">
@@ -182,7 +182,7 @@
             $('#modalDelete').on('show.bs.modal', function(e) {
                 var id = $(e.relatedTarget).data('id');
                 $('#delete_id').val(id);
-                $('#form_delete_id').attr('action', "{{route('admin.users.admin.delete')}}");
+                $('#form_delete_id').attr('action', "{{route('teacher.users.admin.delete')}}");
             });
 
 

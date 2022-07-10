@@ -17,77 +17,34 @@
     <ul class="menu-inner py-1">
         <!-- Dashboard -->
         <li class="menu-item active">
-            <a href="{{ route('admin.dashboard') }}" class="menu-link">
+            <a href="{{ route('teacher.dashboard') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
         </li>
 
-        <!-- Layouts -->
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bxs-user-account"></i>
-                <div data-i18n="Layouts">Data Siswa</div>
-            </a>
-
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="{{ route('admin.student.index') }}" class="menu-link">
-                        <div data-i18n="Without menu">Siswa</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-
-        <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Data Guru & Wali Kelas</span>
-        </li>
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bxs-brightness"></i>
-                <div data-i18n="Account Settings">Guru & Wali Kelas</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="{{ route('admin.teacher.index') }}" class="menu-link">
-                        <div data-i18n="Account">Guru & Wali Kelas</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-
-        <!-- Atur Postingan -->
-        <li class="menu-header small text-uppercase"><span class="menu-header-text">Data Kelas</span></li>
-        <!-- User interface -->
-        <li class="menu-item">
-            <a href="javascript:void(0)" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-box"></i>
-                <div data-i18n="User interface">Kelas</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="{{ route('admin.class.index') }}" class="menu-link">
-                        <div data-i18n="Perfect Scrollbar">Kelas</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-
-        <!-- Atur Postingan -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Data Mata Pelajaran</span></li>
-        <!-- Extended components -->
         <li class="menu-item">
-            <a href="javascript:void(0)" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-copy"></i>
-                <div data-i18n="Extended UI">Mata Pelajaran</div>
+            <a href="{{ route('teacher.course.index') }}" class="menu-link">
+                <i class='menu-icon tf-icons bx bx-book-reader'></i>
+                <div data-i18n="Perfect Scrollbar">Mata Pelajaran</div>
             </a>
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="" class="menu-link">
-                        <div data-i18n="Perfect Scrollbar">Mata Pelajaran</div>
-                    </a>
-                </li>
-            </ul>
+        </li>
+
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Data Absensi</span></li>
+        <li class="menu-item">
+            <a href="{{ route('teacher.present.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-copy"></i>
+                <div data-i18n="Extended UI">Absensi</div>
+            </a>
+        </li>
+
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Data Nilai</span></li>
+        <li class="menu-item">
+            <a href="{{ route('teacher.course.index') }}" class="menu-link">
+                <i class='menu-icon tf-icon bx bx-edit-alt'></i>
+                <div data-i18n="Extended UI">Input Nilai</div>
+            </a>
         </li>
     </ul>
 </aside>

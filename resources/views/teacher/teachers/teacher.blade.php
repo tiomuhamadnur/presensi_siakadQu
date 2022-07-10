@@ -10,7 +10,7 @@
         <div class="card">
             <div class="row card-header">
                 <div class="col-4 d-flex justify-content-start flex-column">
-                    <h5 class="">Data User</h5>
+                    <h5 class="">Data Guru</h5>
                 </div>
                 <div class="col-8 d-flex align-items-end flex-column" style="padding-right: 4%;">
                     <button type="button" class="btn btn-icon btn-outline-primary" data-bs-toggle="modal"
@@ -26,14 +26,11 @@
                         <tr>
                             <th>No</th>
                             <th>name</th>
-                            <th>Kelas</th>
+                            <th>Wali Kelas</th>
                             <th>email</th>
                             <th>Status</th>
                             <th>Hp</th>
                             <th>Kelamin</th>
-                            <th>NISN</th>
-                            <th>Nama Ayah</th>
-                            <th>Hp Orang Tua</th>
                             <th>Alamat</th>
                             <th>Actions</th>
                         </tr>
@@ -42,13 +39,13 @@
                         @php
                             $no = 1;
                         @endphp
-                        @foreach ($students as $item)
+                        @foreach ($teachers as $item)
                             <tr class="table-default">
                                 <td>{{ $no++ }}</td>
                                 <td><i class="fab fa-sketch fa-lg text-warning me-3"></i>
                                     <strong>{{ $item->name }}</strong>
                                 </td>
-                                <td>{{ $item->class ? $item->class->name : null }}</td>
+                                <td>{{ $item->classGuiding ? $item->classGuiding->name : '-' }}</td>
                                 <td>{{ $item->email }}</td>
                                 <td>
                                     @if ($item->deleted_at)
@@ -59,9 +56,6 @@
                                 </td>
                                 <td>{{ $item->phone }}</td>
                                 <td>{{ $item->gender }}</td>
-                                <td>{{ $item->nisn }}</td>
-                                <td>{{ $item->father_name }}</td>
-                                <td>{{ $item->parent_phone }}</td>
                                 <td>{{ $item->address }}</td>
                                 <td>
                                     <div class="dropdown">
@@ -79,7 +73,8 @@
                                                 data-father_name="{{ $item->father_name }}"
                                                 data-parent_phone="{{ $item->parent_phone }}"
                                                 data-address="{{ $item->address }}" data-photo="{{ $item->photo }}"
-                                                data-classes="{{ $classes }}">
+                                                data-classes="{{ $classes }}"
+                                                data-class_guiding="{{ $item->classGuiding ? $item->classGuiding->id : null }}">
                                                 <i class="bx bx-edit-alt me-1">
                                                 </i>
                                                 Edit</a>
@@ -110,7 +105,7 @@
                         <h5 class="modal-title" id="modalAdminTitle">Pratinjau Data</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{ route('teacher.student.update') }}" method="POST">
+                    <form action="{{ route('teacher.teacher.update') }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="modal-body">
@@ -136,32 +131,7 @@
                                 <div class="col mb-1">
                                     <label for="dobWithTitle" class="form-label">Jenis Kelamin</label>
                                     <select class="form-control" name="gender" id="update_gender">
-                                        <option value="Laki-laki">Laki-laki</option>
-                                        <option value="Perempuan">Perempuan</option>
                                     </select>
-                                </div>
-                            </div>
-                            <div class="row g-2">
-                                <div class="col mb-1">
-                                    <label for="emailWithTitle" class="form-label">NISN</label>
-                                    <input type="text" id="update_nisn" class="form-control" name="nisn"
-                                        placeholder="Masukan Nomor Induk Siswa Nasional" />
-                                </div>
-                                <div class="col mb-1">
-                                    <label for="emailWithTitle" class="form-label">Nama Ayah</label>
-                                    <input type="text" id="update_father_name" class="form-control" name="father_name"
-                                        placeholder="Masukan Nama Ayah Kandung" />
-                                </div>
-                            </div>
-                            <div class="row g-2">
-                                <div class="col mb-1">
-                                    <label for="emailWithTitle" class="form-label">HP Orang Tua</label>
-                                    <input type="text" id="update_parent_phone" class="form-control" name="parent_phone"
-                                        placeholder="Masukan Nama Orang Tua" />
-                                </div>
-                                <div class="col mb-1">
-                                    <label for="emailWithTitle" class="form-label">Alamat</label>
-                                    <textarea id="update_address" class="form-control" name="address" placeholder="Masukan Alamat Siswa"></textarea>
                                 </div>
                             </div>
                             <div class="row g-2">
@@ -170,6 +140,12 @@
                                     <select class="form-control" name="class_id" id="update_class_id">
                                     </select>
                                 </div>
+                                <div class="col mb-1">
+                                    <label for="emailWithTitle" class="form-label">Alamat</label>
+                                    <textarea id="update_address" class="form-control" name="address" placeholder="Masukan Alamat Siswa"></textarea>
+                                </div>
+                            </div>
+                            <div class="row g-2">
                                 <div class="col mb-1">
                                     <label for="emailWithTitle" class="form-label">Foto</label>
                                     <input type="file" id="update_photo" class="form-control" name="photo" />
@@ -198,7 +174,7 @@
                         <h5 class="modal-title" id="modalAdminTitle">Tambah Data</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{ route('teacher.student.store') }}" method="POST">
+                    <form action="{{ route('teacher.teacher.store') }}" method="POST">
                         @csrf
                         @method('POST')
                         <div class="modal-body">
@@ -229,21 +205,13 @@
                             </div>
                             <div class="row g-2">
                                 <div class="col mb-1">
-                                    <label for="emailWithTitle" class="form-label">NISN</label>
-                                    <input type="text" id="" class="form-control" name="nisn"
-                                        placeholder="Masukan Nomor Induk Siswa Nasional" />
-                                </div>
-                                <div class="col mb-1">
-                                    <label for="emailWithTitle" class="form-label">Nama Ayah</label>
-                                    <input type="text" id="" class="form-control" name="father_name"
-                                        placeholder="Masukan Nama Ayah Kandung" />
-                                </div>
-                            </div>
-                            <div class="row g-2">
-                                <div class="col mb-1">
-                                    <label for="emailWithTitle" class="form-label">HP Orang Tua</label>
-                                    <input type="text" id="" class="form-control" name="parent_phone"
-                                        placeholder="Masukan Nama Orang Tua" />
+                                    <label for="emailWithTitle" class="form-label">Wali Kelas</label>
+                                    <select class="form-control" name="class_id" id="">
+                                        <option value="">Bukan Wali Kelas</option>
+                                        @foreach ($classes as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="col mb-1">
                                     <label for="emailWithTitle" class="form-label">Alamat</label>
@@ -251,14 +219,6 @@
                                 </div>
                             </div>
                             <div class="row g-2">
-                                <div class="col mb-1">
-                                    <label for="emailWithTitle" class="form-label">Kelas</label>
-                                    <select class="form-control" name="class_id" id="">
-                                        @foreach ($classes as $item)
-                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
                                 <div class="col mb-1">
                                     <label for="emailWithTitle" class="form-label">Foto</label>
                                     <input type="file" id="" class="form-control" name="photo" />
@@ -283,7 +243,7 @@
             $('#modalDelete').on('show.bs.modal', function(e) {
                 var id = $(e.relatedTarget).data('id');
                 $('#delete_id').val(id);
-                $('#form_delete_id').attr('action', "{{ route('teacher.student.delete') }}");
+                $('#form_delete_id').attr('action', "{{ route('teacher.teacher.delete') }}");
             });
 
 
@@ -293,6 +253,7 @@
                 var id = $(e.relatedTarget).data('id');
                 var status = $(e.relatedTarget).data('status');
                 var class_id = $(e.relatedTarget).data('class_id');
+                var class_guiding = $(e.relatedTarget).data('class_guiding');
                 var phone = $(e.relatedTarget).data('phone');
                 var gender = $(e.relatedTarget).data('gender');
                 var nisn = $(e.relatedTarget).data('nisn');
@@ -328,11 +289,10 @@
                 });
 
                 var classes = $(e.relatedTarget).data('classes');
-                console.log(classes);
                 classes.forEach(element => {
                     var optionText = element.name;
                     var optionValue = element.id;
-                    if (element.id == class_id) {
+                    if (element.id == class_guiding) {
                         $('#update_class_id').append(`<option selected value="${optionValue}">
                                        ${optionText}
                                   </option>`);

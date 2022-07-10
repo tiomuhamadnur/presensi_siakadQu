@@ -17,7 +17,7 @@
             <div class="col-md-12">
                 <div class="card mb-4">
                     <h5 class="card-header">Pengaturan Umum</h5>
-                    <form action="{{ route('admin.general.update') }}" method="POST">
+                    <form action="{{ route('teacher.general.update') }}" method="POST">
                         @csrf
                         @method('PUT')
                         <input type="text" hidden value="{{ $data ? $data->id : 0 }}" name="id">
@@ -168,7 +168,7 @@
             $('#modalDelete').on('show.bs.modal', function(e) {
                 var id = $(e.relatedTarget).data('id');
                 $('#delete_id').val(id);
-                $('#form_delete_id').attr('action', "{{ route('admin.users.admin.delete') }}");
+                $('#form_delete_id').attr('action', "{{ route('teacher.users.admin.delete') }}");
             });
 
 

@@ -10,13 +10,46 @@
         <div class="card">
             <div class="row card-header">
                 <div class="col-4 d-flex justify-content-start flex-column">
-                    <h5 class="">Data Guru</h5>
+                    <h5 class="">Data Mata Pelajaran</h5>
                 </div>
                 <div class="col-8 d-flex align-items-end flex-column" style="padding-right: 4%;">
-                    <button type="button" class="btn btn-icon btn-outline-primary" data-bs-toggle="modal"
-                        data-bs-target="#modalStore">
-                        <span class="tf-icons bx bx-plus"></span>
-                    </button>
+                    <div class="row" style="width: 40%">
+                        <div class="col-10">
+                            <form action="{{ route('teacher.course.index') }}">
+                                <div class="input-group input-group-merge">
+                                    <select class="form-control" id="filter_category" name="teacher_id"
+                                        aria-label="Filter Teacher">
+                                        <option value="" selected>All</option>
+                                        @foreach ($teachers as $item)
+                                            @if ($teacher)
+                                                @if ($teacher->id == $item->id)
+                                                    <option selected value="{{ $item->id }}">
+                                                        {{ $item->name }}
+                                                    </option>
+                                                @else
+                                                    <option value="{{ $item->id }}">
+                                                        {{ $item->name }}
+                                                    </option>
+                                                @endif
+                                            @else
+                                                <option value="{{ $item->id }}">
+                                                    {{ $item->name }}
+                                                </option>
+                                            @endif
+                                        @endforeach
+                                    </select>&nbsp;
+                                    <button type="submit" class="form-control btn btn-primary" value="Filter"
+                                        id="filter_btn_id"><i class="bx bx-filter-alt"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-2">
+                            <button type="button" class="btn btn-icon btn-outline-primary" data-bs-toggle="modal"
+                                data-bs-target="#modalStore">
+                                <span class="tf-icons bx bx-plus"></span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -25,9 +58,9 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Kode</th>
                             <th>Nama</th>
-                            <th>Wali Kelas</th>
+                            <th>Pengampu</th>
+                            <th>Kelas</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -35,14 +68,14 @@
                         @php
                             $no = 1;
                         @endphp
-                        @foreach ($classes as $item)
+                        @foreach ($courses as $item)
                             <tr class="table-default">
                                 <td>{{ $no++ }}</td>
-                                <td>{{ $item->code }}</td>
                                 <td><i class="fab fa-sketch fa-lg text-warning me-3"></i>
                                     <strong>{{ $item->name }}</strong>
                                 </td>
-                                <td>{{ $item->teacherGuider ? $item->teacherGuider->name : '-' }}</td>
+                                <td>{{ $item->teacher ? $item->teacher->name : '-' }}</td>
+                                <td>{{ $item->class->name }}</td>
                                 <td>
                                     <div class="dropdown">
                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -50,18 +83,16 @@
                                             <i class="bx bx-dots-vertical-rounded"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="{{ route('teacher.student.index', ['class_id' => $item->id]) }}">
-                                                <i class="bx bxs-user-account"></i> Siswa
-                                            </a>
                                             <a class="dropdown-item"
-                                                href="{{ route('teacher.course.index', ['class_id' => $item->id]) }}">
-                                                <i class='bx bx-book-reader'></i> Pelajaran
+                                                href="{{ route('teacher.course.student.index', ['course_id' => $item->id]) }}">
+                                                <i class='bx bxs-user-badge bx-tada'></i> Siswa
                                             </a>
                                             <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
                                                 data-bs-target="#modalUpdate" data-name="{{ $item->name }}"
-                                                data-id="{{ $item->id }}" data-code="{{ $item->code }}"
-                                                data-name="{{ $item->name }}" data-teachers="{{ $teachers }}"
-                                                data-teacher_guider_id="{{ $item->teacher_guider_id }}">
+                                                data-id="{{ $item->id }}" data-teachers="{{ $teachers }}"
+                                                data-classes="{{ $classes }}"
+                                                data-teacher_id="{{ $item->teacher_id }}"
+                                                data-class_id="{{ $item->class_id }}">
                                                 <i class="bx bx-edit-alt me-1">
                                                 </i>
                                                 Edit</a>
@@ -92,27 +123,28 @@
                         <h5 class="modal-title" id="modalAdminTitle">Pratinjau Data</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{ route('teacher.class.update') }}" method="POST">
+                    <form action="{{ route('teacher.course.update') }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="modal-body">
                             <div class="row g-2">
-                                <input type="text" name="id" id="update_id" hidden>
                                 <div class="col mb-1">
-                                    <label for="" class="form-label">Kode</label>
-                                    <input type="text" id="update_code" name="code" class="form-control"
-                                        placeholder="Kode Kelas" />
+                                    <label for="" class="form-label">Nama Matpel</label>
+                                    <input type="text" id="update_name" class="form-control" name="name"
+                                        placeholder="Masukan Nama Mata Pelajaran" />
                                 </div>
                                 <div class="col mb-1">
-                                    <label for="" class="form-label">Nama Kelas</label>
-                                    <input type="text" id="update_name" class="form-control" name="name"
-                                        placeholder="Masukan Nama Kelas" />
+                                    <label for="" class="form-label">Pengampu</label>
+                                    <select name="teacher_id" class="form-control" id="update_teacher_id">
+
+                                    </select>
                                 </div>
                             </div>
                             <div class="row g-2">
                                 <div class="col mb-1">
-                                    <label for="" class="form-label">Wali Kelas</label>
-                                    <select name="teacher_guider_id" class="form-control" id="update_teacher_guider_id">
+                                    <label for="" class="form-label">Kelas</label>
+                                    <select name="class_id" class="form-control" id="update_class_id">
+
                                     </select>
                                 </div>
                             </div>
@@ -139,27 +171,30 @@
                         <h5 class="modal-title" id="modalAdminTitle">Tambah Data</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{ route('teacher.class.store') }}" method="POST">
+                    <form action="{{ route('teacher.course.store') }}" method="POST">
                         @csrf
                         @method('POST')
                         <div class="modal-body">
                             <div class="row g-2">
                                 <div class="col mb-1">
-                                    <label for="" class="form-label">Kode</label>
-                                    <input type="text" id="code" name="code" class="form-control"
-                                        placeholder="Kode Kelas" />
+                                    <label for="" class="form-label">Nama Matpel</label>
+                                    <input type="text" id="name" class="form-control" name="name"
+                                        placeholder="Masukan Nama Mata Pelajaran" />
                                 </div>
                                 <div class="col mb-1">
-                                    <label for="" class="form-label">Nama Kelas</label>
-                                    <input type="text" id="class" class="form-control" name="name"
-                                        placeholder="Masukan Nama Kelas" />
+                                    <label for="" class="form-label">Pengampu</label>
+                                    <select name="teacher_id" class="form-control" id="teacher_id">
+                                        @foreach ($teachers as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="row g-2">
                                 <div class="col mb-1">
-                                    <label for="" class="form-label">Wali Kelas</label>
-                                    <select name="teacher_guider_id" class="form-control" id="teacher_guider_id">
-                                        @foreach ($teachers as $item)
+                                    <label for="" class="form-label">Kelas</label>
+                                    <select name="class_id" class="form-control" id="class_id">
+                                        @foreach ($classes as $item)
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                                         @endforeach
                                     </select>
@@ -184,32 +219,47 @@
             $('#modalDelete').on('show.bs.modal', function(e) {
                 var id = $(e.relatedTarget).data('id');
                 $('#delete_id').val(id);
-                $('#form_delete_id').attr('action', "{{ route('teacher.class.delete') }}");
+                $('#form_delete_id').attr('action', "{{ route('teacher.course.delete') }}");
             });
 
 
             $('#modalUpdate').on('show.bs.modal', function(e) {
                 var id = $(e.relatedTarget).data('id');
-                var code = $(e.relatedTarget).data('code');
                 var name = $(e.relatedTarget).data('name');
-                var teacher_guider_id = $(e.relatedTarget).data('teacher_guider_id');
+                var teacher_id = $(e.relatedTarget).data('teacher_id');
+                var class_id = $(e.relatedTarget).data('class_id');
 
                 $('#update_id').val(id);
                 $('#update_name').val(name);
-                $('#update_code').val(code);
 
                 var teachers = $(e.relatedTarget).data('teachers');
-                console.log(teachers);
                 teachers.forEach(element => {
                     var optionText = element.name;
                     var optionValue = element.id;
-                    if (element.id == teacher_guider_id) {
-                        $('#update_teacher_guider_id').append(`<option selected value="${optionValue}">
+                    if (element.id == teacher_id) {
+                        $('#update_teacher_id').append(`<option selected value="${optionValue}">
                                        ${optionText}
                                   </option>`);
                     } else {
-                        $('#update_teacher_guider_id').append(`<option value="${optionValue}">
+                        $('#update_teacher_id').append(`<option value="${optionValue}">
                                        ${optionText}
+                                  </option>`);
+                    }
+                });
+
+
+                var classes = $(e.relatedTarget).data('classes');
+
+                classes.forEach(element => {
+                    var text = element.name;
+                    var val = element.id;
+                    if (element.id == class_id) {
+                        $('#update_class_id').append(`<option selected value="${val}">
+                                       ${text}
+                                  </option>`);
+                    } else {
+                        $('#update_class_id').append(`<option value="${val}">
+                                       ${text}
                                   </option>`);
                     }
                 });

@@ -27,7 +27,7 @@ class RoleMiddleware
         } else {
             $roleInEng = 'admin';
         }
-        if ($role == $roleInEng) {
+        if ($role == $roleUser) {
             return $next($request);
         } else {
             return redirect()->route("$roleInEng.dashboard");
