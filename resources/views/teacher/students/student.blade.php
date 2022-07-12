@@ -94,6 +94,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{ $students->links() }}
             </div>
         </div>
     </div>

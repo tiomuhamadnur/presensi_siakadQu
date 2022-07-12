@@ -50,7 +50,8 @@
                                             <i class="bx bx-dots-vertical-rounded"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="{{ route('admin.student.index', ['class_id' => $item->id]) }}">
+                                            <a class="dropdown-item"
+                                                href="{{ route('admin.student.index', ['class_id' => $item->id]) }}">
                                                 <i class="bx bxs-user-account"></i> Siswa
                                             </a>
                                             <a class="dropdown-item"
@@ -76,6 +77,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{ $classes->links() }}
             </div>
         </div>
     </div>

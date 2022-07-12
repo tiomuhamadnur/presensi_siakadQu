@@ -129,6 +129,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{ $transPresents->links() }}
             </div>
         </div>
     </div>

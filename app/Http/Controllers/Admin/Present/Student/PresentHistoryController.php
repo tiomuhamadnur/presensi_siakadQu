@@ -18,7 +18,7 @@ class PresentHistoryController extends Controller
             $schedule = $req->schedule;
         }
         $transPresents = TransPresents::where('trans_course_id', $req->trans_course_id)
-            ->with(['transCourse.student', 'transCourse.course'])->get();
+            ->with(['transCourse.student', 'transCourse.course'])->paginate(20);
         return view('admin.present.present_by_class.present_history', [
             'transPresents' => $transPresents, 'trans_course_id' => $req->trans_course_id
         ]);
