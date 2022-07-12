@@ -20,10 +20,10 @@ class DashboardController extends Controller
         $sick = TransPresents::where('status', 3)->count();
         $allRow = TransPresents::count();
 
-        $countPresent = ($present / $allRow) * 100;
-        $countAbsen = ($absen / $allRow) * 100;
-        $countLeave =($leave / $allRow) * 100;
-        $countSick = ($sick / $allRow) * 100;
+        $countPresent = round(($present / $allRow) * 100, 2);
+        $countAbsen = round(($absen / $allRow) * 100, 2);
+        $countLeave = round(($leave / $allRow) * 100, 2);
+        $countSick = round(($sick / $allRow) * 100, 2);
         return view('teacher.dashboard.dashboard', ['countStudent' => $countStudent, 'countPresent' => $countPresent, 'countAbsen' => $countAbsen, 'countLeave' => $countLeave, 'countSick' => $countSick]);
     }
 

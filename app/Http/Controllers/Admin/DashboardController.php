@@ -21,20 +21,20 @@ class DashboardController extends Controller
         $sick = TransPresents::where('status', 3)->count();
         $allRow = TransPresents::count();
 
-        $countPresent = ($present / $allRow) * 100;
-        $countAbsen = ($absen / $allRow) * 100;
-        $countLeave =($leave / $allRow) * 100;
-        $countSick = ($sick / $allRow) * 100;
+        $countPresent = round(($present / $allRow) * 100, 2);
+        $countAbsen = round(($absen / $allRow) * 100, 2);
+        $countLeave = round(($leave / $allRow) * 100, 2);
+        $countSick = round(($sick / $allRow) * 100, 2);
         return view('admin.dashboard.dashboard', ['countStudent' => $countStudent, 'countPresent' => $countPresent, 'countAbsen' => $countAbsen, 'countLeave' => $countLeave, 'countSick' => $countSick]);
     }
 
     public function doLogin(Request $req)
     {
         $user = User::where('email', $req->email)->first();
-        if($user) {
-            if(Hash::check($req->password, $user->password)) {
+        if ($user) {
+            if (Hash::check($req->password, $user->password)) {
                 Auth::attempt($user);
-                if($user->role == 'admin') {
+                if ($user->role == 'admin') {
                     return route('admin');
                 }
                 return route('user');

@@ -33,7 +33,7 @@ trait Utils
 
     public function sendWa($text, $phone)
     {
-        $key = env('WOOWA_KEY'); //this is demo key please change with your own key
+        $key = env('WOOWA_KEY');
         $url = 'http://116.203.191.58/api/async_send_message';
         $data = array(
             "phone_no"  => $phone,
@@ -60,7 +60,7 @@ trait Utils
                 'Content-Length: ' . strlen($data_string)
             )
         );
-        echo $res = curl_exec($ch);
+        curl_exec($ch);
         curl_close($ch);
     }
 
