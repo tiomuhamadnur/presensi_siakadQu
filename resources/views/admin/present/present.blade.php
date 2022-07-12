@@ -87,10 +87,10 @@
                                         href="{{ route('admin.present.by_class.index', ['course_id' => $item->id, 'class_id' => $item->class_id]) }}">
                                         <i class='bx bxs-user-badge bx-tada'></i> Absensi
                                     </a>
-                                    <a class="btn rounded-pill btn-info"
+                                    {{-- <a class="btn rounded-pill btn-info"
                                         href="{{ route('admin.course.student.index', ['course_id' => $item->id]) }}">
                                         <i class='bx bx-history'></i> Riwayat Absensi
-                                    </a>
+                                    </a> --}}
                                 </td>
                             </tr>
                         @endforeach
