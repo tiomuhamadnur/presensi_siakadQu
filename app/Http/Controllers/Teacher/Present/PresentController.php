@@ -35,7 +35,7 @@ class PresentController extends Controller
             $teacher = User::where('id', $req->teacher_id)->where('role', self::ROLE_TEACHER)->first();
             $courses->where('teacher_id', $req->teacher_id);
         }
-        $courses = $courses->paginate(10);
+        $courses = $courses->paginate(50);
         return view('teacher.present.present', ['courses' => $courses, 'teachers' => $teachers, 'classes' => $classes, 'teacher' => $teacher]);
     }
 

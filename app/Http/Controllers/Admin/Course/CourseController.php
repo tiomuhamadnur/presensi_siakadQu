@@ -24,7 +24,7 @@ class CourseController extends Controller
         if ($req->class_id) {
             $courses->where('class_id', $req->class_id);
         }
-        $courses = $courses->paginate(10);
+        $courses = $courses->paginate(50);
         return view('admin.courses.course', ['courses' => $courses, 'teachers' => $teachers, 'classes' => $classes, 'teacher' => $teacher]);
     }
 

@@ -14,7 +14,7 @@ class TeacherController extends Controller
 {
     public function index()
     {
-        $teachers = User::where('role', self::ROLE_TEACHER)->with(['classGuiding'])->paginate(10);
+        $teachers = User::where('role', self::ROLE_TEACHER)->with(['classGuiding'])->paginate(50);
         $classes = TblClasses::all();
         return view('teacher.teachers.teacher', ['teachers' => $teachers, 'classes' => $classes]);
     }

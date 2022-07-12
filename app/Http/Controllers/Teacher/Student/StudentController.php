@@ -17,7 +17,7 @@ class StudentController extends Controller
         if($req->class_id) {
             $students->where('class_id', $req->class_id);
         }
-        $students = $students->paginate(10);
+        $students = $students->paginate(50);
         $classes = TblClasses::all();
         return view('teacher.students.student', ['students' => $students, 'classes' => $classes]);
     }
