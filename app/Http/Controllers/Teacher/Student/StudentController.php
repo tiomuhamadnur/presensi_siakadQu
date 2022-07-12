@@ -14,7 +14,6 @@ class StudentController extends Controller
     public function index(Request $req)
     {
         $students = User::where('role', self::ROLE_STUDENT)->with(['class']);
-        return $students;
         if($req->class_id) {
             $students->where('class_id', $req->class_id);
         }

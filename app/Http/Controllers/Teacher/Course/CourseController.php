@@ -12,11 +12,26 @@ use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
+    public $tblClass;
+    public function __construct()
+    {
+        $this->tblClass = new TblClasses();
+    }
+
     public function index(Request $req)
     {
-        $courses = TblCourses::with(['teacher', 'class', 'transCourses.student'])->where('teacher_id', Auth::user()->id);
+        $guiderClass = $this->tblClass->getClassGuider(Auth::user()->id)->get();
+        $classGuiderIds = [];
+        foreach($guiderClass as $item)
+        {
+            $classGuiderIds[] = $item->id;
+        }
+        $courses = TblCourses::with(['teacher', 'class', 'transCourses.student'])
+            ->where('teacher_id', Auth::user()->id)
+            ->orWhereIn('class_id', $classGuiderIds);
         $teachers = User::where('role', self::ROLE_TEACHER)->get();
         $classes = TblClasses::all();
+        
         $teacher = null;
         if ($req->teacher_id) {
             $teacher = User::where('id', $req->teacher_id)->where('role', self::ROLE_TEACHER)->first();

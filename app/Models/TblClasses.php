@@ -28,4 +28,9 @@ class TblClasses extends Model
         $controller = new Controller();
         return $this->belongsTo(User::class, 'teacher_guider_id')->where('role', $controller::ROLE_TEACHER);
     }
+
+    public function getClassGuider($guiderId)
+    {
+        return $this->where('teacher_guider_id', $guiderId)->select(['id']);
+    }
 }

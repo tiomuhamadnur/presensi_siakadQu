@@ -109,6 +109,14 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'role:guru'], 'nam
         $route->delete('/', 'ClassController@delete')->name('teacher.class.delete');
     });
 
+     //Student
+     $route->group(['prefix' => 'student', 'namespace' => 'Student'], function ($route) {
+        $route->get('/', 'StudentController@index')->name('teacher.student.index');
+        $route->post('/', 'StudentController@store')->name('teacher.student.store');
+        $route->put('/', 'StudentController@update')->name('teacher.student.update');
+        $route->delete('/', 'StudentController@delete')->name('teacher.student.delete');
+    });
+
     //Course
     $route->group(['prefix' => 'course', 'namespace' => 'Course'], function ($route) {
         $route->get('/', 'CourseController@index')->name('teacher.course.index');

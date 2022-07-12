@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-8 d-flex align-items-end flex-column" style="padding-right: 4%;">
                     <div class="row" style="width: 40%">
-                        <div class="col-10">
+                        {{-- <div class="col-10">
                             <form action="{{ route('teacher.course.index') }}">
                                 <div class="input-group input-group-merge">
                                     <select class="form-control" id="filter_category" name="teacher_id"
@@ -48,7 +48,7 @@
                                 data-bs-target="#modalStore">
                                 <span class="tf-icons bx bx-plus"></span>
                             </button>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

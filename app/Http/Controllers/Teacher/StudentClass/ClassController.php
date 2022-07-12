@@ -6,12 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Models\TblClasses;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClassController extends Controller
 {
-    public function index()
+
+    public function index(Request $req)
     {
-        $classes = TblClasses::with(['students', 'teacherGuider'])->paginate();
+        $classes = TblClasses::with(['students', 'teacherGuider'])
+            ->where('teacher_guider_id', Auth::user()->id)->paginate();
         $teachers = User::where('role', self::ROLE_TEACHER)->get();
         return view('teacher.classes.class', ['classes' => $classes, 'teachers' => $teachers]);
     }

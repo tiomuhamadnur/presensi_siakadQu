@@ -15,7 +15,7 @@
                 <div class="col-8 d-flex align-items-end flex-column" style="padding-right: 4%;">
                     <div class="row" style="width: 40%">
                         <div class="col-10">
-                            <form action="{{ route('teacher.present.index') }}">
+                            {{-- <form action="{{ route('teacher.present.index') }}">
                                 <div class="input-group input-group-merge">
                                     <select class="form-control" id="filter_category" name="teacher_id"
                                         aria-label="Filter Teacher">
@@ -41,14 +41,14 @@
                                     <button type="submit" class="form-control btn btn-primary" value="Filter"
                                         id="filter_btn_id"><i class="bx bx-filter-alt"></i></button>
                                 </div>
-                            </form>
+                            </form> --}}
                         </div>
-                        <div class="col-2">
+                        {{-- <div class="col-2">
                             <button type="button" class="btn btn-icon btn-outline-primary" data-bs-toggle="modal"
                                 data-bs-target="#modalStore">
                                 <span class="tf-icons bx bx-plus"></span>
                             </button>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -61,7 +61,7 @@
                             <th>Nama Mata Pelajaran</th>
                             <th>Pengampu</th>
                             <th>Kelas</th>
-                            <th>Jadwal</th>
+                            {{-- <th>Jadwal</th> --}}
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -77,19 +77,15 @@
                                 </td>
                                 <td>{{ $item->teacher ? $item->teacher->name : '-' }}</td>
                                 <td>{{ $item->class->name }}</td>
-                                @php
+                                {{-- @php
                                     $presentController = new \App\Http\Controllers\Admin\Present\PresentController();
                                     $scheduleDay = $presentController->getDayString($item->schedule);
-                                @endphp
-                                <td>{{ $scheduleDay }}, {{ $item->start_time }} - {{ $item->end_time }}</td>
+                                @endphp --}}
+                                {{-- <td>{{ $scheduleDay }}, {{ $item->start_time }} - {{ $item->end_time }}</td> --}}
                                 <td>
                                     <a class="btn rounded-pill btn-primary"
                                         href="{{ route('teacher.present.by_class.index', ['course_id' => $item->id, 'class_id' => $item->class_id]) }}">
                                         <i class='bx bxs-user-badge bx-tada'></i> Absensi
-                                    </a>
-                                    <a class="btn rounded-pill btn-info"
-                                        href="{{ route('teacher.course.student.index', ['course_id' => $item->id]) }}">
-                                        <i class='bx bx-history'></i> Riwayat Absensi
                                     </a>
                                 </td>
                             </tr>

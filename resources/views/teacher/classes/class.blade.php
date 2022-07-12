@@ -10,14 +10,14 @@
         <div class="card">
             <div class="row card-header">
                 <div class="col-4 d-flex justify-content-start flex-column">
-                    <h5 class="">Data Guru</h5>
+                    <h5 class="">Data Wali Kelas</h5>
                 </div>
-                <div class="col-8 d-flex align-items-end flex-column" style="padding-right: 4%;">
+                {{-- <div class="col-8 d-flex align-items-end flex-column" style="padding-right: 4%;">
                     <button type="button" class="btn btn-icon btn-outline-primary" data-bs-toggle="modal"
                         data-bs-target="#modalStore">
                         <span class="tf-icons bx bx-plus"></span>
                     </button>
-                </div>
+                </div> --}}
             </div>
 
             <div class="table-responsive text-nowrap table-min-height">
