@@ -132,7 +132,6 @@
                         @endforeach
                     </tbody>
                 </table>
-                {{ $transCourse->links() }}
             </div>
         </div>
     </div>
