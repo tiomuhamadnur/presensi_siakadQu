@@ -129,7 +129,7 @@ class CourseController extends Controller
             $transPresent->save();
 
             $student = $transPresent->transCourse->student;
-            $this->sendWa("$text $student->name pada hari ini $time $this->getDescPresent($req->status)\nKeterangan: $transPresent->description", $student->phone);
+            $this->sendWa("$text $student->name pada hari ini $time" .  $this->getDescPresent($req->status). "\nKeterangan: $transPresent->description", $student->phone);
         }
         return $this->sendResponse(null, 'success ');
     }
