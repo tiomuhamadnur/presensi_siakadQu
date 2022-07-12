@@ -60,7 +60,26 @@ trait Utils
                 'Content-Length: ' . strlen($data_string)
             )
         );
-        // echo $res = curl_exec($ch);
+        echo $res = curl_exec($ch);
         curl_close($ch);
+    }
+
+    public function getDescPresent($status)
+    {
+        $desc = null;
+        switch ($status) {
+            case 1:
+                $desc = 'hadir';
+                break;
+            case 0:
+                $desc = 'tidak hadir';
+                break;
+            case 2:
+                $desc = 'sakit';
+                break;
+            default:
+                $desc = 'izin';
+        }
+        return $desc;
     }
 }

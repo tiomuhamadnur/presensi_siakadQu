@@ -129,27 +129,8 @@ class CourseController extends Controller
             $transPresent->save();
 
             $student = $transPresent->transCourse->student;
-            $this->sendWa("$text $student->name pada hari ini $time" .  $this->getDescPresent($req->status). "\nKeterangan: $transPresent->description", $student->phone);
+            $this->sendWa("$text $student->name pada hari ini $time " .  $this->getDescPresent($req->status). "\nKeterangan: $transPresent->description", $student->phone);
         }
         return $this->sendResponse(null, 'success ');
-    }
-
-    public function getDescPresent($status)
-    {
-        $desc = null;
-        switch ($status) {
-            case 1:
-                $desc = 'hadir';
-                break;
-            case 0:
-                $desc = 'tidak hadir';
-                break;
-            case 2:
-                $desc = 'sakit';
-                break;
-            default:
-                $desc = 'izin';
-        }
-        return $desc;
     }
 }
