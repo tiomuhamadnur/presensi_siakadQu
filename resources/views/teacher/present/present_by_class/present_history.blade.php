@@ -61,9 +61,6 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th class="active">
-                                <input type="checkbox" class="select-all checkbox" name="select-all" />
-                            </th>
                             <th>nama</th>
                             <th>Kelas</th>
                             <th>Absen</th>
@@ -78,10 +75,6 @@
                         @foreach ($transPresents as $key => $item)
                             <tr class="table-default">
                                 <td>{{ $no++ }}</td>
-                                <td class="active">
-                                    <input type="checkbox" class="select-item checkbox" name="select-item"
-                                        value="{{ $item->id }}" />
-                                </td>
                                 <td><i class="fab fa-sketch fa-lg text-warning me-3"></i>
                                     <strong>{{ $item->transCourse->student->name }}</strong>
                                 </td>
