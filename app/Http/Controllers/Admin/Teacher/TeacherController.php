@@ -25,7 +25,7 @@ class TeacherController extends Controller
         if ($teacher) {
             $teacher->name = $req->name;
             $teacher->email = $req->email;
-            $teacher->password = Hash::make('123456');
+            $teacher->password = $req->password ? $req->password : Hash::make('123456');
             $teacher->role = self::ROLE_TEACHER;
             $teacher->phone = $req->phone;
             $teacher->gender = $req->gender;
