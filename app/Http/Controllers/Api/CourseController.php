@@ -97,8 +97,9 @@ class CourseController extends Controller
         if ($validator->fails()) {
             return $this->sendError($validator->getMessageBag(), null, 422);
         }
-        $transPresents = TransPresents::where('trans_course_id', $req->trans_course_id)
-            ->with(['transCourse.student', 'transCourse.course'])->get();
+        $transPresents = TransPresents::where('trans_course_id', $req->trans_course_id);
+        $req->on ?  $transPresents->where('on', $req->on) : null;
+        $transPresents = $transPresents->with(['transCourse.student', 'transCourse.course'])->get();
         return $this->sendResponse($transPresents, 'success');
     }
 
@@ -115,7 +116,7 @@ class CourseController extends Controller
         }
 
         $text = 'Assalamualaikum Bpk/i, ananda ';
-        $time = Carbon::now()->today();
+        $time = Carbon::now()->isoFormat('dddd, H:i:s D MMMM Y');
         foreach ($req->ids as $transCourseId) {
             $transPresent = TransPresents::where('trans_course_id', $transCourseId)->with(['transCourse.student'])->first();
             if (!$transPresent) {
@@ -129,7 +130,7 @@ class CourseController extends Controller
             $transPresent->save();
 
             $student = $transPresent->transCourse->student;
-            $this->sendWa("$text $student->name pada hari ini $time " .  $this->getDescPresent($req->status). "\nKeterangan: $transPresent->description", $student->phone);
+            $this->sendWa("$text $student->name pada hari ini $time " .  $this->getDescPresent($req->status) . "\nKeterangan: $transPresent->description", $student->phone);
         }
         return $this->sendResponse(null, 'success ');
     }
