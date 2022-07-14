@@ -29,6 +29,8 @@ class PresentByClassController extends Controller
 
     public function doPresent(Request $req)
     {
+        $text = 'Assalamualaikum Bpk/i, ananda ';
+        $time = Carbon::now()->isoFormat('dddd, H:i:s D MMMM Y');
         foreach ($req->ids as $transCourseId) {
             $transPresent = TransPresents::where('trans_course_id', $transCourseId)->first();
             if (!$transPresent) {
@@ -40,6 +42,9 @@ class PresentByClassController extends Controller
             $transPresent->description = $this->getDescPresent($req->status);
             $transPresent->on = $req->schedule;
             $transPresent->save();
+
+            $student = $transPresent->transCourse->student;
+            $this->sendWa("$text $student->name pada hari ini $time " .  $this->getDescPresent($req->status). "\nKeterangan: $transPresent->description", $student->phone);
         }
         return back()->with('message', ['message' => 'presensi berhasil!']);
     }
