@@ -133,6 +133,7 @@
                                     <label for="" class="form-label">Nama Matpel</label>
                                     <input type="text" id="update_name" class="form-control" name="name"
                                         placeholder="Masukan Nama Mata Pelajaran" />
+                                        <input type="text" id="update_id" class="form-control" name="id"/>
                                 </div>
                                 <div class="col mb-1">
                                     <label for="" class="form-label">Pengampu</label>

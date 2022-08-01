@@ -50,10 +50,9 @@ class CourseController extends Controller
     {
         $course = TblCourses::where('id', $req->id)->first();
         if ($course) {
-            $req->id ? $course = $req->id : null;
-            $req->name ? $course = $req->name : null;
-            $req->teacher_id ? $course = $req->teacher_id : null;
-            $req->class_id ? $course = $req->class_id : null;
+            $req->name ? $course->name = $req->name : null;
+            $req->teacher_id ? $course->teacher_id = $req->teacher_id : null;
+            $req->class_id ? $course->class_id = $req->class_id : null;
             $course->save();
             return back()->with('message', ['message' => 'update berhasil!']);
         }

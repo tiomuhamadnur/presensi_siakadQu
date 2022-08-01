@@ -10,7 +10,7 @@
         <div class="card">
             <div class="row card-header">
                 <div class="col-4 d-flex justify-content-start flex-column">
-                    <h5 class="">Data Guru</h5>
+                    <h5 class="">Data Kelas</h5>
                 </div>
                 <div class="col-8 d-flex align-items-end flex-column" style="padding-right: 4%;">
                     <button type="button" class="btn btn-icon btn-outline-primary" data-bs-toggle="modal"
@@ -25,7 +25,6 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Kode</th>
                             <th>Nama</th>
                             <th>Wali Kelas</th>
                             <th>Actions</th>
@@ -38,7 +37,6 @@
                         @foreach ($classes as $item)
                             <tr class="table-default">
                                 <td>{{ $no++ }}</td>
-                                <td>{{ $item->code }}</td>
                                 <td><i class="fab fa-sketch fa-lg text-warning me-3"></i>
                                     <strong>{{ $item->name }}</strong>
                                 </td>
@@ -101,11 +99,6 @@
                             <div class="row g-2">
                                 <input type="text" name="id" id="update_id" hidden>
                                 <div class="col mb-1">
-                                    <label for="" class="form-label">Kode</label>
-                                    <input type="text" id="update_code" name="code" class="form-control"
-                                        placeholder="Kode Kelas" />
-                                </div>
-                                <div class="col mb-1">
                                     <label for="" class="form-label">Nama Kelas</label>
                                     <input type="text" id="update_name" class="form-control" name="name"
                                         placeholder="Masukan Nama Kelas" />
@@ -146,11 +139,6 @@
                         @method('POST')
                         <div class="modal-body">
                             <div class="row g-2">
-                                <div class="col mb-1">
-                                    <label for="" class="form-label">Kode</label>
-                                    <input type="text" id="code" name="code" class="form-control"
-                                        placeholder="Kode Kelas" />
-                                </div>
                                 <div class="col mb-1">
                                     <label for="" class="form-label">Nama Kelas</label>
                                     <input type="text" id="class" class="form-control" name="name"
