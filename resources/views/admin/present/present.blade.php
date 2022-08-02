@@ -17,6 +17,21 @@
                         <div class="col-10">
                             <form action="{{ route('admin.present.index') }}">
                                 <div class="input-group input-group-merge">
+                                    <select class="form-control" id="filter_class" name="class_id"
+                                        aria-label="Filter Teacher">
+                                        <option value="" selected>Kelas</option>
+                                        @foreach ($classes as $item)
+                                            @if ($class_id == $item->id)
+                                                <option selected value="{{ $item->id }}">
+                                                    {{ $item->name }}
+                                                </option>
+                                            @else
+                                                <option value="{{ $item->id }}">
+                                                    {{ $item->name }}
+                                                </option>
+                                            @endif
+                                        @endforeach
+                                    </select>&nbsp;
                                     <select class="form-control" id="filter_category" name="teacher_id"
                                         aria-label="Filter Teacher">
                                         <option value="" selected>All</option>
@@ -43,12 +58,12 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="col-2">
+                        {{-- <div class="col-2">
                             <button type="button" class="btn btn-icon btn-outline-primary" data-bs-toggle="modal"
                                 data-bs-target="#modalStore">
                                 <span class="tf-icons bx bx-plus"></span>
                             </button>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

@@ -17,9 +17,30 @@
                         <div class="col-10">
                             <form action="{{ route('admin.course.index') }}">
                                 <div class="input-group input-group-merge">
+                                    <select class="form-control" id="filter_category" name="class_id"
+                                        aria-label="Filter Teacher">
+                                        <option value="">Kelas</option>
+                                        @foreach ($classes as $item)
+                                            @if ($class_id)
+                                                @if ($class_id == $item->id)
+                                                    <option selected value="{{ $item->id }}">
+                                                        {{ $item->name }}
+                                                    </option>
+                                                @else
+                                                    <option value="{{ $item->id }}">
+                                                        {{ $item->name }}
+                                                    </option>
+                                                @endif
+                                            @else
+                                                <option value="{{ $item->id }}">
+                                                    {{ $item->name }}
+                                                </option>
+                                            @endif
+                                        @endforeach
+                                    </select>&nbsp;
                                     <select class="form-control" id="filter_category" name="teacher_id"
                                         aria-label="Filter Teacher">
-                                        <option value="" selected>All</option>
+                                        <option value="">Guru</option>
                                         @foreach ($teachers as $item)
                                             @if ($teacher)
                                                 @if ($teacher->id == $item->id)

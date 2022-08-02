@@ -25,6 +25,8 @@
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>NIP</th>
+                            <th>TTL</th>
                             <th>name</th>
                             <th>Kelas</th>
                             <th>email</th>
@@ -45,6 +47,9 @@
                         @foreach ($students as $item)
                             <tr class="table-default">
                                 <td>{{ $no++ }}</td>
+                                <td>{{ $item->nip }}</td>
+                                <td>{{ $item->born_at }}, {{ \Carbon\Carbon::parse($item->birthday)->isoFormat('DD-MM-YYYY') }}
+                                </td>
                                 <td><i class="fab fa-sketch fa-lg text-warning me-3"></i>
                                     <strong>{{ $item->name }}</strong>
                                 </td>
@@ -73,9 +78,9 @@
                                             <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
                                                 data-bs-target="#modalUpdate" data-name="{{ $item->name }}"
                                                 data-email="{{ $item->email }}" data-id="{{ $item->id }}"
-                                                data-status="{{ $item->status }}"
-                                                data-class_id="{{ $item->class_id }}" data-phone="{{ $item->phone }}"
-                                                data-gender="{{ $item->gender }}" data-nisn="{{ $item->nisn }}"
+                                                data-status="{{ $item->status }}" data-class_id="{{ $item->class_id }}"
+                                                data-phone="{{ $item->phone }}" data-gender="{{ $item->gender }}"
+                                                data-nisn="{{ $item->nisn }}"
                                                 data-father_name="{{ $item->father_name }}"
                                                 data-parent_phone="{{ $item->parent_phone }}"
                                                 data-address="{{ $item->address }}" data-photo="{{ $item->photo }}"
@@ -150,15 +155,15 @@
                                 </div>
                                 <div class="col mb-1">
                                     <label for="emailWithTitle" class="form-label">Nama Ayah</label>
-                                    <input type="text" id="update_father_name" class="form-control" name="father_name"
-                                        placeholder="Masukan Nama Ayah Kandung" />
+                                    <input type="text" id="update_father_name" class="form-control"
+                                        name="father_name" placeholder="Masukan Nama Ayah Kandung" />
                                 </div>
                             </div>
                             <div class="row g-2">
                                 <div class="col mb-1">
                                     <label for="emailWithTitle" class="form-label">HP Orang Tua</label>
-                                    <input type="text" id="update_parent_phone" class="form-control" name="parent_phone"
-                                        placeholder="Masukan Nama Orang Tua" />
+                                    <input type="text" id="update_parent_phone" class="form-control"
+                                        name="parent_phone" placeholder="Masukan Nama Orang Tua" />
                                 </div>
                                 <div class="col mb-1">
                                     <label for="emailWithTitle" class="form-label">Alamat</label>
@@ -218,7 +223,8 @@
                             <div class="row g-2">
                                 <div class="col mb-1">
                                     <label for="emailWithTitle" class="form-label">Hp</label>
-                                    <input type="text" id="" class="form-control" name="phone" placeholder="08xxxxxxxx" />
+                                    <input type="text" id="" class="form-control" name="phone"
+                                        placeholder="08xxxxxxxx" />
                                 </div>
                                 <div class="col mb-1">
                                     <label for="dobWithTitle" class="form-label">Jenis Kelamin</label>

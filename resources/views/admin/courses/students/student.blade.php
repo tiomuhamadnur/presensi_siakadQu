@@ -14,11 +14,13 @@
                             {{ $course ? $course->name : null }}
                             /</span> Siswa</h5>
                 </div>
-                <div class="col-8 d-flex align-items-end flex-column" style="padding-right: 4%;">
-                    <button type="button" class="btn btn-icon btn-outline-primary" data-bs-toggle="modal"
-                        data-bs-target="#modalStore">
-                        <span class="tf-icons bx bx-plus"></span>
-                    </button>
+                <div class="col-8 d-flex align-items-end flex-column">
+                    <form action="{{ route('admin.course.student.sync') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="class_id" value="{{ $class_id }}">
+                        <input type="hidden" name="course_id" value="{{ $course_id }}">
+                        <button type="submit" class="btn btn-outline-primary"><i class='bx bx-sync'></i></button>
+                    </form>
                 </div>
             </div>
 
@@ -138,15 +140,15 @@
                                 </div>
                                 <div class="col mb-1">
                                     <label for="nameWithTitle" class="form-label">Nilai UAS</label>
-                                    <input type="text" id="update_final_score" name="final_score" class="form-control"
-                                        placeholder="Masukan Nilai Tugas" />
+                                    <input type="text" id="update_final_score" name="final_score"
+                                        class="form-control" placeholder="Masukan Nilai Tugas" />
                                 </div>
                             </div>
                             <div class="row g-2">
                                 <div class="col mb-1">
                                     <label for="nameWithTitle" class="form-label">Nilai Akhir</label>
-                                    <input type="text" id="update_total_score" name="total_score" class="form-control"
-                                        placeholder="Masukan Nilai Tugas" />
+                                    <input type="text" id="update_total_score" name="total_score"
+                                        class="form-control" placeholder="Masukan Nilai Tugas" />
                                 </div>
                             </div>
                         </div>
@@ -227,15 +229,17 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col mb-3">
-                                <input type="text" name="student_id" id="present_student_id" hidden class="form-control">
+                                <input type="text" name="student_id" id="present_student_id" hidden
+                                    class="form-control">
                                 <input type="text" name="trans_course_id" id="present_trans_course_id" hidden
                                     class="form-control">
                                 <input type="text" name="status" id="present_status" value="1" hidden
                                     class="form-control">
                                 <input type="text" name="description" id="present_description" hidden
                                     class="form-control">
-                                <input type="datetime" name="on" value="{{ \Carbon\Carbon::now()->toDateTimeString() }}"
-                                    id="present_on" hidden class="form-control">
+                                <input type="datetime" name="on"
+                                    value="{{ \Carbon\Carbon::now()->toDateTimeString() }}" id="present_on" hidden
+                                    class="form-control">
                             </div>
                         </div>
                     </div>
@@ -265,20 +269,23 @@
                             <div class="col-mb-2">
                                 <small class="text-light fw-semibold d-block">Status Kehadiran</small>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="status" id="unpresent_id" value="0">
+                                    <input class="form-check-input" type="radio" name="status" id="unpresent_id"
+                                        value="0">
                                     <label class="form-check-label" for="unpresent_id">Tidak Hadir</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="status" id="sick_id" value="2">
+                                    <input class="form-check-input" type="radio" name="status" id="sick_id"
+                                        value="2">
                                     <label class="form-check-label" for="sick_id">Sakit</label>
                                 </div>
                             </div>
                             <div class="col mb-2">
                                 <label for="" class="form-label">Deskripsi</label>
-                                <input type="text" name="description" id="unpresent_description" class="form-control">
+                                <input type="text" name="description" id="unpresent_description"
+                                    class="form-control">
 
-                                <input type="text" value="{{ \Carbon\Carbon::now()->toDateTimeString() }}" name="on"
-                                    id="unpresent_on" hidden class="form-control">
+                                <input type="text" value="{{ \Carbon\Carbon::now()->toDateTimeString() }}"
+                                    name="on" id="unpresent_on" hidden class="form-control">
                                 <input type="text" name="student_id" id="unpresent_student_id" hidden
                                     class="form-control">
                                 <input type="text" name="trans_course_id" id="unpresent_trans_course_id" hidden

@@ -20,8 +20,11 @@ class PresentController extends Controller
             $teacher = User::where('id', $req->teacher_id)->where('role', self::ROLE_TEACHER)->first();
             $courses->where('teacher_id', $req->teacher_id);
         }
+        if ($req->class_id) {
+            $courses->where('class_id', $req->class_id);
+        }
         $courses = $courses->paginate(50);
-        return view('admin.present.present', ['courses' => $courses, 'teachers' => $teachers, 'classes' => $classes, 'teacher' => $teacher]);
+        return view('admin.present.present', ['courses' => $courses, 'teachers' => $teachers, 'class_id' => $req->class_id, 'classes' => $classes, 'teacher' => $teacher]);
     }
 
     public function getDayString($dayInt)

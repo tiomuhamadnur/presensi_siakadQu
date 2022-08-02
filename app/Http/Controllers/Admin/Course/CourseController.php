@@ -17,15 +17,17 @@ class CourseController extends Controller
         $teachers = User::where('role', self::ROLE_TEACHER)->get();
         $classes = TblClasses::all();
         $teacher = null;
+        $class_id = null;
         if ($req->teacher_id) {
             $teacher = User::where('id', $req->teacher_id)->where('role', self::ROLE_TEACHER)->first();
             $courses->where('teacher_id', $req->teacher_id);
         }
         if ($req->class_id) {
+            $class_id = $req->class_id;
             $courses->where('class_id', $req->class_id);
         }
         $courses = $courses->paginate(50);
-        return view('admin.courses.course', ['courses' => $courses, 'teachers' => $teachers, 'classes' => $classes, 'teacher' => $teacher]);
+        return view('admin.courses.course', ['courses' => $courses, 'teachers' => $teachers, 'class_id' => $class_id, 'classes' => $classes, 'teacher' => $teacher]);
     }
 
     public function store(Request $req)

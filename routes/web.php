@@ -58,6 +58,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin'], 'name
             $route->post('/', 'StudentController@store')->name('admin.course.student.store');
             $route->put('/', 'StudentController@update')->name('admin.course.student.update');
             $route->delete('/', 'StudentController@delete')->name('admin.course.student.delete');
+            $route->post('sync', 'StudentController@syncStudentClass')->name('admin.course.student.sync');
 
             //PRESENT
             $route->post('present', 'StudentPresentController@present')->name('admin.course.student.present');

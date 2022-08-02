@@ -24,7 +24,29 @@ class StudentController extends Controller
             $students = User::where('role', self::ROLE_STUDENT)->whereNotIn('id', $studentIds)->where('class_id', $tblCourse->class_id)->get();
         }
         $classes = TblClasses::all();
-        return view('admin.courses.students.student', ['transCourse' => $transCourse, 'classes' => $classes, 'students' => $students, 'course' => $tblCourse]);
+        return view('admin.courses.students.student', ['transCourse' => $transCourse, 'class_id' => $tblCourse->class_id, 'classes' => $classes, 'students' => $students, 'course' => $tblCourse, 'course_id' => $req->course_id]);
+    }
+
+    public function syncStudentClass(Request $req)
+    {
+        $students = User::where('role', self::ROLE_STUDENT)->where('class_id', $req->class_id)->get();
+        $transCourses = TransCourses::where('class_id', $req->class_id)->where('course_id', $req->course_id)->get();
+        foreach ($students as $student) {
+            $isFounded = false;
+            foreach ($transCourses as $course) {
+                if ($student->id == $course->student_id) {
+                    $isFounded = true;
+                }
+            }
+            if (!$isFounded) {
+                $newTransCourse = new TransCourses();
+                $newTransCourse->class_id = $req->class_id;
+                $newTransCourse->course_id = $req->course_id;
+                $newTransCourse->student_id = $student->id;
+                $newTransCourse->save();
+            }
+        }
+        return back()->with('message', ['message' => 'sinkronisasi berhasil!']);
     }
 
     public function store(Request $req)

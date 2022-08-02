@@ -10,8 +10,21 @@
         <div class="card">
             <div class="row card-header">
                 <div class="col-4 d-flex justify-content-start flex-column">
-                    <h6 class="fw py-3 mb-4">Riwayat Presensi : {{ $transPresents->first()->transCourse->student->name }} <br>
-                        Matpel : {{ $transPresents->first()->transCourse->course->name }}</h5>
+                    @php
+                        $present = $transPresents->first();
+                        $transCourse = null;
+                        $student = null;
+                        $course = null;
+                        if ($present) {
+                            $transCourse = $present->transCourse;
+                            if ($transCourse) {
+                                $student = $transCourse->student;
+                                $course = $transCourse->course;
+                            }
+                        }
+                    @endphp
+                    <h6 class="fw py-3 mb-4">Riwayat Presensi : {{ $student ? $student->name : '(Belum ada riwayat absensi)' }} <br>
+                        Matpel : {{ $course ? $course->name : null }}</h5>
                 </div>
                 <div class="col-8 d-flex align-items-end flex-column" style="padding-right: 4%;">
                     <div class="row">
@@ -78,46 +91,45 @@
                                 <td><i class="fab fa-sketch fa-lg text-warning me-3"></i>
                                     <strong>{{ $item->transCourse->student->name }}</strong>
                                 </td>
-                                <td>{{ $item->transCourse->student->class ? $item->transCourse->student->class->name : null }}</td>
+                                <td>{{ $item->transCourse->student->class ? $item->transCourse->student->class->name : null }}
+                                </td>
                                 <td>
-                                        @if ($item->status == 1)
+                                    @if ($item->status == 1)
+                                        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip"
+                                            id="btn_hadir_id" data-bs-offset="0,4" data-bs-placement="top"
+                                            data-bs-html="true" title="" data-bs-original-title="<span>Hadir</span>">
+                                            <i class='bx bxs-badge-check'></i>
+                                        </button>
+                                    @elseif($item->status == 2)
+                                        <a href="#" data-item="{{ $item->present }}" data-bs-toggle="modal"
+                                            data-bs-target="#modalPresent">
                                             <button type="button" class="btn btn-outline-secondary"
-                                                data-bs-toggle="tooltip" id="btn_hadir_id" data-bs-offset="0,4"
-                                                data-bs-placement="top" data-bs-html="true" title=""
-                                                data-bs-original-title="<span>Hadir</span>">
-                                                <i class='bx bxs-badge-check'></i>
+                                                data-bs-toggle="tooltip" data-toggle="modal" data-target="#modalPresent"
+                                                data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
+                                                title=""
+                                                data-bs-original-title="<span>Sakit : {{ $item->description }}</span>">
+                                                <i class='bx bx-plus-medical'></i>
                                             </button>
-                                        @elseif($item->status == 2)
-                                            <a href="#" data-item="{{ $item->present }}" data-bs-toggle="modal"
-                                                data-bs-target="#modalPresent">
-                                                <button type="button" class="btn btn-outline-secondary"
-                                                    data-bs-toggle="tooltip" data-toggle="modal" data-target="#modalPresent"
-                                                    data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
-                                                    title=""
-                                                    data-bs-original-title="<span>Sakit : {{ $item->description }}</span>">
-                                                    <i class='bx bx-plus-medical'></i>
-                                                </button>
-                                            </a>
-                                        @elseif($item->status == 3)
-                                            <a href="#" data-item="{{ $item->present }}" data-bs-toggle="modal"
-                                                data-bs-target="#modalPresent">
-                                                <button type="button" class="btn btn-outline-secondary"
-                                                    data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
-                                                    data-bs-html="true" title=""
-                                                    data-bs-original-title="<span>Izin : {{ $item->description }}</span>">
-                                                    <i class='bx bxs-envelope'></i>
-                                                </button>
-                                            </a>
-                                        @else
+                                        </a>
+                                    @elseif($item->status == 3)
+                                        <a href="#" data-item="{{ $item->present }}" data-bs-toggle="modal"
+                                            data-bs-target="#modalPresent">
                                             <button type="button" class="btn btn-outline-secondary"
                                                 data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
                                                 data-bs-html="true" title=""
-                                                data-bs-original-title="<span>Tidak Ada Keterangan </span>">
-                                                <i class='bx bx-calendar-x'></i>
+                                                data-bs-original-title="<span>Izin : {{ $item->description }}</span>">
+                                                <i class='bx bxs-envelope'></i>
                                             </button>
-                                        @endif
+                                        </a>
+                                    @else
+                                        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip"
+                                            data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" title=""
+                                            data-bs-original-title="<span>Tidak Ada Keterangan </span>">
+                                            <i class='bx bx-calendar-x'></i>
+                                        </button>
+                                    @endif
                                 </td>
-                                <td>{{\Carbon\Carbon::parse($item->on)->format('d M Y')}}</td>
+                                <td>{{ \Carbon\Carbon::parse($item->on)->format('d M Y') }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -136,8 +148,7 @@
                     <h5 class="modal-title" id="present_title">Ubah Keterangan</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="form_present_id" action="{{ route('admin.present.history.update_present') }}"
-                    method="POST">
+                <form id="form_present_id" action="{{ route('admin.present.history.update_present') }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="modal-body">
