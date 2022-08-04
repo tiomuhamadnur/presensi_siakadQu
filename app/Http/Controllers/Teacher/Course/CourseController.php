@@ -20,15 +20,15 @@ class CourseController extends Controller
 
     public function index(Request $req)
     {
-        $guiderClass = $this->tblClass->getClassGuider(Auth::user()->id)->get();
-        $classGuiderIds = [];
-        foreach($guiderClass as $item)
-        {
-            $classGuiderIds[] = $item->id;
-        }
+        // $guiderClass = $this->tblClass->getClassGuider(Auth::user()->id)->get();
+        // $classGuiderIds = [];
+        // foreach($guiderClass as $item)
+        // {
+        //     $classGuiderIds[] = $item->id;
+        // }
         $courses = TblCourses::with(['teacher', 'class', 'transCourses.student'])
-            ->where('teacher_id', Auth::user()->id)
-            ->orWhereIn('class_id', $classGuiderIds);
+            ->where('teacher_id', Auth::user()->id);
+            // ->orWhereIn('class_id', $classGuiderIds);
         $teachers = User::where('role', self::ROLE_TEACHER)->get();
         $classes = TblClasses::all();
         
@@ -42,6 +42,16 @@ class CourseController extends Controller
         }
         $courses = $courses->paginate(50);
         return view('teacher.courses.course', ['courses' => $courses, 'teachers' => $teachers, 'classes' => $classes, 'teacher' => $teacher]);
+    }
+
+    public function classGuider(Request $req)
+    {
+        $courses = TblCourses::with(['teacher', 'class', 'transCourses.student'])
+            ->where('class_id', $req->class_id);
+        $class = TblClasses::find($req->class_id);
+        
+        $courses = $courses->paginate(50);
+        return view('teacher.courses.course_guider', ['courses' => $courses, 'class' => $class]);
     }
 
     public function store(Request $req)

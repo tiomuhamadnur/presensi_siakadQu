@@ -10,8 +10,21 @@
         <div class="card">
             <div class="row card-header">
                 <div class="col-4 d-flex justify-content-start flex-column">
-                    <h6 class="fw py-3 mb-4">Riwayat Presensi : {{ $transPresents->first()->transCourse->student->name }} <br>
-                        Matpel : {{ $transPresents->first()->transCourse->course->name }}</h5>
+                    @php
+                        $present = $transPresents->first();
+                        $transCourse = null;
+                        $student = null;
+                        $course = null;
+                        if ($present) {
+                            $transCourse = $present->transCourse;
+                            if ($transCourse) {
+                                $student = $transCourse->student;
+                                $course = $transCourse->course;
+                            }
+                        }
+                    @endphp
+                    <h6 class="fw py-3 mb-4">Riwayat Presensi : {{ $student ? $student->name : '(Belum ada riwayat absensi)' }} <br>
+                        Matpel : {{ $course ? $course->name : null }}</h5>
                 </div>
                 <div class="col-8 d-flex align-items-end flex-column" style="padding-right: 4%;">
                     <div class="row">

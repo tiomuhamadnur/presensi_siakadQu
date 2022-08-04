@@ -76,7 +76,6 @@
                             <th>Nama Mata Pelajaran</th>
                             <th>Pengampu</th>
                             <th>Kelas</th>
-                            <th>Jadwal</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -96,7 +95,6 @@
                                     $presentController = new \App\Http\Controllers\Admin\Present\PresentController();
                                     $scheduleDay = $presentController->getDayString($item->schedule);
                                 @endphp
-                                <td>{{ $scheduleDay }}, {{ $item->start_time }} - {{ $item->end_time }}</td>
                                 <td>
                                     <a class="btn rounded-pill btn-primary"
                                         href="{{ route('admin.present.by_class.index', ['course_id' => $item->id, 'class_id' => $item->class_id]) }}">

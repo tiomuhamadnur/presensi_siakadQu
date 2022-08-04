@@ -25,7 +25,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>NIP</th>
+                            <th>NIK</th>
                             <th>TTL</th>
                             <th>name</th>
                             <th>Kelas</th>
@@ -47,7 +47,7 @@
                         @foreach ($students as $item)
                             <tr class="table-default">
                                 <td>{{ $no++ }}</td>
-                                <td>{{ $item->nip }}</td>
+                                <td>{{ $item->nik }}</td>
                                 <td>{{ $item->born_at }}, {{ \Carbon\Carbon::parse($item->birthday)->isoFormat('DD-MM-YYYY') }}
                                 </td>
                                 <td><i class="fab fa-sketch fa-lg text-warning me-3"></i>

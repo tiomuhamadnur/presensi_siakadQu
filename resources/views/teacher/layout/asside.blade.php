@@ -27,7 +27,7 @@
         <li class="menu-item">
             <a href="{{ route('teacher.course.index') }}" class="menu-link">
                 <i class='menu-icon tf-icons bx bx-book-reader'></i>
-                <div data-i18n="Perfect Scrollbar">Mata Pelajaran</div>
+                <div data-i18n="Perfect Scrollbar">Mata Pelajaran Diampu</div>
             </a>
         </li>
 

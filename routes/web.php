@@ -121,6 +121,7 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'role:guru'], 'nam
     //Course
     $route->group(['prefix' => 'course', 'namespace' => 'Course'], function ($route) {
         $route->get('/', 'CourseController@index')->name('teacher.course.index');
+        $route->get('guider', 'CourseController@classGuider')->name('teacher.course.guider');
         $route->post('/', 'CourseController@store')->name('teacher.course.store');
         $route->put('/', 'CourseController@update')->name('teacher.course.update');
         $route->delete('/', 'CourseController@delete')->name('teacher.course.delete');

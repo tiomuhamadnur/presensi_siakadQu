@@ -37,6 +37,9 @@ class StudentController extends Controller
             $student->parent_phone = $req->parent_phone;
             $student->address = $req->address;
             $student->class_id = $req->class_id;
+            $student->born_at = $req->born_at;
+            $student->nik = $req->nik;
+            $student->birthday = $req->birthday;
             $path = null;
             if ($req->hasFile('photo')) {
                 $path = Storage::disk('public')->put('studentfiles/profil', $req->file('photo'));
@@ -64,6 +67,9 @@ class StudentController extends Controller
             $req->parent_phone ? $student->parent_phone = $req->parent_phone : null;
             $req->address ? $student->address = $req->address : null;
             $req->class_id ? $student->class_id = $req->class_id : null;
+            $req->born_at ? $student->born_at = $req->born_at : null;
+            $req->birthday ? $student->birthday = $req->birthday : null;
+            $req->nik ? $student->nik = $req->nik : null;
             $path = null;
             if ($req->hasFile('photo')) {
                 $path = Storage::disk('public')->put('studentfiles/profil', $req->file('photo'));

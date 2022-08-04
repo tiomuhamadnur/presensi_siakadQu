@@ -12,12 +12,12 @@
                 <div class="col-4 d-flex justify-content-start flex-column">
                     <h5 class="">Data User</h5>
                 </div>
-                <div class="col-8 d-flex align-items-end flex-column" style="padding-right: 4%;">
+                {{-- <div class="col-8 d-flex align-items-end flex-column" style="padding-right: 4%;">
                     <button type="button" class="btn btn-icon btn-outline-primary" data-bs-toggle="modal"
                         data-bs-target="#modalStore">
                         <span class="tf-icons bx bx-plus"></span>
                     </button>
-                </div>
+                </div> --}}
             </div>
 
             <div class="table-responsive text-nowrap table-min-height">
@@ -25,6 +25,8 @@
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>NIK</th>
+                            <th>TTL</th>
                             <th>name</th>
                             <th>Kelas</th>
                             <th>email</th>
@@ -45,6 +47,9 @@
                         @foreach ($students as $item)
                             <tr class="table-default">
                                 <td>{{ $no++ }}</td>
+                                <td>{{ $item->nik }}</td>
+                                <td>{{ $item->born_at }},
+                                    {{ \Carbon\Carbon::parse($item->birthday)->isoFormat('DD-MM-YYYY') }}
                                 <td><i class="fab fa-sketch fa-lg text-warning me-3"></i>
                                     <strong>{{ $item->name }}</strong>
                                 </td>
@@ -73,13 +78,13 @@
                                             <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
                                                 data-bs-target="#modalUpdate" data-name="{{ $item->name }}"
                                                 data-email="{{ $item->email }}" data-id="{{ $item->id }}"
-                                                data-status="{{ $item->status }}"
-                                                data-class_id="{{ $item->class_id }}" data-phone="{{ $item->phone }}"
-                                                data-gender="{{ $item->gender }}" data-nisn="{{ $item->nisn }}"
+                                                data-status="{{ $item->status }}" data-class_id="{{ $item->class_id }}"
+                                                data-phone="{{ $item->phone }}" data-gender="{{ $item->gender }}"
+                                                data-nisn="{{ $item->nisn }}"
                                                 data-father_name="{{ $item->father_name }}"
                                                 data-parent_phone="{{ $item->parent_phone }}"
                                                 data-address="{{ $item->address }}" data-photo="{{ $item->photo }}"
-                                                data-classes="{{ $classes }}">
+                                                data-classes="{{ $classes }}" data-item="{{ $item }}">
                                                 <i class="bx bx-edit-alt me-1">
                                                 </i>
                                                 Edit</a>
@@ -144,21 +149,40 @@
                             </div>
                             <div class="row g-2">
                                 <div class="col mb-1">
+                                    <label for="" class="form-label">Tempat Lahir</label>
+                                    <input type="text" id="update_born_at" class="form-control" name="born_at"
+                                        placeholder="" />
+                                </div>
+                                <div class="col mb-1">
+                                    <label for="" class="form-label">Tanggal Lahir</label>
+                                    <input type="date" id="update_birthday" class="form-control" name="birthday"
+                                        placeholder="" />
+                                </div>
+                            </div>
+                            <div class="row g-2">
+                                <div class="col mb-1">
+                                    <label for="" class="form-label">NIK</label>
+                                    <input type="text" id="update_nik" class="form-control" name="nik"
+                                        placeholder="NIK" />
+                                </div>
+                            </div>
+                            <div class="row g-2">
+                                <div class="col mb-1">
                                     <label for="emailWithTitle" class="form-label">NISN</label>
                                     <input type="text" id="update_nisn" class="form-control" name="nisn"
                                         placeholder="Masukan Nomor Induk Siswa Nasional" />
                                 </div>
                                 <div class="col mb-1">
                                     <label for="emailWithTitle" class="form-label">Nama Ayah</label>
-                                    <input type="text" id="update_father_name" class="form-control" name="father_name"
-                                        placeholder="Masukan Nama Ayah Kandung" />
+                                    <input type="text" id="update_father_name" class="form-control"
+                                        name="father_name" placeholder="Masukan Nama Ayah Kandung" />
                                 </div>
                             </div>
                             <div class="row g-2">
                                 <div class="col mb-1">
                                     <label for="emailWithTitle" class="form-label">HP Orang Tua</label>
-                                    <input type="text" id="update_parent_phone" class="form-control" name="parent_phone"
-                                        placeholder="Masukan Nama Orang Tua" />
+                                    <input type="text" id="update_parent_phone" class="form-control"
+                                        name="parent_phone" placeholder="Masukan Nama Orang Tua" />
                                 </div>
                                 <div class="col mb-1">
                                     <label for="emailWithTitle" class="form-label">Alamat</label>
@@ -218,7 +242,8 @@
                             <div class="row g-2">
                                 <div class="col mb-1">
                                     <label for="emailWithTitle" class="form-label">Hp</label>
-                                    <input type="text" id="" class="form-control" name="phone" placeholder="08xxxxxxxx" />
+                                    <input type="text" id="" class="form-control" name="phone"
+                                        placeholder="08xxxxxxxx" />
                                 </div>
                                 <div class="col mb-1">
                                     <label for="dobWithTitle" class="form-label">Jenis Kelamin</label>
@@ -226,6 +251,25 @@
                                         <option value="Laki-laki">Laki-laki</option>
                                         <option value="Perempuan">Perempuan</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="row g-2">
+                                <div class="col mb-1">
+                                    <label for="" class="form-label">Tempat Lahir</label>
+                                    <input type="text" id="born_at" class="form-control" name="born_at"
+                                        placeholder="" />
+                                </div>
+                                <div class="col mb-1">
+                                    <label for="" class="form-label">Tanggal Lahir</label>
+                                    <input type="date" id="birthday" class="form-control" name="birthday"
+                                        placeholder="" />
+                                </div>
+                            </div>
+                            <div class="row g-2">
+                                <div class="col mb-1">
+                                    <label for="" class="form-label">NIK</label>
+                                    <input type="text" id="nik" class="form-control" name="nik"
+                                        placeholder="NIK" />
                                 </div>
                             </div>
                             <div class="row g-2">
@@ -301,6 +345,7 @@
                 var parent_phone = $(e.relatedTarget).data('parent_phone');
                 var address = $(e.relatedTarget).data('address');
                 var photo = $(e.relatedTarget).data('photo');
+                var data = $(e.relatedTarget).data('item');
 
                 $('#update_name').val(name);
                 $('#update_email').val(email);
@@ -314,6 +359,9 @@
                 $('#update_parent_phone').val(parent_phone);
                 $('#update_address').val(address);
                 $('#update_photo').val(photo);
+                $('#update_born_at').val(data.born_at);
+                $('#update_birthday').val(data.birthday);
+                $('#update_nik').val(data.nik);
 
                 const jk = ['Laki-laki', 'Perempuan'];
                 jk.forEach(element => {

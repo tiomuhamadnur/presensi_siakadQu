@@ -13,12 +13,8 @@ class PresentHistoryController extends Controller
 {
     public function index(Request $req)
     {
-        $schedule = Carbon::now()->toDateString();
-        if ($req->schedule) {
-            $schedule = $req->schedule;
-        }
         $transPresents = TransPresents::where('trans_course_id', $req->trans_course_id)
-            ->with(['transCourse.student', 'transCourse.course'])->get();
+            ->with(['transCourse.student', 'transCourse.course'])->paginate(50);
         return view('teacher.present.present_by_class.present_history', [
             'transPresents' => $transPresents, 'trans_course_id' => $req->trans_course_id
         ]);

@@ -10,45 +10,10 @@
         <div class="card">
             <div class="row card-header">
                 <div class="col-4 d-flex justify-content-start flex-column">
-                    <h5 class="">Data Mata Pelajaran</h5>
+                    <h5 class="">Mata Pelajaran Diampu</h5>
                 </div>
                 <div class="col-8 d-flex align-items-end flex-column" style="padding-right: 4%;">
                     <div class="row" style="width: 40%">
-                        {{-- <div class="col-10">
-                            <form action="{{ route('teacher.course.index') }}">
-                                <div class="input-group input-group-merge">
-                                    <select class="form-control" id="filter_category" name="teacher_id"
-                                        aria-label="Filter Teacher">
-                                        <option value="" selected>All</option>
-                                        @foreach ($teachers as $item)
-                                            @if ($teacher)
-                                                @if ($teacher->id == $item->id)
-                                                    <option selected value="{{ $item->id }}">
-                                                        {{ $item->name }}
-                                                    </option>
-                                                @else
-                                                    <option value="{{ $item->id }}">
-                                                        {{ $item->name }}
-                                                    </option>
-                                                @endif
-                                            @else
-                                                <option value="{{ $item->id }}">
-                                                    {{ $item->name }}
-                                                </option>
-                                            @endif
-                                        @endforeach
-                                    </select>&nbsp;
-                                    <button type="submit" class="form-control btn btn-primary" value="Filter"
-                                        id="filter_btn_id"><i class="bx bx-filter-alt"></i></button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-2">
-                            <button type="button" class="btn btn-icon btn-outline-primary" data-bs-toggle="modal"
-                                data-bs-target="#modalStore">
-                                <span class="tf-icons bx bx-plus"></span>
-                            </button>
-                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -87,7 +52,7 @@
                                                 href="{{ route('teacher.course.student.index', ['course_id' => $item->id]) }}">
                                                 <i class='bx bxs-user-badge bx-tada'></i> Siswa
                                             </a>
-                                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
+                                            {{-- <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
                                                 data-bs-target="#modalUpdate" data-name="{{ $item->name }}"
                                                 data-id="{{ $item->id }}" data-teachers="{{ $teachers }}"
                                                 data-classes="{{ $classes }}"
@@ -99,7 +64,7 @@
                                             <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
                                                 data-bs-target="#modalDelete" data-id="{{ $item->id }}">
                                                 <i class="bx bx-trash me-1"></i>Delete
-                                            </a>
+                                            </a> --}}
                                         </div>
                                     </div>
                                 </td>

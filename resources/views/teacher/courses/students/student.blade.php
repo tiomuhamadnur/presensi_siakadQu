@@ -14,12 +14,12 @@
                             {{ $course ? $course->name : null }}
                             /</span> Siswa</h5>
                 </div>
-                <div class="col-8 d-flex align-items-end flex-column" style="padding-right: 4%;">
+                {{-- <div class="col-8 d-flex align-items-end flex-column" style="padding-right: 4%;">
                     <button type="button" class="btn btn-icon btn-outline-primary" data-bs-toggle="modal"
                         data-bs-target="#modalStore">
                         <span class="tf-icons bx bx-plus"></span>
                     </button>
-                </div>
+                </div> --}}
             </div>
 
             <div class="table-responsive text-nowrap table-min-height">

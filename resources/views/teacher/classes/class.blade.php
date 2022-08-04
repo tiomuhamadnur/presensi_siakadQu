@@ -52,10 +52,10 @@
                                                 <i class="bx bxs-user-account"></i> Siswa
                                             </a>
                                             <a class="dropdown-item"
-                                                href="{{ route('teacher.course.index', ['class_id' => $item->id]) }}">
+                                                href="{{ route('teacher.course.guider', ['class_id' => $item->id]) }}">
                                                 <i class='bx bx-book-reader'></i> Pelajaran
                                             </a>
-                                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
+                                            {{-- <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
                                                 data-bs-target="#modalUpdate" data-name="{{ $item->name }}"
                                                 data-id="{{ $item->id }}" data-code="{{ $item->code }}"
                                                 data-name="{{ $item->name }}" data-teachers="{{ $teachers }}"
@@ -66,7 +66,7 @@
                                             <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
                                                 data-bs-target="#modalDelete" data-id="{{ $item->id }}">
                                                 <i class="bx bx-trash me-1"></i>Delete
-                                            </a>
+                                            </a> --}}
                                         </div>
                                     </div>
                                 </td>
