@@ -84,7 +84,7 @@
                                                 data-father_name="{{ $item->father_name }}"
                                                 data-parent_phone="{{ $item->parent_phone }}"
                                                 data-address="{{ $item->address }}" data-photo="{{ $item->photo }}"
-                                                data-classes="{{ $classes }}">
+                                                data-classes="{{ $classes }}" data-item="{{ $item }}">
                                                 <i class="bx bx-edit-alt me-1">
                                                 </i>
                                                 Edit</a>
@@ -157,6 +157,24 @@
                                     <label for="emailWithTitle" class="form-label">Nama Ayah</label>
                                     <input type="text" id="update_father_name" class="form-control"
                                         name="father_name" placeholder="Masukan Nama Ayah Kandung" />
+                                </div>
+                            </div>
+                            <div class="row g-2">
+                                <div class="col mb-1">
+                                    <label for="emailWithTitle" class="form-label">NIK</label>
+                                    <input type="text" id="update_nik" class="form-control" name="nik"
+                                        placeholder="Masukan NIK" />
+                                </div>
+                                <div class="col mb-1">
+                                    <label for="emailWithTitle" class="form-label">Tempat Lahir</label>
+                                    <input type="text" id="update_born_at" class="form-control"
+                                        name="born_at" placeholder="Masukan Tempat Lahir" />
+                                </div>
+                            </div>
+                            <div class="row g-2">
+                                <div class="col mb-1">
+                                    <label for="emailWithTitle" class="form-label">Tanggal Lahir</label>
+                                    <input type="date" id="update_birthday" class="form-control" name="birthday" />
                                 </div>
                             </div>
                             <div class="row g-2">
@@ -248,6 +266,24 @@
                             </div>
                             <div class="row g-2">
                                 <div class="col mb-1">
+                                    <label for="emailWithTitle" class="form-label">NIK</label>
+                                    <input type="text" id="" class="form-control" name="nik"
+                                        placeholder="Masukan Nomor Induk Siswa Nasional" />
+                                </div>
+                                <div class="col mb-1">
+                                    <label for="emailWithTitle" class="form-label">Tempat Lahir</label>
+                                    <input type="text" id="" class="form-control"
+                                        name="born_at" placeholder="Masukan Tempat Lahir" />
+                                </div>
+                            </div>
+                            <div class="row g-2">
+                                <div class="col mb-1">
+                                    <label for="emailWithTitle" class="form-label">Tanggal Lahir</label>
+                                    <input type="date" id="" class="form-control" name="birthday" />
+                                </div>
+                            </div>
+                            <div class="row g-2">
+                                <div class="col mb-1">
                                     <label for="emailWithTitle" class="form-label">HP Orang Tua</label>
                                     <input type="text" id="" class="form-control" name="parent_phone"
                                         placeholder="Masukan Nama Orang Tua" />
@@ -307,6 +343,7 @@
                 var parent_phone = $(e.relatedTarget).data('parent_phone');
                 var address = $(e.relatedTarget).data('address');
                 var photo = $(e.relatedTarget).data('photo');
+                var data = $(e.relatedTarget).data('item');
 
                 $('#update_name').val(name);
                 $('#update_email').val(email);
@@ -320,6 +357,9 @@
                 $('#update_parent_phone').val(parent_phone);
                 $('#update_address').val(address);
                 $('#update_photo').val(photo);
+                $('#update_born_at').val(data.born_at);
+                $('#update_birthday').val(data.birthday);
+                $('#update_nik').val(data.nik);
 
                 const jk = ['Laki-laki', 'Perempuan'];
                 jk.forEach(element => {

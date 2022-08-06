@@ -10,7 +10,7 @@
         <div class="card">
             <div class="row card-header">
                 <div class="col-4 d-flex justify-content-start flex-column">
-                    <h5 class="">Data Mata Pelajaran</h5>
+                    <h5 class="">Input Nilai Mata Pelajaran</h5>
                 </div>
                 <div class="col-8 d-flex align-items-end flex-column" style="padding-right: 4%;">
                     <div class="row" style="width: 40%">
@@ -64,12 +64,12 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="col-2">
+                        {{-- <div class="col-2">
                             <button type="button" class="btn btn-icon btn-outline-primary" data-bs-toggle="modal"
                                 data-bs-target="#modalStore">
                                 <span class="tf-icons bx bx-plus"></span>
                             </button>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -104,10 +104,10 @@
                                             <i class="bx bx-dots-vertical-rounded"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item"
+                                            {{-- <a class="dropdown-item"
                                                 href="{{ route('admin.course.student.index', ['course_id' => $item->id]) }}">
                                                 <i class='bx bxs-user-badge bx-tada'></i> Siswa
-                                            </a>
+                                            </a> --}}
                                             <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
                                                 data-bs-target="#modalUpdate" data-name="{{ $item->name }}"
                                                 data-id="{{ $item->id }}" data-teachers="{{ $teachers }}"
@@ -117,10 +117,10 @@
                                                 <i class="bx bx-edit-alt me-1">
                                                 </i>
                                                 Edit</a>
-                                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
+                                            {{-- <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
                                                 data-bs-target="#modalDelete" data-id="{{ $item->id }}">
                                                 <i class="bx bx-trash me-1"></i>Delete
-                                            </a>
+                                            </a> --}}
                                         </div>
                                     </div>
                                 </td>

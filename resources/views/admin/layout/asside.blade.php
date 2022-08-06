@@ -63,7 +63,7 @@
 
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Data Nilai</span></li>
         <li class="menu-item">
-            <a href="{{ route('admin.course.index') }}" class="menu-link">
+            <a href="{{ route('admin.course.score.index') }}" class="menu-link">
                 <i class='menu-icon tf-icon bx bx-edit-alt'></i>
                 <div data-i18n="Extended UI">Input Nilai</div>
             </a>

@@ -51,6 +51,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin'], 'name
         $route->post('/', 'CourseController@store')->name('admin.course.store');
         $route->put('/', 'CourseController@update')->name('admin.course.update');
         $route->delete('/', 'CourseController@delete')->name('admin.course.delete');
+        
+        //Score
+        $route->group(['prefix' => 'score'], function ($route) {
+            $route->get('/', 'ScoreController@index')->name('admin.course.score.index');
+            $route->post('/', 'ScoreController@store')->name('admin.course.score.store');
+            $route->put('/', 'ScoreController@update')->name('admin.course.score.update');
+            $route->delete('/', 'ScoreController@delete')->name('admin.course.score.delete');
+        });
 
         //Student
         $route->group(['prefix' => 'student', 'namespace' => 'Student'], function ($route) {
