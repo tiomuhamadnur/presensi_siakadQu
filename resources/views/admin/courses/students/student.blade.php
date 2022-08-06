@@ -58,7 +58,17 @@
                                 <td>{{ $item->final_score }}</td>
                                 <td>{{ $item->total_score }}</td>
                                 <td>
-                                    <div class="dropdown">
+                                    <a class="btn btn-primary" href="javascript:void(0);" data-bs-toggle="modal"
+                                        data-bs-target="#modalUpdate" data-name="{{ $item->student->name }}"
+                                        data-email="{{ $item->student->email }}" data-id="{{ $item->id }}"
+                                        data-assesment_score="{{ $item->assesment_score }}"
+                                        data-quiz_score="{{ $item->quiz_score }}" data-mid_score="{{ $item->mid_score }}"
+                                        data-final_score="{{ $item->final_score }}"
+                                        data-total_score="{{ $item->total_score }}">
+                                        <i class="bx bx-edit-alt me-1">
+                                        </i>
+                                        Update</a>
+                                    {{-- <div class="dropdown">
                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
                                             data-bs-toggle="dropdown">
                                             <i class="bx bx-dots-vertical-rounded"></i>
@@ -80,7 +90,7 @@
                                                 <i class="bx bx-trash me-1"></i>Delete
                                             </a>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </td>
                             </tr>
                         @endforeach
