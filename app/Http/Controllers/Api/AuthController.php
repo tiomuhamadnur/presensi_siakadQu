@@ -37,11 +37,11 @@ class AuthController extends Controller
                         'user' => $user
                     ], 'login berhasil');
                 } else {
-                    return $this->sendError("login gagagl", "terjadi kesalahan", 401);
+                    return $this->sendError("login gagal", "role bukan guru!!!", 401);
                 }
             }
         }
-        return $this->sendError("login gagagl", "terjadi kesalahan", 401);
+        return $this->sendError("login gagal", "Pengguna tidak dapat ditemuka!!!", 401);
     }
 
     public function doRegister(Request $req)
