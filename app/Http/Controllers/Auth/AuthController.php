@@ -41,12 +41,14 @@ class AuthController extends Controller
                 if ($user->role == 'admin') {
                     // return redirect(session('url')['intended']);
                     return redirect()->route('admin.dashboard');
-                } else {
+                } elseif($user->role == 'guru') {
                     return redirect()->route('teacher.dashboard');
+                } else {
+                    return back()->with('unauthorized', ['message' => 'anda tidak punya akses masuk!']);
                 }
             }
         }
-        return back()->with('401', 'Login Gagal, email atau password salah!');
+        return back()->with('unauthorized', ['message' => 'email atau password yang dimasukan salah!']);
     }
 
     public function register()

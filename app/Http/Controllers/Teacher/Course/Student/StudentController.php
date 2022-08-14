@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Teacher\Course\Student;
 
 use App\Http\Controllers\Controller;
+use App\Models\MasterScoring;
 use App\Models\TblClasses;
 use App\Models\TblCourses;
 use App\Models\TransCourses;
+use App\Models\TransScore;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -24,7 +26,7 @@ class StudentController extends Controller
             $students = User::where('role', self::ROLE_STUDENT)->whereNotIn('id', $studentIds)->where('class_id', $tblCourse->class_id)->get();
         }
         $classes = TblClasses::all();
-        return view('teacher.courses.students.student', ['transCourse' => $transCourse, 'classes' => $classes, 'students' => $students, 'course' => $tblCourse]);
+        return view('teacher.courses.students.student', ['class_id' => $tblCourse->class_id, 'course_id' => $req->course_id, 'transCourse' => $transCourse, 'classes' => $classes, 'students' => $students, 'course' => $tblCourse]);
     }
 
     public function store(Request $req)
@@ -35,6 +37,59 @@ class StudentController extends Controller
         $course->student_id = $req->student_id;
         $course->save();
         return back()->with('message', ['message' => 'tambah data berhasil!']);
+    }
+
+    public function syncStudentClass(Request $req)
+    {
+        $students = User::where('role', self::ROLE_STUDENT)->where('class_id', $req->class_id)->get();
+        $transCourses = TransCourses::where('class_id', $req->class_id)->where('course_id', $req->course_id)->with(['transScores'])->get();
+        foreach ($students as $student) {
+            $isFounded = false;
+            foreach ($transCourses as $course) {
+                if ($student->id == $course->student_id) {
+                    $isFounded = true;
+                }
+            }
+            if (!$isFounded) {
+                $newTransCourse = new TransCourses();
+                $newTransCourse->class_id = $req->class_id;
+                $newTransCourse->course_id = $req->course_id;
+                $newTransCourse->student_id = $student->id;
+                $newTransCourse->save();
+            }
+        }
+        $this->syncMasterScore($transCourses, $req->course_id);
+
+        return back()->with('message', ['message' => 'sinkronisasi berhasil!']);
+    }
+
+    public function syncMasterScore($transCourses, $courseId)
+    {
+        $masterScores = MasterScoring::where('tbl_course_id', $courseId)->get();
+        $transScoresNumbers = [];
+        foreach ($transCourses as $transCourse) {
+            foreach ($transCourse->transScores as $transScore) {
+                $transScoresNumbers[] = $transScore->number;
+                foreach ($masterScores as $masterScore) {
+                    if ((int)$masterScore->number == (int)$transScore->number) {
+                        $transScore->name = $masterScore->name;
+                        $transScore->percent = $masterScore->percent;
+                        $transScore->description = $masterScore->description;
+                        $transScore->save();
+                    }
+                }
+            }
+            $masterScoresWithTrans = MasterScoring::where('tbl_course_id', $courseId)->whereNotIn('number', $transScoresNumbers)->get();
+            foreach ($masterScoresWithTrans as $masterScore) {
+                $newTransScore = new TransScore();
+                $newTransScore->number = $masterScore->number;
+                $newTransScore->name = $masterScore->name;
+                $newTransScore->trans_course_id = $transCourse->id;
+                $newTransScore->percent = $masterScore->percent;
+                $newTransScore->description = $masterScore->description;
+                $newTransScore->save();
+            }
+        }
     }
 
     public function update(Request $req)

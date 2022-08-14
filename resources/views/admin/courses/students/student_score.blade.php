@@ -1,7 +1,7 @@
-@extends('teacher.layout.base')
+@extends('admin.layout.base')
 @section('navbar')
-    @include('teacher.layout.navbar')
-    @include('teacher.layout.toast')
+    @include('admin.layout.navbar')
+    @include('admin.layout.toast')
 @endsection
 
 @section('content')
@@ -15,7 +15,7 @@
                             /</span> Siswa</h5>
                 </div>
                 <div class="col-8 d-flex align-items-end flex-column">
-                    <form action="{{ route('teacher.course.student.sync') }}" method="POST">
+                    <form action="{{ route('admin.course.student.sync') }}" method="POST">
                         @csrf
                         <input type="hidden" name="class_id" value="{{ $class_id }}">
                         <input type="hidden" name="course_id" value="{{ $course_id }}">
@@ -32,11 +32,11 @@
                             <th>nama</th>
                             <th>Kelas</th>
                             <th>email</th>
-                            {{-- <th>Nilai Tugas</th>
+                            <th>Nilai Tugas</th>
                             <th>Nilai Quiz</th>
                             <th>Nilai UTS</th>
                             <th>Nilai UAS</th>
-                            <th>Nilai Akhir</th> --}}
+                            <th>Nilai Akhir</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -52,17 +52,23 @@
                                 </td>
                                 <td>{{ $item->student->class ? $item->student->class->name : null }}</td>
                                 <td>{{ $item->student->email }}</td>
-                                <td><a class="btn btn-primary"
-                                        href="{{ route('teacher.course.student.score.index', ['id' => $item->id]) }}">
-                                        <i class='bx bxs-user-badge bx-tada'></i> Update Nilai
-                                    </a></td>
-                                {{-- <td>{{ $item->assesment_score }}</td>
+                                <td>{{ $item->assesment_score }}</td>
                                 <td>{{ $item->quiz_score }}</td>
                                 <td>{{ $item->mid_score }}</td>
                                 <td>{{ $item->final_score }}</td>
                                 <td>{{ $item->total_score }}</td>
                                 <td>
-                                    <div class="dropdown">
+                                    <a class="btn btn-primary" href="javascript:void(0);" data-bs-toggle="modal"
+                                        data-bs-target="#modalUpdate" data-name="{{ $item->student->name }}"
+                                        data-email="{{ $item->student->email }}" data-id="{{ $item->id }}"
+                                        data-assesment_score="{{ $item->assesment_score }}"
+                                        data-quiz_score="{{ $item->quiz_score }}" data-mid_score="{{ $item->mid_score }}"
+                                        data-final_score="{{ $item->final_score }}"
+                                        data-total_score="{{ $item->total_score }}">
+                                        <i class="bx bx-edit-alt me-1">
+                                        </i>
+                                        Update</a>
+                                    {{-- <div class="dropdown">
                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
                                             data-bs-toggle="dropdown">
                                             <i class="bx bx-dots-vertical-rounded"></i>
@@ -79,9 +85,13 @@
                                                 <i class="bx bx-edit-alt me-1">
                                                 </i>
                                                 Edit</a>
+                                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
+                                                data-bs-target="#modalDelete" data-id="{{ $item->id }}">
+                                                <i class="bx bx-trash me-1"></i>Delete
+                                            </a>
                                         </div>
-                                    </div>
-                                </td> --}}
+                                    </div> --}}
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -103,7 +113,7 @@
                         <h5 class="modal-title" id="modalAdminTitle">Pratinjau Data</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{ route('teacher.course.student.update') }}" method="POST">
+                    <form action="{{ route('admin.course.student.update') }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="modal-body">
@@ -140,8 +150,8 @@
                                 </div>
                                 <div class="col mb-1">
                                     <label for="nameWithTitle" class="form-label">Nilai UAS</label>
-                                    <input type="text" id="update_final_score" name="final_score" class="form-control"
-                                        placeholder="Masukan Nilai Tugas" />
+                                    <input type="text" id="update_final_score" name="final_score"
+                                        class="form-control" placeholder="Masukan Nilai Tugas" />
                                 </div>
                             </div>
                             <div class="row g-2">
@@ -174,7 +184,7 @@
                         <h5 class="modal-title" id="modalAdminTitle">Tambah Data</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{ route('teacher.course.student.store') }}" method="POST">
+                    <form action="{{ route('admin.course.student.store') }}" method="POST">
                         @csrf
                         @method('POST')
                         <div class="modal-body">
@@ -223,7 +233,7 @@
                     <h5 class="modal-title" id="present_title">Siswa ini hadir ?</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="form_present_id" action="{{ route('teacher.course.student.present') }}" method="POST">
+                <form id="form_present_id" action="{{ route('admin.course.student.present') }}" method="POST">
                     @csrf
                     @method('POST')
                     <div class="modal-body">
@@ -261,7 +271,7 @@
                     <h5 class="modal-title" id="exampleModalLabel2">Tidak Hadir ?</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="form_unpresent_id" action="{{ route('teacher.course.student.present') }}" method="POST">
+                <form id="form_unpresent_id" action="{{ route('admin.course.student.present') }}" method="POST">
                     @csrf
                     @method('POST')
                     <div class="modal-body">
@@ -309,7 +319,7 @@
             $('#modalDelete').on('show.bs.modal', function(e) {
                 var id = $(e.relatedTarget).data('id');
                 $('#delete_id').val(id);
-                $('#form_delete_id').attr('action', "{{ route('teacher.course.student.delete') }}");
+                $('#form_delete_id').attr('action', "{{ route('admin.course.student.delete') }}");
             });
 
 

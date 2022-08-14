@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Teacher\Present\Student;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Utils;
 use App\Models\TblCourses;
 use App\Models\TransCourses;
 use App\Models\TransPresents;
@@ -11,6 +12,8 @@ use Illuminate\Http\Request;
 
 class PresentByClassController extends Controller
 {
+    use Utils;
+    
     public function index(Request $req)
     {
         $schedule = Carbon::now()->toDateString();

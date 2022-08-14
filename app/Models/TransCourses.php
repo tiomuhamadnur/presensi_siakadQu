@@ -47,4 +47,9 @@ class TransCourses extends Model
     {
         return $this->hasMany(TransPresents::class, 'trans_course_id')->orderBy('on', 'asc');
     }
+
+    public function transScores()
+    {
+        return $this->hasMany(TransScore::class, 'trans_course_id');
+    }
 }

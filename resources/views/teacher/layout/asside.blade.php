@@ -23,15 +23,19 @@
             </a>
         </li>
 
-        <li class="menu-header small text-uppercase"><span class="menu-header-text">Data Mata Pelajaran</span></li>
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Guru Pengampu</span></li>
         <li class="menu-item">
             <a href="{{ route('teacher.course.index') }}" class="menu-link">
                 <i class='menu-icon tf-icons bx bx-book-reader'></i>
                 <div data-i18n="Perfect Scrollbar">Mata Pelajaran Diampu</div>
             </a>
+            <a href="{{ route('teacher.course.score.index') }}" class="menu-link">
+                <i class='menu-icon tf-icon bx bx-edit-alt'></i>
+                <div data-i18n="Extended UI">Input Nilai</div>
+            </a>
         </li>
 
-        <li class="menu-header small text-uppercase"><span class="menu-header-text">Data Kelas</span></li>
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Guru Wali Kelas</span></li>
         <li class="menu-item">
             <a href="{{ route('teacher.class.index') }}" class="menu-link">
                 <i class='menu-icon tf-icons bx bx-book-reader'></i>
@@ -44,14 +48,6 @@
             <a href="{{ route('teacher.present.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-copy"></i>
                 <div data-i18n="Extended UI">Absensi</div>
-            </a>
-        </li>
-
-        <li class="menu-header small text-uppercase"><span class="menu-header-text">Data Nilai</span></li>
-        <li class="menu-item">
-            <a href="{{ route('teacher.course.index') }}" class="menu-link">
-                <i class='menu-icon tf-icon bx bx-edit-alt'></i>
-                <div data-i18n="Extended UI">Input Nilai</div>
             </a>
         </li>
     </ul>

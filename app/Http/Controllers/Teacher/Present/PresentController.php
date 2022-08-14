@@ -19,24 +19,9 @@ class PresentController extends Controller
 
     public function index(Request $req)
     {
-        $guiderClass = $this->tblClass->getClassGuider(Auth::user()->id)->get();
-        $classGuiderIds = [];
-        foreach ($guiderClass as $item) {
-            $classGuiderIds[] = $item->id;
-        }
-
         $courses = TblCourses::with(['teacher', 'class', 'transCourses.student'])
-            ->where('teacher_id', Auth::user()->id)
-            ->orWhereIn('class_id', $classGuiderIds);
-        $teachers = User::where('role', self::ROLE_TEACHER)->get();
-        $classes = TblClasses::all();
-        $teacher = null;
-        if ($req->teacher_id) {
-            $teacher = User::where('id', $req->teacher_id)->where('role', self::ROLE_TEACHER)->first();
-            $courses->where('teacher_id', $req->teacher_id);
-        }
-        $courses = $courses->paginate(50);
-        return view('teacher.present.present', ['courses' => $courses, 'teachers' => $teachers, 'classes' => $classes, 'teacher' => $teacher]);
+            ->where('teacher_id', Auth::user()->id)->paginate(50);
+        return view('teacher.present.present', ['courses' => $courses]);
     }
 
     public function getDayString($dayInt)

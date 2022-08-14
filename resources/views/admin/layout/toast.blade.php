@@ -44,6 +44,21 @@
     </div>
 @endif
 
+@if (session()->get('unauthorized'))
+    <div class="bs-toast toast toast-placement-ex m-2 fade bg-danger top-0 start-50 translate-middle-x show"
+        role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+        <div class="toast-header">
+            <i class="bx bx-bell me-2"></i>
+            <div class="me-auto fw-semibold"></div>
+            <small></small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            {{ session()->get('unauthorized')['message'] }}
+        </div>
+    </div>
+@endif
+
 @if (session()->get('404'))
     <div class="bs-toast toast toast-placement-ex m-2 fade bg-danger top-0 start-50 translate-middle-x show"
         role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">

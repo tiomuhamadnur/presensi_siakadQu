@@ -54,6 +54,7 @@
 
 <body>
     <!-- Content -->
+    @include('admin.layout.toast')
 
     <div class="container-xxl">
         <div class="authentication-wrapper authentication-basic container-p-y">
@@ -103,12 +104,12 @@
                             </div>
                         </form>
 
-                        <p class="text-center">
+                        {{-- <p class="text-center">
                             <span>belum punya akun?</span>
                             <a href="{{route('register')}}">
                                 <span>Daftar</span>
                             </a>
-                        </p>
+                        </p> --}}
                     </div>
                 </div>
                 <!-- /Register -->

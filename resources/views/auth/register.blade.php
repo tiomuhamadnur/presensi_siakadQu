@@ -66,7 +66,7 @@
 
   <body>
     <!-- Content -->
-
+    @include('admin.layout.toast')
     <div class="container-xxl">
       <div class="authentication-wrapper authentication-basic container-p-y">
         <div class="authentication-inner">
