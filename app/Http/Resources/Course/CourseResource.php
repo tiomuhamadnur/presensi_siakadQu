@@ -17,12 +17,10 @@ class CourseResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->course->id,
-            'name' => $this->course->name,
-            'day' => $this->getDayRedaction((int)$this->day),
-            'time' => $this->time,
+            'id' => $this->id,
+            'name' => $this->name,
             'class' => $this->class,
-            'student_count' => $this->course->transCourses->count()
+            'student_count' => $this->transCourses->count()
         ];
     }
 }
