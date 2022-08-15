@@ -31,23 +31,43 @@ class PresentByClassController extends Controller
 
     public function doPresent(Request $req)
     {
-
         $text = 'Assalamualaikum Bpk/i, ananda ';
         $time = Carbon::now()->isoFormat('dddd, H:i:s D MMMM Y');
-        foreach ($req->ids as $transCourseId) {
-            $transPresent = TransPresents::where('trans_course_id', $transCourseId)->with(['transCourse.student'])->first();
-            if (!$transPresent) {
-                $transPresent = new TransPresents();
+        $ids = $req->ids;
+        $transPresents = TransPresents::whereIn('trans_course_id', $ids)->get();
+        if (count($transPresents) > 0) {
+            foreach ($transPresents as $transPresent) {
+                $transCourseId = $transPresent->trans_course_id;
+                $date = Carbon::parse($transPresent->on)->toDateString();
+                $dateOn = Carbon::parse($req->schedule)->toDateString();
+                if ($date != $dateOn) {
+                    $transPresent = new TransPresents();
+                    $transPresent->trans_course_id = $transCourseId;
+                    $transPresent->status = $req->status;
+                    $transPresent->description = $this->getDescPresent($req->status);
+                    $transPresent->on = $req->schedule;
+                    $transPresent->save();
+                } else {
+                    $transPresent->trans_course_id = $transCourseId;
+                    $transPresent->status = $req->status;
+                    $transPresent->description = $this->getDescPresent($req->status);
+                    $transPresent->on = $req->schedule;
+                    $transPresent->save();
+                }
+
+                $student = $transPresent->transCourse->student;
+                $this->sendWa("$text $student->name pada hari ini $time " .  $this->getDescPresent($req->status) . "\nKeterangan: $transPresent->description", $student->phone);
             }
-
-            $transPresent->trans_course_id = $transCourseId;
-            $transPresent->status = $req->status;
-            $transPresent->description = $this->getDescPresent($req->status);
-            $transPresent->on = $req->schedule;
-            $transPresent->save();
-
-            $student = $transPresent->transCourse->student;
-            $this->sendWa("$text $student->name pada hari ini $time " .  $this->getDescPresent($req->status). "\nKeterangan: $transPresent->description", $student->phone);
+        } else {
+            $transCourses = TransCourses::whereIn('id', $req->ids)->get();
+            foreach ($transCourses as $transCourse) {
+                $transPresent = new TransPresents();
+                $transPresent->trans_course_id = $transCourse->id;
+                $transPresent->status = $req->status;
+                $transPresent->description = $this->getDescPresent($req->status);
+                $transPresent->on = $req->schedule;
+                $transPresent->save();
+            }
         }
         return back()->with('message', ['message' => 'presensi berhasil!']);
     }

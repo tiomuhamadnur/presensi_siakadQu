@@ -52,10 +52,12 @@
                                 </td>
                                 <td>{{ $item->student->class ? $item->student->class->name : null }}</td>
                                 <td>{{ $item->student->email }}</td>
-                                <td><a class="btn btn-primary"
+                                <td>
+                                    <a class="btn btn-primary"
                                         href="{{ route('teacher.course.student.score.index', ['id' => $item->id]) }}">
                                         <i class='bx bxs-user-badge bx-tada'></i> Update Nilai
-                                    </a></td>
+                                    </a>
+                                </td>
                                 {{-- <td>{{ $item->assesment_score }}</td>
                                 <td>{{ $item->quiz_score }}</td>
                                 <td>{{ $item->mid_score }}</td>

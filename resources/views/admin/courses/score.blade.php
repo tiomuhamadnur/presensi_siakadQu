@@ -99,9 +99,13 @@
                                 <td>{{ $item->class->name }}</td>
                                 <td>
                                     <a class="btn btn-primary"
-                                                href="{{ route('admin.course.student.index', ['course_id' => $item->id]) }}">
-                                                <i class='bx bxs-user-badge bx-tada'></i> Update Nilai
-                                            </a>
+                                        href="{{ route('admin.course.student.index', ['course_id' => $item->id]) }}">
+                                        <i class='bx bxs-user-badge bx-tada'></i> Update Nilai
+                                    </a>
+                                    <a class="btn btn-success"
+                                        href="{{ route('admin.course.scoring.index', ['course_id' => $item->id]) }}">
+                                        <i class='bx bxs-edit-alt bx-tada'></i> Template Penilaian
+                                    </a>
                                     {{-- <div class="dropdown">
                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
                                             data-bs-toggle="dropdown">
@@ -125,7 +129,7 @@
                                                 data-bs-target="#modalDelete" data-id="{{ $item->id }}">
                                                 <i class="bx bx-trash me-1"></i>Delete
                                             </a> --}}
-                                        {{-- </div> --}}
+                                    {{-- </div> --}}
                                     {{-- </div> --}}
                                 </td>
                             </tr>
@@ -158,7 +162,7 @@
                                     <label for="" class="form-label">Nama Matpel</label>
                                     <input type="text" id="update_name" class="form-control" name="name"
                                         placeholder="Masukan Nama Mata Pelajaran" />
-                                        <input type="hidden" id="update_id" class="form-control" name="id"/>
+                                    <input type="hidden" id="update_id" class="form-control" name="id" />
                                 </div>
                                 <div class="col mb-1">
                                     <label for="" class="form-label">Pengampu</label>

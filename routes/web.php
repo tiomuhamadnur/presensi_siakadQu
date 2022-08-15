@@ -51,7 +51,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin'], 'name
         $route->post('/', 'CourseController@store')->name('admin.course.store');
         $route->put('/', 'CourseController@update')->name('admin.course.update');
         $route->delete('/', 'CourseController@delete')->name('admin.course.delete');
-        
+
         //Score
         $route->group(['prefix' => 'score'], function ($route) {
             $route->get('/', 'ScoreController@index')->name('admin.course.score.index');
@@ -68,20 +68,32 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin'], 'name
             $route->delete('/', 'StudentController@delete')->name('admin.course.student.delete');
             $route->post('sync', 'StudentController@syncStudentClass')->name('admin.course.student.sync');
 
-            //Score
-            $route->group(['prefix' => 'score'], function ($route) {
-                $route->get('/', 'StudentScoreController@index')->name('admin.course.student.score.index');
-                $route->post('/', 'StudentScoreController@store')->name('admin.course.student.score.store');
-                $route->put('/', 'StudentScoreController@update')->name('admin.course.student.score.update');
-                $route->delete('/', 'StudentScoreController@delete')->name('admin.course.student.score.delete');
-            });
+            //input score
+            $route->get('input-score', 'StudentScoreController@index')->name('admin.course.student.score.index');
+            $route->post('input-score', 'StudentScoreController@store')->name('admin.course.student.score.store');
+            $route->put('input-score', 'StudentScoreController@update')->name('admin.course.student.score.update');
 
             //PRESENT
             $route->post('present', 'StudentPresentController@present')->name('admin.course.student.present');
             $route->put('present', 'StudentPresentController@presentUpdate')->name('admin.course.student.present.update');
             // $route->post('unpresent', 'StudentPresentController@unPresent')->name('admin.course.student.unpresent');
             // $route->put('unpresent', 'StudentPresentController@unPresentUpdate')->name('admin.course.student.unpresent.update');
-            
+        });
+
+        //Score
+        $route->group(['prefix' => 'score'], function ($route) {
+            $route->get('/', 'ScoreController@index')->name('admin.course.score.index');
+            $route->post('/', 'ScoreController@store')->name('admin.course.score.store');
+            $route->put('/', 'ScoreController@update')->name('admin.course.score.update');
+            $route->delete('/', 'ScoreController@delete')->name('admin.course.score.delete');
+        });
+
+        //Scoring
+        $route->group(['prefix' => 'master-scoring'], function ($route) {
+            $route->get('/', 'CourseScoringController@index')->name('admin.course.scoring.index');
+            $route->post('/', 'CourseScoringController@store')->name('admin.course.scoring.store');
+            $route->put('/', 'CourseScoringController@update')->name('admin.course.scoring.update');
+            $route->delete('/', 'CourseScoringController@delete')->name('admin.course.scoring.delete');
         });
     });
 
@@ -126,8 +138,8 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'role:guru'], 'nam
         $route->delete('/', 'ClassController@delete')->name('teacher.class.delete');
     });
 
-     //Student
-     $route->group(['prefix' => 'student', 'namespace' => 'Student'], function ($route) {
+    //Student
+    $route->group(['prefix' => 'student', 'namespace' => 'Student'], function ($route) {
         $route->get('/', 'StudentController@index')->name('teacher.student.index');
         $route->post('/', 'StudentController@store')->name('teacher.student.store');
         $route->put('/', 'StudentController@update')->name('teacher.student.update');
@@ -160,7 +172,7 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'role:guru'], 'nam
             $route->put('present', 'StudentPresentController@presentUpdate')->name('teacher.course.student.present.update');
             // $route->post('unpresent', 'StudentPresentController@unPresent')->name('teacher.course.student.unpresent');
             // $route->put('unpresent', 'StudentPresentController@unPresentUpdate')->name('teacher.course.student.unpresent.update');
-            
+
         });
 
         //Score
@@ -171,12 +183,12 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'role:guru'], 'nam
             $route->delete('/', 'ScoreController@delete')->name('teacher.course.score.delete');
         });
 
-         //Scoring
-         $route->group(['prefix' => 'master-scoring'], function ($route) {
+        //Scoring
+        $route->group(['prefix' => 'master-scoring'], function ($route) {
             $route->get('/', 'CourseScoringController@index')->name('teacher.course.scoring.index');
             $route->post('/', 'CourseScoringController@store')->name('teacher.course.scoring.store');
             $route->put('/', 'CourseScoringController@update')->name('teacher.course.scoring.update');
-            $route->delete('/', 'CourseScoringController@delete')->name('teacher.course.scoring.delete'); 
+            $route->delete('/', 'CourseScoringController@delete')->name('teacher.course.scoring.delete');
         });
     });
 

@@ -32,11 +32,6 @@
                             <th>nama</th>
                             <th>Kelas</th>
                             <th>email</th>
-                            <th>Nilai Tugas</th>
-                            <th>Nilai Quiz</th>
-                            <th>Nilai UTS</th>
-                            <th>Nilai UAS</th>
-                            <th>Nilai Akhir</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -52,13 +47,9 @@
                                 </td>
                                 <td>{{ $item->student->class ? $item->student->class->name : null }}</td>
                                 <td>{{ $item->student->email }}</td>
-                                <td>{{ $item->assesment_score }}</td>
-                                <td>{{ $item->quiz_score }}</td>
-                                <td>{{ $item->mid_score }}</td>
-                                <td>{{ $item->final_score }}</td>
-                                <td>{{ $item->total_score }}</td>
+                                
                                 <td>
-                                    <a class="btn btn-primary" href="javascript:void(0);" data-bs-toggle="modal"
+                                    {{-- <a class="btn btn-primary" href="javascript:void(0);" data-bs-toggle="modal"
                                         data-bs-target="#modalUpdate" data-name="{{ $item->student->name }}"
                                         data-email="{{ $item->student->email }}" data-id="{{ $item->id }}"
                                         data-assesment_score="{{ $item->assesment_score }}"
@@ -67,7 +58,11 @@
                                         data-total_score="{{ $item->total_score }}">
                                         <i class="bx bx-edit-alt me-1">
                                         </i>
-                                        Update</a>
+                                        Update</a> --}}
+                                        <a class="btn btn-primary"
+                                        href="{{ route('admin.course.student.score.index', ['id' => $item->id]) }}">
+                                        <i class='bx bxs-user-badge bx-tada'></i> Update Nilai
+                                    </a>
                                     {{-- <div class="dropdown">
                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
                                             data-bs-toggle="dropdown">
