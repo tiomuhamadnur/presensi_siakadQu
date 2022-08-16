@@ -20,7 +20,7 @@ class CourseController extends Controller
     use Utils;
     public function index(Request $req)
     {
-        $courses = TblCourses::where('teacher_id', Auth::user()->id)->with(['class', 'transCourse'])->paginate(20);
+        $courses = TblCourses::where('teacher_id', Auth::user()->id)->with(['class', 'transCourses'])->paginate(20);
         return $this->sendResponse(CourseResource::collection($courses), 'berhasil mengambil data course');
     }
 
@@ -62,7 +62,11 @@ class CourseController extends Controller
             return $this->sendError($validator->getMessageBag(), null, 422);
         }
 
-        $on = Carbon::now()->toDateString();
+        if ($req->on) {
+            $on = $req->on;
+        } else {
+            $on = Carbon::now()->toDateString();
+        }
         $students = TransCourses::where('trans_courses.class_id', $req->class_id)
             ->where('course_id', $req->course_id)->with(['student', 'course', 'present' => function ($q) use ($on) {
                 if ($on) {
