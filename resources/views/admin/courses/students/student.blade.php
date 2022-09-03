@@ -32,6 +32,7 @@
                             <th>nama</th>
                             <th>Kelas</th>
                             <th>email</th>
+                            <th>Kehadiran</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -47,7 +48,7 @@
                                 </td>
                                 <td>{{ $item->student->class ? $item->student->class->name : null }}</td>
                                 <td>{{ $item->student->email }}</td>
-                                
+                                <td></td>
                                 <td>
                                     {{-- <a class="btn btn-primary" href="javascript:void(0);" data-bs-toggle="modal"
                                         data-bs-target="#modalUpdate" data-name="{{ $item->student->name }}"

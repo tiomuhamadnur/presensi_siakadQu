@@ -10,9 +10,16 @@
         <div class="card">
             <div class="row card-header">
                 <div class="col-4 d-flex justify-content-start flex-column">
-                    <h5 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Matpel
-                            {{ $course ? $course->name : null }}
-                            /</span> Siswa</h5>
+                    <h6 class="fw-bold py-3 mb-4">
+                        <span class="text-muted fw-light">
+                            <a href="{{ route('teacher.class.index') }}">Kelas
+                                {{ $class ? $class->name : null }}</a>
+                            /
+                        </span>
+                        <span class="text-muted fw-light"><a href="{{ route('teacher.course.index') }}">Matpel
+                                {{ $course ? $course->name : null }}</a>
+                            /</span> Siswa
+                    </h6>
                 </div>
                 <div class="col-8 d-flex align-items-end flex-column">
                     <form action="{{ route('teacher.course.student.sync') }}" method="POST">
@@ -32,12 +39,11 @@
                             <th>nama</th>
                             <th>Kelas</th>
                             <th>email</th>
-                            {{-- <th>Nilai Tugas</th>
-                            <th>Nilai Quiz</th>
-                            <th>Nilai UTS</th>
-                            <th>Nilai UAS</th>
-                            <th>Nilai Akhir</th> --}}
-                            <th>Actions</th>
+                            <th>Nilai Akhir</th>
+                            <th>Presensi</th>
+                            @if ($is_editor)
+                                <th>Actions</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
@@ -52,12 +58,27 @@
                                 </td>
                                 <td>{{ $item->student->class ? $item->student->class->name : null }}</td>
                                 <td>{{ $item->student->email }}</td>
-                                <td>
-                                    <a class="btn btn-primary"
-                                        href="{{ route('teacher.course.student.score.index', ['id' => $item->id]) }}">
-                                        <i class='bx bxs-user-badge bx-tada'></i> Update Nilai
-                                    </a>
-                                </td>
+                                @php
+                                    $totalScore = 0;
+                                    foreach ($item->transScores as $key => $value) {
+                                        $totalScore = $totalScore + ($value->score * $value->percent) / 100;
+                                    }
+                                @endphp
+                                <td>{{ $totalScore }}</td>
+                                <td>({{ $item->presents->where('status', 1)->count() }} Hadir |
+                                    {{ $item->presents->where('status', 0)->count() }} Absen |
+                                    {{ $item->presents->where('status', 3)->count() }} Izin |
+                                    {{ $item->presents->whereNotIn('status', [0, 1, 3])->count() }} Sakit) /
+                                    {{ $item->presents->count() }} Pertemuan</td>
+                                @if ($is_editor)
+                                    <td>
+                                        <a class="btn btn-primary"
+                                            href="{{ route('teacher.course.student.score.index', ['id' => $item->id]) }}">
+                                            <i class='bx bxs-user-badge bx-tada'></i> Detail Nilai
+                                        </a>
+                                        <a class="btn btn-primary" href="{{route('teacher.present.history.index', ['trans_course_id' => $item->id])}}"><i class='bx bx-history'></i> Kehadiran</a>
+                                    </td>
+                                @endif
                                 {{-- <td>{{ $item->assesment_score }}</td>
                                 <td>{{ $item->quiz_score }}</td>
                                 <td>{{ $item->mid_score }}</td>

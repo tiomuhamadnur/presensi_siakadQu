@@ -10,23 +10,31 @@ use App\Models\TransCourses;
 use App\Models\TransScore;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
     public function index(Request $req)
     {
-        $transCourse = TransCourses::where('course_id', $req->course_id)->with(['course', 'student', 'present'])->paginate(50);
+        $transCourse = TransCourses::where('course_id', $req->course_id)->with(['course', 'student', 'presents', 'transScores'])->paginate(50);
         $studentIds = [];
         foreach ($transCourse as $item) {
             $studentIds[] = $item->student_id;
         }
-        $tblCourse = TblCourses::find($req->course_id);
+        $tblCourse = TblCourses::where('id', $req->course_id)->with(['class'])->first();
+        $isEditor = true;
         $students = [];
+        $class = null;
+        $userId = Auth::user()->id;
         if ($tblCourse) {
+            $class = $tblCourse->class;
+            if ($tblCourse->class->teacher_guider_id == $userId && $tblCourse->teacher_id != $userId) {
+                $isEditor = false;
+            }
             $students = User::where('role', self::ROLE_STUDENT)->whereNotIn('id', $studentIds)->where('class_id', $tblCourse->class_id)->get();
         }
         $classes = TblClasses::all();
-        return view('teacher.courses.students.student', ['class_id' => $tblCourse->class_id, 'course_id' => $req->course_id, 'transCourse' => $transCourse, 'classes' => $classes, 'students' => $students, 'course' => $tblCourse]);
+        return view('teacher.courses.students.student', ['class' => $class, 'class_id' => $tblCourse->class_id, 'is_editor' => $isEditor, 'course_id' => $req->course_id, 'transCourse' => $transCourse, 'classes' => $classes, 'students' => $students, 'course' => $tblCourse]);
     }
 
     public function store(Request $req)
