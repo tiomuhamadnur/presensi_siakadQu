@@ -87,7 +87,7 @@ class CourseController extends Controller
             return $this->sendError($validator->getMessageBag(), null, 422);
         }
         $transPresents = TransPresents::where('trans_course_id', $req->trans_course_id);
-        $req->on ?  $transPresents->where('on', $req->on) : null;
+        $req->schedule ?  $transPresents->where('on', $req->schedule) : null;
         $transPresents = $transPresents->with(['transCourse.student', 'transCourse.course'])->get();
         return $this->sendResponse($transPresents, 'success');
     }
