@@ -112,7 +112,7 @@ class CourseController extends Controller
     {
         $validator = Validator::make($req->all(), [
             'ids' => 'required|array',
-            'status' => 'required',
+            'status' => 'required|array',
             'on' => 'required'
         ]);
 
@@ -123,37 +123,46 @@ class CourseController extends Controller
         $text = 'Assalamualaikum Bpk/i, ananda ';
         $time = Carbon::now()->isoFormat('dddd, H:i:s D MMMM Y');
         $ids = $req->ids;
-        $transPresents = TransPresents::whereIn('trans_course_id', $ids)->get();
+        $idsString = null;
+        foreach($ids as $key => $id) {
+            if($key == 0) {
+                $idsString = "$id";
+            } else {
+                $idsString = $idsString . ",$id";
+            }
+        }
+        $transPresents = TransPresents::whereIn('trans_course_id', $ids)
+            ->orderByRaw('FIELD (trans_course_id, ' . implode(', ', $ids) . ') ASC')->get();
         if (count($transPresents) > 0) {
-            foreach ($transPresents as $transPresent) {
+            foreach ($transPresents as $key => $transPresent) {
                 $transCourseId = $transPresent->trans_course_id;
                 $date = Carbon::parse($transPresent->on)->toDateString();
                 $dateOn = Carbon::parse($req->on)->toDateString();
                 if ($date != $dateOn) {
                     $transPresent = new TransPresents();
                     $transPresent->trans_course_id = $transCourseId;
-                    $transPresent->status = $req->status;
-                    $transPresent->description = $this->getDescPresent($req->status);
+                    $transPresent->status = $req->status[$key];
+                    $transPresent->description = $this->getDescPresent($req->status[$key]);
                     $transPresent->on = $req->on;
                     $transPresent->save();
                 } else {
                     $transPresent->trans_course_id = $transCourseId;
-                    $transPresent->status = $req->status;
-                    $transPresent->description = $this->getDescPresent($req->status);
+                    $transPresent->status = $req->status[$key];
+                    $transPresent->description = $this->getDescPresent($req->status[$key]);
                     $transPresent->on = $req->on;
                     $transPresent->save();
                 }
 
                 $student = $transPresent->transCourse->student;
-                $this->sendWa("$text $student->name pada hari ini $time " .  $this->getDescPresent($req->status) . "\nKeterangan: $transPresent->description", $student->phone);
+                $this->sendWa("$text $student->name pada hari ini $time " .  $this->getDescPresent($req->status[$key]) . "\nKeterangan: $transPresent->description", $student->phone);
             }
         } else {
             $transCourses = TransCourses::whereIn('id', $req->ids)->get();
-            foreach ($transCourses as $transCourse) {
+            foreach ($transCourses as $key => $transCourse) {
                 $transPresent = new TransPresents();
                 $transPresent->trans_course_id = $transCourse->id;
-                $transPresent->status = $req->status;
-                $transPresent->description = $this->getDescPresent($req->status);
+                $transPresent->status = $req->status[$key];
+                $transPresent->description = $this->getDescPresent($req->status[$key]);
                 $transPresent->on = $req->on;
                 $transPresent->save();
             }
