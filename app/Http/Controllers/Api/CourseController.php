@@ -9,7 +9,6 @@ use App\Http\Resources\Course\StudentResource;
 use App\Models\TblCourses;
 use App\Models\TransCourses;
 use App\Models\TransPresents;
-use App\Models\TransSchedule;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -87,7 +86,7 @@ class CourseController extends Controller
             return $this->sendError($validator->getMessageBag(), null, 422);
         }
         $transPresents = TransPresents::where('trans_course_id', $req->trans_course_id);
-        $req->schedule ?  $transPresents->where('on', $req->schedule) : null;
+        $req->on ?  $transPresents->where('on', $req->on) : null;
         $transPresents = $transPresents->with(['transCourse.student', 'transCourse.course'])->get();
         return $this->sendResponse($transPresents, 'success');
     }
@@ -97,7 +96,7 @@ class CourseController extends Controller
         $validator = Validator::make($req->all(), [
             'ids' => 'required|array',
             'status' => 'required',
-            'schedule' => 'required'
+            'on' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -112,19 +111,19 @@ class CourseController extends Controller
             foreach ($transPresents as $transPresent) {
                 $transCourseId = $transPresent->trans_course_id;
                 $date = Carbon::parse($transPresent->on)->toDateString();
-                $dateOn = Carbon::parse($req->schedule)->toDateString();
+                $dateOn = Carbon::parse($req->on)->toDateString();
                 if ($date != $dateOn) {
                     $transPresent = new TransPresents();
                     $transPresent->trans_course_id = $transCourseId;
                     $transPresent->status = $req->status;
                     $transPresent->description = $this->getDescPresent($req->status);
-                    $transPresent->on = $req->schedule;
+                    $transPresent->on = $req->on;
                     $transPresent->save();
                 } else {
                     $transPresent->trans_course_id = $transCourseId;
                     $transPresent->status = $req->status;
                     $transPresent->description = $this->getDescPresent($req->status);
-                    $transPresent->on = $req->schedule;
+                    $transPresent->on = $req->on;
                     $transPresent->save();
                 }
 
@@ -138,7 +137,7 @@ class CourseController extends Controller
                 $transPresent->trans_course_id = $transCourse->id;
                 $transPresent->status = $req->status;
                 $transPresent->description = $this->getDescPresent($req->status);
-                $transPresent->on = $req->schedule;
+                $transPresent->on = $req->on;
                 $transPresent->save();
             }
         }
