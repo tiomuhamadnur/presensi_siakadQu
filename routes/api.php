@@ -29,4 +29,5 @@ Route::middleware(['auth:sanctum'])->group( function () {
     Route::get('course-by-class', [CourseController::class, 'presentByClass']);
     Route::post('do-present', [CourseController::class, 'doPresent']);
     Route::get('history-present', [CourseController::class, 'presentHistory']);
+    Route::get('history-present-course', [CourseController::class, 'presentHistoryCourse']);
 });

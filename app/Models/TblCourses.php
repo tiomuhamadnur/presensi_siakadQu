@@ -30,6 +30,12 @@ class TblCourses extends Model
         return $this->belongsTo(User::class, 'teacher_id')->where('role', $controller::ROLE_TEACHER);
     }
 
+    public function teacherGuider()
+    {
+        $controller = new Controller();
+        return $this->belongsTo(User::class, 'teacher_guider_id')->where('role', $controller::ROLE_TEACHER);
+    }
+
     public function transCourses()
     {
         return $this->hasMany(TransCourses::class, 'course_id');

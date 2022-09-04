@@ -14,7 +14,7 @@ class StudentResource extends JsonResource
      */
     public function toArray($request)
     {
-        $present = [];
+        $present = null;
         if ($this->present) {
             $present = [
                 'id' => $this->present->id,

@@ -19,7 +19,7 @@ class CourseController extends Controller
     use Utils;
     public function index(Request $req)
     {
-        $courses = TblCourses::where('teacher_id', Auth::user()->id)->with(['class', 'transCourses'])->paginate(20);
+        $courses = TblCourses::where('teacher_id', Auth::user()->id)->with(['class.teacherGuider', 'transCourses'])->paginate(20);
         return $this->sendResponse(CourseResource::collection($courses), 'berhasil mengambil data course');
     }
 
@@ -89,6 +89,23 @@ class CourseController extends Controller
         $req->on ?  $transPresents->where('on', $req->on) : null;
         $transPresents = $transPresents->with(['transCourse.student', 'transCourse.course'])->get();
         return $this->sendResponse($transPresents, 'success');
+    }
+
+    public function presentHistoryCourse(Request $req)
+    {
+        $validator = Validator::make($req->all(), [
+            'course_id' => 'required',
+            'on' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError($validator->getMessageBag(), null, 422);
+        }
+        $on = $req->on;
+        $courses = TblCourses::where('id', $req->course_id)->with(['transCourses.student', 'transCourses.present' => function ($q) use ($on) {
+            $q->where('on', $on);
+        }])->get();
+        return $this->sendResponse($courses, 'success');
     }
 
     public function doPresent(Request $req)
