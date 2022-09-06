@@ -124,8 +124,8 @@ class CourseController extends Controller
         $time = Carbon::now()->isoFormat('dddd, H:i:s D MMMM Y');
         $ids = $req->ids;
         $idsString = null;
-        foreach($ids as $key => $id) {
-            if($key == 0) {
+        foreach ($ids as $key => $id) {
+            if ($key == 0) {
                 $idsString = "$id";
             } else {
                 $idsString = $idsString . ",$id";

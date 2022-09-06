@@ -41,6 +41,8 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('sneat/assets/js/config.js') }}"></script>
 
+    @yield('custom_css')
+
     <style>
         .table-min-height {
             min-height: 500px !important;
@@ -66,8 +68,7 @@
                 <div class="content-wrapper">
                     {{-- JQuery --}}
                         <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
-                                                integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous">
-                        </script>
+                            integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
                     {{-- End JQuery --}}
                     <!-- Content -->
                         @yield('content')
@@ -153,13 +154,15 @@
 
 
       {{-- CKEDITOR --}}
-      <script type="text/javascript" src="/js/ckfinder/ckfinder.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js" integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn" crossorigin="anonymous"></script>
+      {{-- <script type="text/javascript" src="/js/ckfinder/ckfinder.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js" integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn" crossorigin="anonymous"></script> --}}
 
-    <script>
+    {{-- <script>
         CKFinder.config({
             connectorPath: '/ckfinder/connector'
         });
-    </script>
+    </script> --}}
+
+    @yield('custom_js')
    </body>
 </html>
