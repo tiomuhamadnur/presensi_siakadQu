@@ -1,4 +1,20 @@
 @extends('teacher.layout.base')
+@php
+    $className = $class ? " - " . $class->name : null;
+    $title = $course ? $course->name . $className : null
+@endphp
+@section('title', $title)
+
+@section('custom_css')
+    <!-- datatable style -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+    <!-- bootstrap 4 css  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <!-- css tambahan  -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css">
+@endsection
+
 @section('navbar')
     @include('teacher.layout.navbar')
     @include('teacher.layout.toast')
@@ -32,7 +48,7 @@
             </div>
 
             <div class="table-responsive text-nowrap table-min-height">
-                <table class="table">
+                <table class="table" id="table_id">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -65,11 +81,14 @@
                                     }
                                 @endphp
                                 <td>{{ $totalScore }}</td>
-                                <td>({{ $item->presents->where('status', 1)->count() }} Hadir |
+                                <td>
+                                    {{ $item->presents->where('status', 1)->count() }} Hadir |
                                     {{ $item->presents->where('status', 0)->count() }} Absen |
                                     {{ $item->presents->where('status', 3)->count() }} Izin |
-                                    {{ $item->presents->whereNotIn('status', [0, 1, 3])->count() }} Sakit) /
-                                    {{ $item->presents->count() }} Pertemuan</td>
+                                    {{ $item->presents->whereNotIn('status', [0, 1, 3])->count() }} Sakit
+                                    {{-- / --}}
+                                    {{-- {{ $item->presents->count() }} Pertemuan --}}
+                                </td>
                                 @if ($is_editor)
                                     <td>
                                         <a class="btn btn-primary"
@@ -377,6 +396,34 @@
 
             });
 
+        });
+    </script>
+@endsection
+
+@section('custom_js')
+    <!-- jquery -->
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <!-- jquery datatable -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
+    <!-- script tambahan  -->
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
+
+    <!-- fungsi datatable -->
+    <script>
+        $(document).ready(function() {
+            $('#table_id').DataTable({
+                // script untuk membuat export data 
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            })
         });
     </script>
 @endsection

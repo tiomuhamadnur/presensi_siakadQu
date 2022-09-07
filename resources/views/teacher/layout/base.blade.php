@@ -16,10 +16,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>Presensi</title>
+    <title>@yield('title')</title>
     <meta name="description" content="" />
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/logo.jpeg') }}" />
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -47,6 +47,7 @@
         }
 
     </style>
+    @yield('custom_css')
 
 </head>
 
@@ -66,8 +67,7 @@
                 <div class="content-wrapper">
                     {{-- JQuery --}}
                         <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
-                                                integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous">
-                        </script>
+                            integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
                     {{-- End JQuery --}}
                     <!-- Content -->
                         @yield('content')
@@ -153,13 +153,15 @@
 
 
       {{-- CKEDITOR --}}
-      <script type="text/javascript" src="/js/ckfinder/ckfinder.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js" integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn" crossorigin="anonymous"></script>
-
-    <script>
+      {{-- <script type="text/javascript" src="/js/ckfinder/ckfinder.js"></script> --}}
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"
+          integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn" crossorigin="anonymous">
+      </script>
+{{-- <script>
         CKFinder.config({
             connectorPath: '/ckfinder/connector'
         });
-    </script>
+    </script> --}}
+    @yield('custom_js')
    </body>
 </html>
