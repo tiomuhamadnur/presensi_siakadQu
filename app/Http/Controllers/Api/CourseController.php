@@ -19,6 +19,7 @@ class CourseController extends Controller
     use Utils;
     public function index(Request $req)
     {
+        return "cek";
         $courses = TblCourses::where('teacher_id', Auth::user()->id)->with(['class.teacherGuider', 'transCourses'])->paginate(20);
         return CourseResource::collection($courses);
     }
