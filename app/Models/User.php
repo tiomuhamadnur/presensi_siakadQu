@@ -61,6 +61,12 @@ class User extends Authenticatable
     {
         return $this->hasOne(TblClasses::class, 'teacher_guider_id');
     }
+
+    public function classGuidings()
+    {
+        return $this->hasMany(TblClasses::class, 'teacher_guider_id');
+    }
+
     public function course()
     {
         return $this->hasOne(TblCourses::class, 'teacher_guider_id');

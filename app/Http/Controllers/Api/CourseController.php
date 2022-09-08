@@ -20,7 +20,7 @@ class CourseController extends Controller
     public function index(Request $req)
     {
         $courses = TblCourses::where('teacher_id', Auth::user()->id)->with(['class.teacherGuider', 'transCourses'])->paginate(20);
-        return $this->sendResponse(CourseResource::collection($courses), 'berhasil mengambil data course');
+        return CourseResource::collection($courses);
     }
 
     public function getDayNumber($plain)

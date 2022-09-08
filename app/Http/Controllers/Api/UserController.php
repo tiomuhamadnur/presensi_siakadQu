@@ -14,6 +14,7 @@ class UserController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return $this->sendResponse($user, 'berhasil mengambil data user');
+        $tblUser = User::where('id', $user->id)->with(['classGuidings'])->first();
+        return $this->sendResponse($tblUser, 'berhasil mengambil data user');
     }
 }
