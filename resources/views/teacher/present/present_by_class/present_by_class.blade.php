@@ -1,7 +1,7 @@
 @extends('teacher.layout.base')
 
 @php
-    $courseName = $course ? $course->name : null
+    $courseName = $course ? $course->name : null;
     $title = "Absensi-" . $courseName;
 @endphp
 @section('title', $title)
