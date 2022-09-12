@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
@@ -49,5 +50,19 @@ class Controller extends BaseController
             $response['data'] = $errorMessages;
         }
         return response()->json($response, $code);
+    }
+
+    public function uploadFile(Request $req, $reqName, $path, $isLoop = false)
+    {
+        $file = null;
+        if($isLoop) {
+            $file = $reqName;
+        } else {
+            $file = $req->file($reqName);
+        }
+        
+        $filename = date('YmdHi');
+        $file->move(public_path($path), $filename);
+        return "$path/$filename";
     }
 }

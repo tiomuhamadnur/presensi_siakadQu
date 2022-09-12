@@ -35,7 +35,8 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>name</th>
+                            <th>nama</th>
+                            <th>NIP</th>
                             <th>Wali Kelas</th>
                             <th>email</th>
                             <th>Status</th>
@@ -55,6 +56,7 @@
                                 <td><i class="fab fa-sketch fa-lg text-warning me-3"></i>
                                     <strong>{{ $item->name }}</strong>
                                 </td>
+                                <td>{{ $item->nip }}</td>
                                 <td>{{ $item->classGuiding ? $item->classGuiding->name : '-' }}</td>
                                 <td>{{ $item->email }}</td>
                                 <td>
@@ -84,6 +86,7 @@
                                                 data-parent_phone="{{ $item->parent_phone }}"
                                                 data-address="{{ $item->address }}" data-photo="{{ $item->photo }}"
                                                 data-classes="{{ $classes }}"
+                                                data-nip="{{ $item->nip }}"
                                                 data-class_guiding="{{ $item->classGuiding ? $item->classGuiding->id : null }}">
                                                 <i class="bx bx-edit-alt me-1">
                                                 </i>
@@ -99,7 +102,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                {{ $teachers->links() }}
+                {{-- {{ $teachers->links() }} --}}
             </div>
         </div>
     </div>
@@ -126,6 +129,11 @@
                                     <label for="nameWithTitle" class="form-label">Nama</label>
                                     <input type="text" id="update_name" name="name" class="form-control"
                                         placeholder="Masukan Nama" />
+                                </div>
+                                <div class="col mb-1">
+                                    <label for="nameWithTitle" class="form-label">NIP</label>
+                                    <input type="number" id="update_nip" name="nip" class="form-control"
+                                        placeholder="Masukan NIP" />
                                 </div>
                                 <div class="col mb-1">
                                     <label for="" class="form-label">Email</label>
@@ -194,6 +202,11 @@
                                     <label for="nameWithTitle" class="form-label">Nama</label>
                                     <input type="text" id="" name="name" class="form-control"
                                         placeholder="Masukan Nama" />
+                                </div>
+                                <div class="col mb-1">
+                                    <label for="nameWithTitle" class="form-label">NIP</label>
+                                    <input type="number" id="" name="nip" class="form-control"
+                                        placeholder="Masukan NIP" />
                                 </div>
                                 <div class="col mb-1">
                                     <label for="" class="form-label">Email</label>
@@ -285,6 +298,7 @@
                 $('#update_parent_phone').val(parent_phone);
                 $('#update_address').val(address);
                 $('#update_photo').val(photo);
+                $('#update_nip').val($(e.relatedTarget).data('nip'));
 
                 const jk = ['Laki-laki', 'Perempuan'];
                 jk.forEach(element => {

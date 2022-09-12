@@ -17,7 +17,7 @@ class StudentController extends Controller
         if($req->class_id) {
             $students->where('class_id', $req->class_id);
         }
-        $students = $students->paginate(50);
+        $students = $students->get();
         $classes = TblClasses::all();
         return view('admin.students.student', ['students' => $students, 'classes' => $classes]);
     }

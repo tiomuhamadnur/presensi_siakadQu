@@ -20,6 +20,10 @@ Route::get('/', function () {
 //Admin
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin'], 'namespace' => 'App\Http\Controllers\Admin'], function ($route) {
     $route->get('/', 'DashboardController@index')->name('admin.dashboard');
+    $route->group(['prefix' => 'profile', 'namespace' => 'Profile'], function ($route) {
+        $route->get('/', 'SettingsController@index')->name('admin.profile');
+        $route->post('/', 'SettingsController@update')->name('admin.profile.update');
+    });
 
     //Student
     $route->group(['prefix' => 'student', 'namespace' => 'Student'], function ($route) {
@@ -129,6 +133,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin'], 'name
 //Teacher
 Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'role:guru'], 'namespace' => 'App\Http\Controllers\Teacher'], function ($route) {
     $route->get('/', 'DashboardController@index')->name('teacher.dashboard');
+
+    $route->group(['prefix' => 'profile', 'namespace' => 'Profile'], function ($route) {
+        $route->get('/', 'SettingsController@index')->name('teacher.profile');
+        $route->post('/', 'SettingsController@update')->name('teacher.profile.update');
+    });
 
     //Teacher
     $route->group(['prefix' => 'class', 'namespace' => 'StudentClass'], function ($route) {
