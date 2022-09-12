@@ -21,19 +21,19 @@ class TblCourses extends Model
 
     public function class()
     {
-        return $this->belongsTo(TblClasses::class, 'class_id')->withTrashed();
+        return $this->belongsTo(TblClasses::class, 'class_id');
     }
 
     public function teacher()
     {
         $controller = new Controller();
-        return $this->belongsTo(User::class, 'teacher_id')->where('role', $controller::ROLE_TEACHER)->withTrashed();
+        return $this->belongsTo(User::class, 'teacher_id')->where('role', $controller::ROLE_TEACHER);
     }
 
     public function teacherGuider()
     {
         $controller = new Controller();
-        return $this->belongsTo(User::class, 'teacher_guider_id')->where('role', $controller::ROLE_TEACHER)->withTrashed();
+        return $this->belongsTo(User::class, 'teacher_guider_id')->where('role', $controller::ROLE_TEACHER);
     }
 
     public function transCourses()
