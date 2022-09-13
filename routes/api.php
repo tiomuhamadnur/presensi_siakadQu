@@ -22,6 +22,7 @@ Route::post('login', [AuthController::class, 'doLogin']);
      
 Route::middleware('auth:sanctum')->group( function () {
     Route::resource('user', UserController::class);
+    Route::post('user/update', [UserController::class, 'update']);
 });
 
 Route::middleware(['auth:sanctum'])->group( function () {
