@@ -4,8 +4,65 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c9bafdf9c026ec5a1b60b4d7a1ee0340",
+    "content-hash": "a8ec90ab61a001b5ab1a9a37bf83b413",
     "packages": [
+        {
+            "name": "askedio/laravel-soft-cascade",
+            "version": "9.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Askedio/laravel-soft-cascade.git",
+                "reference": "7eeba7b6380a0c188fdfc71d07eb88c4bd74a2b0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Askedio/laravel-soft-cascade/zipball/7eeba7b6380a0c188fdfc71d07eb88c4bd74a2b0",
+                "reference": "7eeba7b6380a0c188fdfc71d07eb88c4bd74a2b0",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/container": "^7.0|^8.0|^9.0",
+                "illuminate/database": "^7.0|^8.0|^9.0",
+                "illuminate/events": "^7.0|^8.0|^9.0",
+                "illuminate/support": "^7.0|^8.0|^9.0",
+                "php": "^7.2.5|^8.0"
+            },
+            "require-dev": {
+                "codacy/coverage": "dev-master",
+                "orchestra/testbench": "^5.0|^6.0|^7.0",
+                "phpunit/phpunit": "^8.4|^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Askedio\\SoftCascade\\Providers\\GenericServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Askedio\\SoftCascade\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Will Bowman",
+                    "homepage": "https://medium.com/@asked_io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel Cascade Soft Delete & Restore",
+            "support": {
+                "issues": "https://github.com/Askedio/laravel-soft-cascade/issues",
+                "source": "https://github.com/Askedio/laravel-soft-cascade/tree/9.0.0"
+            },
+            "time": "2022-02-15T14:01:31+00:00"
+        },
         {
             "name": "asm89/stack-cors",
             "version": "v2.1.1",

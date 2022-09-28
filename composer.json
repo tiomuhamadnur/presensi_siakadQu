@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "askedio/laravel-soft-cascade": "^9.0",
         "ckfinder/ckfinder-laravel-package": "^3.5",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",

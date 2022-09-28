@@ -5,11 +5,20 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '9b316dca3b0f00c678c4e95eeb56f7ce631031c3',
+        'reference' => '9fc2f0c5aef69d6e80ab92706d3baa2ddbc37d3b',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
     'versions' => array(
+        'askedio/laravel-soft-cascade' => array(
+            'pretty_version' => '9.0.0',
+            'version' => '9.0.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../askedio/laravel-soft-cascade',
+            'aliases' => array(),
+            'reference' => '7eeba7b6380a0c188fdfc71d07eb88c4bd74a2b0',
+            'dev_requirement' => false,
+        ),
         'asm89/stack-cors' => array(
             'pretty_version' => 'v2.1.1',
             'version' => '2.1.1.0',
@@ -436,7 +445,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '9b316dca3b0f00c678c4e95eeb56f7ce631031c3',
+            'reference' => '9fc2f0c5aef69d6e80ab92706d3baa2ddbc37d3b',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(

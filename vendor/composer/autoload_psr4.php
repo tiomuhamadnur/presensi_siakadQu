@@ -95,5 +95,6 @@ return array(
     'Brick\\Math\\' => array($vendorDir . '/brick/math/src'),
     'Aws\\' => array($vendorDir . '/aws/aws-sdk-php/src'),
     'Asm89\\Stack\\' => array($vendorDir . '/asm89/stack-cors/src'),
+    'Askedio\\SoftCascade\\' => array($vendorDir . '/askedio/laravel-soft-cascade/src'),
     'App\\' => array($baseDir . '/app'),
 );
