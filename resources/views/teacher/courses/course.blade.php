@@ -40,7 +40,7 @@
                                     <strong>{{ $item->name }}</strong>
                                 </td>
                                 <td>{{ $item->teacher ? $item->teacher->name : '-' }}</td>
-                                <td>{{ $item->class->name }}</td>
+                                <td>{{ $item->class ? $item->class->name : 'kelas sudah dihapus' }}</td>
                                 <td>
                                     <div class="dropdown">
                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow"

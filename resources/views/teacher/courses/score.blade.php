@@ -96,7 +96,7 @@
                                     <strong>{{ $item->name }}</strong>
                                 </td>
                                 <td>{{ $item->teacher ? $item->teacher->name : '-' }}</td>
-                                <td>{{ $item->class->name }}</td>
+                                <td>{{ $item->class ? $item->class->name : 'kelas sudah dihapus' }}</td>
                                 <td>
                                     <a class="btn btn-primary"
                                         href="{{ route('teacher.course.student.index', ['course_id' => $item->id]) }}">
