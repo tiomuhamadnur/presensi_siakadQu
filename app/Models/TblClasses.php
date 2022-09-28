@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Http\Controllers\Controller;
+use Askedio\SoftCascade\Traits\SoftCascadeTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,6 +11,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class TblClasses extends Model
 {
     use HasFactory, SoftDeletes;
+    use SoftCascadeTrait;
+
+    protected $softCascade = ['students'];
 
     protected $fillable = [
         'code',
