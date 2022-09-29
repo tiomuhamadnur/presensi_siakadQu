@@ -92,9 +92,10 @@
                                         value="{{ $item->id }}" />
                                 </td>
                                 <td><i class="fab fa-sketch fa-lg text-warning me-3"></i>
-                                    <strong>{{ $item->student->name }}</strong>
+                                    <strong>{{ $item->student ? $item->student->name : 'Deleted Student (' . $item->studentWithTrased->name . ')' }}</strong>
                                 </td>
-                                <td>{{ $item->student->class ? $item->student->class->name : null }}</td>
+                                <td>{{ $item->student ? ($item->student->class ? $item->student->class->name : '-') : '-' }}
+                                </td>
                                 <td>
                                     @if ($item->present)
                                         @if ($item->present->status == 1)

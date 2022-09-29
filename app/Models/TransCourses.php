@@ -38,6 +38,12 @@ class TransCourses extends Model
         return $this->belongsTo(User::class, 'student_id')->where('role', $controller::ROLE_STUDENT);
     }
 
+    public function studentWithTrased()
+    {
+        $controller = new Controller();
+        return $this->belongsTo(User::class, 'student_id')->where('role', $controller::ROLE_STUDENT)->withTrashed();
+    }
+
     public function class()
     {
         return $this->belongsTo(TblClasses::class, 'class_id');
