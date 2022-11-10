@@ -394,7 +394,8 @@
     <script>
         $(document).ready(function() {
             $('#table_id').DataTable({
-                // script untuk membuat export data 
+                // script untuk membuat export data
+                paging: false, 
                 dom: 'Bfrtip',
                 buttons: [
                     'copy', 'csv', 'excel', 'pdf', 'print'

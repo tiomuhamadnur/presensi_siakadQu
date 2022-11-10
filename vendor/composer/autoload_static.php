@@ -89,6 +89,7 @@ class ComposerStaticInit7f0ff8f0de9dc434501c6ea8205968b7
             'Symfony\\Component\\Console\\' => 26,
             'Spatie\\FlysystemDropbox\\' => 24,
             'Spatie\\Dropbox\\' => 15,
+            'ShiftOneLabs\\LaravelCascadeDeletes\\' => 35,
         ),
         'R' => 
         array (
@@ -332,6 +333,10 @@ class ComposerStaticInit7f0ff8f0de9dc434501c6ea8205968b7
         'Spatie\\Dropbox\\' => 
         array (
             0 => __DIR__ . '/..' . '/spatie/dropbox-api/src',
+        ),
+        'ShiftOneLabs\\LaravelCascadeDeletes\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/shiftonelabs/laravel-cascade-deletes/src',
         ),
         'Ramsey\\Uuid\\' => 
         array (
@@ -5886,6 +5891,8 @@ class ComposerStaticInit7f0ff8f0de9dc434501c6ea8205968b7
         'SebastianBergmann\\Type\\UnknownType' => __DIR__ . '/..' . '/sebastian/type/src/type/UnknownType.php',
         'SebastianBergmann\\Type\\VoidType' => __DIR__ . '/..' . '/sebastian/type/src/type/VoidType.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
+        'ShiftOneLabs\\LaravelCascadeDeletes\\CascadesDeletes' => __DIR__ . '/..' . '/shiftonelabs/laravel-cascade-deletes/src/CascadesDeletes.php',
+        'ShiftOneLabs\\LaravelCascadeDeletes\\CascadesDeletesModel' => __DIR__ . '/..' . '/shiftonelabs/laravel-cascade-deletes/src/CascadesDeletesModel.php',
         'Spatie\\Dropbox\\Client' => __DIR__ . '/..' . '/spatie/dropbox-api/src/Client.php',
         'Spatie\\Dropbox\\Exceptions\\BadRequest' => __DIR__ . '/..' . '/spatie/dropbox-api/src/Exceptions/BadRequest.php',
         'Spatie\\Dropbox\\InMemoryTokenProvider' => __DIR__ . '/..' . '/spatie/dropbox-api/src/InMemoryTokenProvider.php',

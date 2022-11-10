@@ -6143,6 +6143,66 @@
             "install-path": "../sebastian/version"
         },
         {
+            "name": "shiftonelabs/laravel-cascade-deletes",
+            "version": "1.0.1",
+            "version_normalized": "1.0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/shiftonelabs/laravel-cascade-deletes.git",
+                "reference": "af256e3796f997b5f66d34c7ec25c2a1c560e36f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/shiftonelabs/laravel-cascade-deletes/zipball/af256e3796f997b5f66d34c7ec25c2a1c560e36f",
+                "reference": "af256e3796f997b5f66d34c7ec25c2a1c560e36f",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": ">=4.1",
+                "illuminate/events": ">=4.1",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.0",
+                "shiftonelabs/codesniffer-standard": "0.*",
+                "squizlabs/php_codesniffer": "2.*"
+            },
+            "time": "2020-04-02T07:31:25+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "ShiftOneLabs\\LaravelCascadeDeletes\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Patrick Carlo-Hickman",
+                    "email": "patrick@shiftonelabs.com"
+                }
+            ],
+            "description": "Adds application level cascading deletes to Eloquent Models.",
+            "homepage": "https://github.com/shiftonelabs/laravel-cascade-deletes",
+            "keywords": [
+                "cascade",
+                "deletes",
+                "eloquent",
+                "laravel",
+                "lumen",
+                "model"
+            ],
+            "support": {
+                "issues": "https://github.com/shiftonelabs/laravel-cascade-deletes/issues",
+                "source": "https://github.com/shiftonelabs/laravel-cascade-deletes"
+            },
+            "install-path": "../shiftonelabs/laravel-cascade-deletes"
+        },
+        {
             "name": "spatie/dropbox-api",
             "version": "1.20.1",
             "version_normalized": "1.20.1.0",

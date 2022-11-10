@@ -5309,6 +5309,8 @@ return array(
     'SebastianBergmann\\Type\\UnknownType' => $vendorDir . '/sebastian/type/src/type/UnknownType.php',
     'SebastianBergmann\\Type\\VoidType' => $vendorDir . '/sebastian/type/src/type/VoidType.php',
     'SebastianBergmann\\Version' => $vendorDir . '/sebastian/version/src/Version.php',
+    'ShiftOneLabs\\LaravelCascadeDeletes\\CascadesDeletes' => $vendorDir . '/shiftonelabs/laravel-cascade-deletes/src/CascadesDeletes.php',
+    'ShiftOneLabs\\LaravelCascadeDeletes\\CascadesDeletesModel' => $vendorDir . '/shiftonelabs/laravel-cascade-deletes/src/CascadesDeletesModel.php',
     'Spatie\\Dropbox\\Client' => $vendorDir . '/spatie/dropbox-api/src/Client.php',
     'Spatie\\Dropbox\\Exceptions\\BadRequest' => $vendorDir . '/spatie/dropbox-api/src/Exceptions/BadRequest.php',
     'Spatie\\Dropbox\\InMemoryTokenProvider' => $vendorDir . '/spatie/dropbox-api/src/InMemoryTokenProvider.php',

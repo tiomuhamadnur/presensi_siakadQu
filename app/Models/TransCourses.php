@@ -14,7 +14,7 @@ class TransCourses extends Model
     use HasFactory, SoftDeletes;
     use SoftCascadeTrait;
 
-    protected $softCascade = ['presents', 'transScores'];
+    protected $softCascade = ['presents', 'transScores', 'present'];
 
     protected $fillable = [
         'class_id',

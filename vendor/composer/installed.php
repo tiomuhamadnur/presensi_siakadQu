@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '9fc2f0c5aef69d6e80ab92706d3baa2ddbc37d3b',
+        'reference' => '45cf9fc55f575ac6e35fe05d417ffe1fd663c932',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -445,7 +445,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '9fc2f0c5aef69d6e80ab92706d3baa2ddbc37d3b',
+            'reference' => '45cf9fc55f575ac6e35fe05d417ffe1fd663c932',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
@@ -1060,6 +1060,15 @@
             'aliases' => array(),
             'reference' => 'c6c1022351a901512170118436c764e473f6de8c',
             'dev_requirement' => true,
+        ),
+        'shiftonelabs/laravel-cascade-deletes' => array(
+            'pretty_version' => '1.0.1',
+            'version' => '1.0.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../shiftonelabs/laravel-cascade-deletes',
+            'aliases' => array(),
+            'reference' => 'af256e3796f997b5f66d34c7ec25c2a1c560e36f',
+            'dev_requirement' => false,
         ),
         'spatie/dropbox-api' => array(
             'pretty_version' => '1.20.1',
