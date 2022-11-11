@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Course\Student;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Teacher\Course\Student\StudentController as StudentStudentController;
 use App\Models\TblClasses;
 use App\Models\TblCourses;
 use App\Models\TransCourses;
@@ -33,7 +34,7 @@ class StudentController extends Controller
     public function syncStudentClass(Request $req)
     {
         $students = User::where('role', self::ROLE_STUDENT)->where('class_id', $req->class_id)->get();
-        $transCourses = TransCourses::where('class_id', $req->class_id)->where('course_id', $req->course_id)->get();
+        $transCourses = TransCourses::where('class_id', $req->class_id)->where('course_id', $req->course_id)->with(['transScores'])->get();
         foreach ($students as $student) {
             $isFounded = false;
             foreach ($transCourses as $course) {
@@ -49,6 +50,8 @@ class StudentController extends Controller
                 $newTransCourse->save();
             }
         }
+        $studentUtils = new StudentStudentController();
+        $studentUtils->syncMasterScore($transCourses, $req->course_id);
         return back()->with('message', ['message' => 'sinkronisasi berhasil!']);
     }
 
