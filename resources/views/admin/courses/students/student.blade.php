@@ -44,10 +44,10 @@
                             <tr class="table-default">
                                 <td>{{ $no++ }}</td>
                                 <td><i class="fab fa-sketch fa-lg text-warning me-3"></i>
-                                    <strong>{{ $item->student ? $item->student->name : 'Deleted Student' }}</strong>
+                                    <strong>{{ $item->name }}</strong>
                                 </td>
-                                <td>{{ $item->student ? ($item->student->class ? $item->student->class->name : null) : null }}</td>
-                                <td>{{ $item->student ? $item->student->email : null }}</td>
+                                <td>{{ $item->class_name }}</td>
+                                <td>{{ $item->email }}</td>
                                 <td></td>
                                 <td>
                                     {{-- <a class="btn btn-primary" href="javascript:void(0);" data-bs-toggle="modal"
@@ -61,7 +61,7 @@
                                         </i>
                                         Update</a> --}}
                                         <a class="btn btn-primary"
-                                        href="{{ route('admin.course.student.score.index', ['id' => $item->id]) }}">
+                                        href="{{ route('admin.course.student.score.index', ['id' => $item->trans_id]) }}">
                                         <i class='bx bxs-user-badge bx-tada'></i> Update Nilai
                                     </a>
                                     {{-- <div class="dropdown">

@@ -98,6 +98,7 @@ class StudentController extends Controller
                 $newTransScore->save();
             }
         }
+        return MasterScoring::where('tbl_course_id', $courseId)->whereNotIn('number', $transScoresNumbers)->get();
     }
 
     public function update(Request $req)

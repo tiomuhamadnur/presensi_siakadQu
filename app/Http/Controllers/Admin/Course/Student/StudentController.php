@@ -16,8 +16,11 @@ class StudentController extends Controller
     {
         $transCourse = TransCourses::where('course_id', $req->course_id)
             ->join('users', 'users.id', 'trans_courses.student_id')
+            ->join('tbl_classes', 'tbl_classes.id', 'trans_courses.class_id')
             ->where('users.deleted_at', null)
-            ->with(['course', 'student', 'present'])->paginate(50);
+            ->select(['trans_courses.id as trans_id', 'users.*', 'tbl_classes.name as class_name'])
+            ->with(['course', 'student', 'present', 'transScores'])->paginate(50);
+
         $studentIds = [];
         foreach ($transCourse as $item) {
             $studentIds[] = $item->student_id;
