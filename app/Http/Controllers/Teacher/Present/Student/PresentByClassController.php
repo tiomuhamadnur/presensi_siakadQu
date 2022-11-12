@@ -106,7 +106,10 @@ class PresentByClassController extends Controller
     public function presentCheck($req, $on)
     {
         $transCourse = TransCourses::where('trans_courses.class_id', $req->class_id)
-            ->where('course_id', $req->course_id)->with(['student', 'course', 'present' => function ($q) use ($on) {
+            ->join('users', 'users.id', 'trans_courses.student_id')
+            ->where('users.deleted_at', null)
+            ->where('course_id', $req->course_id)
+            ->with(['student', 'course', 'present' => function ($q) use ($on) {
                 if ($on) {
                     $q->whereDate('on', '=', $on);
                 }

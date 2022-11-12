@@ -70,10 +70,10 @@
                             <tr class="table-default">
                                 <td>{{ $no++ }}</td>
                                 <td><i class="fab fa-sketch fa-lg text-warning me-3"></i>
-                                    <strong>{{ $item->student->name }}</strong>
+                                    <strong>{{ $item->name }}</strong>
                                 </td>
-                                <td>{{ $item->student->class ? $item->student->class->name : null }}</td>
-                                <td>{{ $item->student->email }}</td>
+                                <td>{{ $item->class_name }}</td>
+                                <td>{{ $item->email }}</td>
                                 @php
                                     $totalScore = 0;
                                     foreach ($item->transScores as $key => $value) {
@@ -92,7 +92,7 @@
                                 @if ($is_editor)
                                     <td>
                                         <a class="btn btn-primary"
-                                            href="{{ route('teacher.course.student.score.index', ['id' => $item->id]) }}">
+                                            href="{{ route('teacher.course.student.score.index', ['id' => $item->trans_id]) }}">
                                             <i class='bx bxs-user-badge bx-tada'></i> Detail Nilai
                                         </a>
                                         <a class="btn btn-primary" href="{{route('teacher.present.history.index', ['trans_course_id' => $item->id])}}"><i class='bx bx-history'></i> Kehadiran</a>
