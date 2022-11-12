@@ -29,13 +29,17 @@
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                        <img src="{{ asset(\Auth::user()->photo) }}" alt
-                            class="w-px-40 h-auto rounded-circle" />
+                        @if (\Auth::user()->photo)
+                            <img src="{{ asset(\Auth::user()->photo) }}" alt class="w-px-40 h-auto rounded-circle" />
+                        @else
+                            <img src="https://w7.pngwing.com/pngs/340/956/png-transparent-profile-user-icon-computer-icons-user-profile-head-ico-miscellaneous-black-desktop-wallpaper.png"
+                                alt class="w-px-40 h-auto rounded-circle" />
+                        @endif
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                        <a class="dropdown-item" href="{{route('teacher.profile')}}">
+                        <a class="dropdown-item" href="{{ route('teacher.profile') }}">
                             <div class="d-flex">
                                 <div class="flex-shrink-0 me-3">
                                     <div class="avatar avatar-online">
