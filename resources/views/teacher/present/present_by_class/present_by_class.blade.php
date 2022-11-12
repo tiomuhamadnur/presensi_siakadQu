@@ -400,6 +400,7 @@
             $('#table_id').DataTable({
                 // script untuk membuat export data 
                 dom: 'Bfrtip',
+                paging: false,
                 buttons: [
                     'copy', 'csv', 'excel', 'pdf', 'print'
                 ]
