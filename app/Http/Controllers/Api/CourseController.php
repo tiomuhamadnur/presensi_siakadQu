@@ -9,6 +9,7 @@ use App\Http\Resources\Course\StudentResource;
 use App\Models\TblCourses;
 use App\Models\TransCourses;
 use App\Models\TransPresents;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -67,7 +68,9 @@ class CourseController extends Controller
             $on = Carbon::now()->toDateString();
         }
         $students = TransCourses::where('trans_courses.class_id', $req->class_id)
-            ->where('course_id', $req->course_id)->with(['student', 'course', 'present' => function ($q) use ($on) {
+            ->join('users', 'users.id', 'trans_courses.student_id')
+            ->where('users.deleted_at', null)
+            ->where('trans_courses.course_id', $req->course_id)->with(['student', 'course', 'present' => function ($q) use ($on) {
                 if ($on) {
                     $q->whereDate('on', '=', $on);
                 }
@@ -102,9 +105,15 @@ class CourseController extends Controller
             return $this->sendError($validator->getMessageBag(), null, 422);
         }
         $on = $req->on;
-        $courses = TblCourses::where('id', $req->course_id)->with(['transCourses.student', 'transCourses.present' => function ($q) use ($on) {
-            $q->where('on', $on);
-        }])->get();
+        $courses = TransCourses:://where('trans_courses.class_id', $req->class_id)
+            join('users', 'users.id', 'trans_courses.student_id')
+            ->where('users.deleted_at', null)
+            ->where('course_id', $req->course_id)
+            ->with(['student', 'course', 'present' => function ($q) use ($on) {
+                if ($on) {
+                    $q->whereDate('on', '=', $on);
+                }
+            }])->get();
         return $this->sendResponse($courses, 'success');
     }
 
