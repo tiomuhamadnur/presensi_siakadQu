@@ -15,7 +15,6 @@ class CreateTransPresentsTable extends Migration
     {
         Schema::create('trans_presents', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('student_id')->unsigned();
             $table->bigInteger('trans_course_id')->unsigned();
             $table->tinyInteger('status')->default(0);
             $table->string('description');
@@ -23,7 +22,6 @@ class CreateTransPresentsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('student_id')->on('users')->references('id');
             $table->foreign('trans_course_id')->on('trans_courses')->references('id');
         });
     }

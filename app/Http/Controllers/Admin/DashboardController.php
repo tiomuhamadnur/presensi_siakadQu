@@ -21,6 +21,10 @@ class DashboardController extends Controller
         $sick = TransPresents::where('status', 3)->count();
         $allRow = TransPresents::count();
 
+        if ($allRow == 0) {
+            $allRow = 1;
+        }
+
         $countPresent = round(($present / $allRow) * 100, 2);
         $countAbsen = round(($absen / $allRow) * 100, 2);
         $countLeave = round(($leave / $allRow) * 100, 2);

@@ -15,11 +15,14 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('class_id')->unsigned();
+            $table->bigInteger('class_id')->unsigned()->nullable();
             $table->string('name');
             $table->string('email');
             $table->string('password');
             $table->string('nip', 60)->nullable();
+            $table->char('nik', 50)->nullable();
+            $table->string('born_at', 100)->nullable();
+            $table->date('birthday')->nullable();
             $table->char('phone', 20)->nullable();
             $table->enum('gender', ['Laki-laki', 'Perempuan']);
             $table->enum('role', ['admin', 'guru', 'siswa']);
@@ -28,6 +31,7 @@ class CreateUsersTable extends Migration
             $table->char('parent_phone', 20)->nullable();
             $table->string('address')->nullable();
             $table->string('photo')->nullable();
+            $table->tinyInteger('status')->default('1');
             $table->timestamps();
             $table->softDeletes();
         });
