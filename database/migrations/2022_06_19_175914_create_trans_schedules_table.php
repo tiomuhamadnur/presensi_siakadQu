@@ -22,6 +22,7 @@ class CreateTransSchedulesTable extends Migration
             $table->time('time');
             $table->timestamps();
             $table->softDeletes();
+
             $table->foreign('class_id')->on('tbl_classes')->references('id');
             $table->foreign('course_id')->on('tbl_courses')->references('id');
             $table->foreign('teacher_id')->on('users')->references('id');

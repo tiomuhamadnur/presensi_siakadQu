@@ -18,6 +18,9 @@ class CreateTblCoursesTable extends Migration
             $table->string('name');
             $table->bigInteger('teacher_id')->unsigned();
             $table->bigInteger('class_id')->unsigned();
+            $table->char('schedule', 10)->default('senin');
+            $table->time('start_time')->nullable();
+            $table->time('end_time')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

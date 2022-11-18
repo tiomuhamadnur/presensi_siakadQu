@@ -16,9 +16,12 @@ class CreateMasterScoringsTable extends Migration
         Schema::create('master_scorings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('tbl_course_id')->unsigned();
+            $table->tinyInteger('number')->default('1');
             $table->string('name');
             $table->float('percent');
-            $table->float('description');
+            $table->string('description');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

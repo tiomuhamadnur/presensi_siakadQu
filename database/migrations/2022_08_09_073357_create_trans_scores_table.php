@@ -16,6 +16,7 @@ class CreateTransScoresTable extends Migration
         Schema::create('trans_scores', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('trans_course_id')->unsigned();
+            $table->tinyInteger('number')->default('1');
             $table->string('name');
             $table->float('score');
             $table->float('percent')->nullable();

@@ -17,6 +17,7 @@ class CreateTblClassesTable extends Migration
             $table->bigIncrements('id');
             $table->char('code', 20);
             $table->string('name');
+            $table->char('semester', 10)->default('I');;
             $table->bigInteger('teacher_guider_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
