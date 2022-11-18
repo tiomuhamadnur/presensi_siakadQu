@@ -1,99 +1,56 @@
-<nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-    id="layout-navbar">
-    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-            <i class="bx bx-menu bx-sm"></i>
-        </a>
-    </div>
 
-    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-        <!-- Search -->
-        <div class="navbar-nav align-items-center">
-            <div class="nav-item d-flex align-items-center">
-                {{-- <i class="bx bx-search fs-4 lh-0"></i> --}}
-                {{-- <input type="text" class="form-control border-0 shadow-none" placeholder="Search..."
-                    aria-label="Search..." /> --}}
+        <!-- Logo Header -->
+        <div class="logo-header" data-background-color="orange">
+
+            <a href="index.html" class="logo">
+                <img src="../assets/img/logo.png" style="width: 140px; justify-content: center;" alt="navbar brand" class="navbar-brand">
+            </a>
+            <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon">
+                    <i class="icon-menu"></i>
+                </span>
+            </button>
+            <button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
+            <div class="nav-toggle">
+                <button class="btn btn-toggle toggle-sidebar">
+                    <i class="icon-menu"></i>
+                </button>
             </div>
         </div>
-        <!-- /Search -->
+        <!-- End Logo Header -->
 
-        <ul class="navbar-nav flex-row align-items-center ms-auto">
-            <!-- Place this tag where you want the button to render. -->
-            {{-- <li class="nav-item lh-1 me-3">
-                <a class="github-button" href="https://github.com/themeselection/sneat-html-admin-template-free"
-                    data-icon="octicon-star" data-size="large" data-show-count="true"
-                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
-            </li> --}}
+        <!-- Navbar Header -->
+        <nav class="navbar navbar-header navbar-expand-lg" data-background-color="orange">
 
-            <!-- User -->
-            <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                    <div class="avatar avatar-online">
-                        @if (\Auth::user()->photo)
-                            <img src="{{ asset(\Auth::user()->photo) }}" alt class="w-px-40 h-auto rounded-circle" />
-                        @else
-                            <img src="https://w7.pngwing.com/pngs/340/956/png-transparent-profile-user-icon-computer-icons-user-profile-head-ico-miscellaneous-black-desktop-wallpaper.png"
-                                alt class="w-px-40 h-auto rounded-circle" />
-                        @endif
-                    </div>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li>
-                        <a class="dropdown-item" href="{{ route('admin.profile') }}">
-                            <div class="d-flex">
-                                <div class="flex-shrink-0 me-3">
-                                    <div class="avatar avatar-online">
-                                        <img src="{{ asset(\Auth::user()->photo) }}" alt
-                                            class="w-px-40 h-auto rounded-circle" />
-                                    </div>
-                                </div>
-                                <div class="flex-grow-1">
-                                    <span class="fw-semibold d-block">{{ \Auth::user()->name }}</span>
-                                    <small class="text-muted">Admin</small>
-                                </div>
+            <div class="container-fluid">
+                <div class="collapse" id="search-nav">
+                    <form class="navbar-left navbar-form nav-search mr-md-3">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <button type="submit" class="btn btn-search pr-1">
+                                    <i class="fa fa-search search-icon"></i>
+                                </button>
+                            </div>
+                            <input type="text" placeholder="Search ..." class="form-control">
+                        </div>
+                    </form>
+                </div>
+                <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+                    <li class="nav-item toggle-nav-search hidden-caret">
+                        <a class="nav-link" data-toggle="collapse" href="#search-nav" role="button" aria-expanded="false" aria-controls="search-nav">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </li>
+
+
+                    <li class="nav-item dropdown hidden-caret">
+                        <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
+                            <div class="avatar-sm">
+                                <img src="../assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
                             </div>
                         </a>
                     </li>
-                    <li>
-                        <div class="dropdown-divider"></div>
-                    </li>
-                    {{-- <li>
-                        <a class="dropdown-item" href="#">
-                            <i class="bx bx-user me-2"></i>
-                            <span class="align-middle">My Profile</span>
-                        </a>
-                    </li> --}}
-                    {{-- <li>
-                        <a class="dropdown-item" href="#">
-                            <i class="bx bx-cog me-2"></i>
-                            <span class="align-middle">Settings</span>
-                        </a>
-                    </li> --}}
-                    {{-- <li>
-                        <a class="dropdown-item" href="#">
-                            <span class="d-flex align-items-center align-middle">
-                                <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                                <span class="flex-grow-1 align-middle">Billing</span>
-                                <span
-                                    class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                            </span>
-                        </a>
-                    </li> --}}
-                    <li>
-                        <div class="dropdown-divider"></div>
-                    </li>
-                    <li>
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button class="dropdown-item">
-                                <i class="bx bx-power-off me-2"></i>
-                                <span class="align-middle">Log Out</span>
-                            </button>
-                        </form>
-                    </li>
                 </ul>
-            </li>
-            <!--/ User -->
-        </ul>
-    </div>
-</nav>
+            </div>
+        </nav>
+        <!-- End Navbar -->

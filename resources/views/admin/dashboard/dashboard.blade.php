@@ -1,62 +1,71 @@
-@extends('admin.layout.base')
-@section('navbar')
-    @include('admin.layout.navbar')
-@endsection
-@section('content')
-    <div class="container-xxl flex-grow-1 container-p-y">
-        <div class="row">
-            <div class="col-lg-4 col-md-4 order-1">
-                <div class="row">
-                    <div class="col-lg-6 col-md-12 col-6 mb-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="card-title d-flex align-items-start justify-content-between">
-                                    <div class="avatar flex-shrink-0">
-                                        <img src="{{ asset('sneat/assets/img/icons/unicons/chart-success.png') }}"
-                                            alt="chart success" class="rounded" />
-                                    </div>
-                                    <div class="dropdown">
-                                        <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown"
-                                            aria-haspopup="true" aria-expanded="false">
-                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
-                                            <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                                            <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <span class="fw-semibold d-block mb-1">Jumlah Siswa</span>
-                                <small class="text-success fw-semibold">{{ $countStudent }} Siswa</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-12 col-6 mb-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="card-title d-flex align-items-start justify-content-between">
-                                    <div class="avatar flex-shrink-0">
-                                        <img src="{{ asset('sneat/assets/img/icons/unicons/chart-success.png') }}"
-                                            alt="chart success" class="rounded" />
-                                    </div>
-                                    <div class="dropdown">
-                                        <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown"
-                                            aria-haspopup="true" aria-expanded="false">
-                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
-                                            <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                                            <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <span class="fw-semibold d-block mb-1">Kehadiran</span>
-                                <small class="text-success fw-semibold">{{ $countPresent }} %</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+@include('admin.layout.base')
+
+<div class="wrapper">
+    <div class="main-header">
+        @include('admin.layout.navbar')
     </div>
-@endsection
+        @include('admin.layout.asside')
+
+        <div class="main-panel">
+			<div class="content">
+				<div class="panel-header bg-primary-gradient">
+					<div class="page-inner py-5">
+						<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+							<div>
+								<h2 class="text-white pb-2 fw-bold mt--2">Dashboard</h2>
+								<h2 class="text-white op-9 mb-2">Sistem Administrasi Akademi</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="page-inner mt--5">
+					<div class="row mt--2">
+						<div class="col-md-4">
+							<div class="card full-height">
+								<div class="card-body" style="border-bottom: 100px;">
+									<div class="card-title">Jumlah Guru</div>
+									<a href=""><i class="fas fa-user"></i></a>
+									<div class="d-flex flex-wrap justify-content-around pb-2 pt-4">
+										<div class="px-2 pb-2 pb-md-0 text-center">
+											<div><h1 style="font-size: 80px; color: #000000">10</h1></div>
+											<h6 class="fw-bold mt-3 mb-0" style="font-size: 40px;">Guru</h6>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div class="card full-height">
+								<div class="card-body" style="border-bottom: 100px;">
+									<div class="card-title">Jumlah Siswa</div>
+									<a href=""><i class="fas fa-users"></i></a>
+									<div class="d-flex flex-wrap justify-content-around pb-2 pt-4">
+										<div class="px-2 pb-2 pb-md-0 text-center">
+											<div><h1 style="font-size: 80px; color: #000000">{{ $countStudent }} </h1></div>
+											<h6 class="fw-bold mt-3 mb-0" style="font-size: 40px;">Siswa</h6>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="card full-height">
+								<div class="card-body" style="border-bottom: 100px;">
+									<div class="card-title">Jumlah Kelas</div>
+									<a href=""><i class="fas fa-database"></i></a>
+									<div class="d-flex flex-wrap justify-content-around pb-2 pt-4">
+										<div class="px-2 pb-2 pb-md-0 text-center">
+											<div><h1 style="font-size: 80px; color: #000000">10</h1></div>
+											<h6 class="fw-bold mt-3 mb-0" style="font-size: 40px;">Kelas</h6>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+            @include('admin.layout.footer')
+		</div>
+</div>
