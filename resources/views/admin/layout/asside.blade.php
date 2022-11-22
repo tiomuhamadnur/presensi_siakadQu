@@ -2,12 +2,12 @@
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
         <div class="sidebar-content">
             <div class="user">
-                <div class="avatar-sm float-left mr-2">
+                <div class="avatar avatar-lg" >
                     @if (\Auth::user()->photo)
-                    <img src="{{ asset(\Auth::user()->photo) }}" alt class="w-px-40 h-auto rounded-circle" />
+                    <img src="{{ asset(\Auth::user()->photo) }}" alt class="#" class="avatar-img rounded-circle" style="width: 3rem; height: 3rem; border-radius: 50%"/>
                 @else
                     <img src="https://w7.pngwing.com/pngs/340/956/png-transparent-profile-user-icon-computer-icons-user-profile-head-ico-miscellaneous-black-desktop-wallpaper.png"
-                        alt class="w-px-40 h-auto rounded-circle" />
+                        alt="" class="" />
                 @endif
                 </div>
                 <div class="info">
@@ -23,26 +23,24 @@
                     <div class="collapse in" id="collapseExample">
                         <ul class="nav">
                             <li>
-                                <form action="{{ route('logout') }}" method="POST">
-                                    @csrf
+                                <a href="{{ route('admin.profile') }}" data-toggle="modal" data-target="#exampleModalCenter">
                                     <button class="dropdown-item">
-                                        <span class="link-collapse" style="color: #777">My Profile</span>
+                                        <span class="link-collapse" style="color: #777">Profile Saya</span>
                                     </button>
-                                </form>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.profile') }}">
+                                    <button class="dropdown-item">
+                                        <span class="link-collapse" style="color: #777">Pengaturan</span>
+                                    </button>
+                                </a>
                             </li>
                             <li>
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf
                                     <button class="dropdown-item">
-                                        <span class="link-collapse" style="color: #777">Setting</span>
-                                    </button>
-                                </form>
-                            </li>
-                            <li>
-                                <form action="{{ route('logout') }}" method="POST">
-                                    @csrf
-                                    <button class="dropdown-item">
-                                        <span class="link-collapse" style="color: #777">Log Out</span>
+                                        <span class="link-collapse" style="color: #777">Keluar</span>
                                     </button>
                                 </form>
                             </li>
@@ -51,8 +49,8 @@
                 </div>
             </div>
             <ul class="nav nav-primary">
-                <li class="nav-item active">
-                    <a href="#">
+                <li class="nav-item">
+                    <a href="{{ route('admin.dashboard') }}" class="menu-link">
                         <i class="fas fa-home"></i>
                         <p>Dashboard</p>
                         <span class=""></span>
@@ -65,14 +63,14 @@
                     <h4 class="text-section">Navigasi Utama</h4>
                 </li>
                 <li class="nav-item">
-                    <a href="/guruwali">
+                    <a href="{{ route('admin.teacher.index') }}" class="menu-link">
                         <i class="fas fa-user"></i>
                         <p>Guru & Wali Kelas</p>
-                        <span class="/guruwali"></span>
+                        <span class="/#"></span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/siswa">
+                    <a href="{{ route('admin.class.index') }}" >
                         <i class="fas fa-users"></i>
                         <p>Siswa</p>
                         <span class="#"></span>
@@ -120,27 +118,22 @@
     </div>
 </div>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-	Launch demo modal
-</button>
 
-<!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+				<h5 class="modal-title" id="exampleModalLongTitle">Profile Saya
+                </h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-body">
-				Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+				
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
 			</div>
 		</div>
 	</div>

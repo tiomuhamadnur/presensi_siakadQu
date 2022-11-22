@@ -41,12 +41,15 @@
                             <i class="fa fa-search"></i>
                         </a>
                     </li>
-
-
                     <li class="nav-item dropdown hidden-caret">
                         <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
-                            <div class="avatar-sm">
-                                <img src="../assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+                            <div class="avatar avatar-sm">
+                                @if (\Auth::user()->photo)
+                                <img src="{{ asset(\Auth::user()->photo) }}" alt class="..." class="avatar-img rounded-circle" style="width: 3rem; height: 3rem; border-radius: 50%;" />
+                            @else
+                                <img src="https://w7.pngwing.com/pngs/340/956/png-transparent-profile-user-icon-computer-icons-user-profile-head-ico-miscellaneous-black-desktop-wallpaper.png"
+                                    alt="..." class="avatar-img rounded-circle" />
+                            @endif
                             </div>
                         </a>
                     </li>

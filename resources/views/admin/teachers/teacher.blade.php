@@ -1,4 +1,34 @@
-@extends('admin.layout.base')
+
+@include('admin.layout.base')
+@section('custom_js')
+    <!-- jquery -->
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <!-- jquery datatable -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
+    <!-- script tambahan  -->
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js">
+    </script>
+
+    <!-- fungsi datatable -->
+    <script>
+        $(document).ready(function () {
+            $('#table_id').DataTable({
+                // script untuk membuat export data 
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            })
+        });
+
+    </script>
+@endsection
 @section('custom_css')
     <!-- datatable style -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
@@ -9,103 +39,112 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css">
 @endsection
 
-@section('navbar')
-    @include('admin.layout.navbar')
-    @include('admin.layout.toast')
-@endsection
-
-@section('content')
-    <!-- Contextual Classes -->
-    <div class="container-xxl flex-grow-1 container-p-y" style="min-height: 400px;">
-        <div class="card">
-            <div class="row card-header">
-                <div class="col-4 d-flex justify-content-start flex-column">
-                    <h5 class="">Data Guru</h5>
-                </div>
-                <div class="col-8 d-flex align-items-end flex-column" style="padding-right: 4%;">
-                    <button type="button" class="btn btn-icon btn-outline-primary" data-bs-toggle="modal"
-                        data-bs-target="#modalStore">
-                        <span class="tf-icons bx bx-plus"></span>
-                    </button>
-                </div>
-            </div>
-
-            <div class="table-responsive text-nowrap table-min-height">
-                <table class="table" id="table_id">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>nama</th>
-                            <th>NIP</th>
-                            <th>Wali Kelas</th>
-                            <th>email</th>
-                            <th>Status</th>
-                            <th>Hp</th>
-                            <th>Kelamin</th>
-                            <th>Alamat</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="table-border-bottom-0">
-                        @php
-                            $no = 1;
-                        @endphp
-                        @foreach ($teachers as $item)
-                            <tr class="table-default">
-                                <td>{{ $no++ }}</td>
-                                <td><i class="fab fa-sketch fa-lg text-warning me-3"></i>
-                                    <strong>{{ $item->name }}</strong>
-                                </td>
-                                <td>{{ $item->nip }}</td>
-                                <td>{{ $item->classGuiding ? $item->classGuiding->name : '-' }}</td>
-                                <td>{{ $item->email }}</td>
-                                <td>
-                                    @if ($item->deleted_at)
-                                        <span class="badge bg-label-danger me-1">Deleted</span>
-                                    @else
-                                        <span class="badge bg-label-primary me-1">Active</span>
-                                    @endif
-                                </td>
-                                <td>{{ $item->phone }}</td>
-                                <td>{{ $item->gender }}</td>
-                                <td>{{ $item->address }}</td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                            data-bs-toggle="dropdown">
-                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
-                                                data-bs-target="#modalUpdate" data-name="{{ $item->name }}"
-                                                data-email="{{ $item->email }}" data-id="{{ $item->id }}"
-                                                data-status="{{ $item->status }}"
-                                                data-class_id="{{ $item->class_id }}" data-phone="{{ $item->phone }}"
-                                                data-gender="{{ $item->gender }}" data-nisn="{{ $item->nisn }}"
-                                                data-father_name="{{ $item->father_name }}"
-                                                data-parent_phone="{{ $item->parent_phone }}"
-                                                data-address="{{ $item->address }}" data-photo="{{ $item->photo }}"
-                                                data-classes="{{ $classes }}"
-                                                data-nip="{{ $item->nip }}"
-                                                data-class_guiding="{{ $item->classGuiding ? $item->classGuiding->id : null }}">
-                                                <i class="bx bx-edit-alt me-1">
-                                                </i>
-                                                Edit</a>
-                                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
-                                                data-bs-target="#modalDelete" data-id="{{ $item->id }}">
-                                                <i class="bx bx-trash me-1"></i>Delete
-                                            </a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                {{-- {{ $teachers->links() }} --}}
-            </div>
-        </div>
+<div class="wrapper">
+    <div class="main-header">
+        @include('admin.layout.navbar')
     </div>
+        @include('admin.layout.asside')
+
+        <div class="main-panel">
+			<div class="content">
+				<div class="panel-header bg-primary-gradient">
+					<div class="page-inner py-5">
+						<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+							<div>
+								<h2 class="text-white pb-2 fw-bold mt--2">Guru & Wali Kelas</h2>
+								<h2 class="text-white op-9 mb-2">Sistem Administrasi Akademi Daarul Qur'an</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+                <div class="page-inner py-5">
+                        <!-- Contextual Classes -->
+                        <div class="container-xxl flex-grow-1 container-p-y" style="min-height: 400px;">
+                            <div class="card">
+                                <div class="row card-header">
+                                    <div class="col-4 d-flex justify-content-start flex-column">
+                                        <h5 class="">Data Guru</h5>
+                                    </div>
+                                    <div class="col-8 d-flex align-items-end flex-column" style="padding-right: 4%;">
+                                        <button type="button" class="btn btn-icon btn-outline-primary" data-bs-toggle="modal"
+                                            data-bs-target="#modalStore">
+                                            +<span class="tf-icons bx bx-plus"></span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="table-responsive text-nowrap table-min-height">
+                                    <table class="table table-head-bg-success mb-3" id="table_id">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">No</th>
+                                                <th class="text-center">Nama</th>
+                                                <th class="text-center">NIP</th>
+                                                {{-- <th>Wali Kelas</th> --}}
+                                                <th class="text-center">Email</th>
+                                                {{-- <th>Status</th> --}}
+                                                <th class="text-center">Kontak</th>
+                                                {{-- <th>Kelamin</th> --}}
+                                                {{-- <th>Alamat</th>   --}}
+                                                <th class="text-center">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="table-border-bottom-0">
+                                            @php
+                                                $no = 1;
+                                            @endphp
+                                            @foreach ($teachers as $item)
+                                                <tr class="table-default">
+                                                    <td class="text-center">{{ $no++ }}</td>
+                                                    <td class="text-center"><i class="fab fa-sketch fa-lg text-warning me-3"></i>
+                                                        <strong>{{ $item->name }}</strong>
+                                                    </td class="text-center">
+                                                    <td class="text-center">{{ $item->nip }}</td>
+                                                    {{-- <td>{{ $item->classGuiding ? $item->classGuiding->name : '-' }}</td> --}}
+                                                    <td class="text-center">{{ $item->email }}</td>
+                                                    {{-- <td>
+                                                        @if ($item->deleted_at)
+                                                            <span class="badge bg-label-danger me-1">Deleted</span>
+                                                        @else
+                                                            <span class="badge bg-label-primary me-1">Active</span>
+                                                        @endif
+                                                    </td> --}}
+                                                    <td class="text-center">{{ $item->phone }}</td>
+                                                    {{-- <td>{{ $item->gender }}</td> --}}
+                                                    {{-- <td>{{ $item->address }}</td> --}}
+                                                    <td class="text-center">
+                                                                <a type="button" class="btn btn-outline-secondary" href="javascript:void(0);" data-bs-toggle="modal"
+                                                                data-bs-target="#modalDelete" data-id="{{ $item->id }}">
+                                                                <i class="bx bx-trash me-1"></i>Tampil
+                                                                </a>
+                                                                <a type="button" class="btn btn-outline-warning" href="javascript:void(0);" data-bs-toggle="modal"
+                                                                    data-bs-target="#modalUpdate" data-name="{{ $item->name }}"
+                                                                    data-email="{{ $item->email }}" data-id="{{ $item->id }}"
+                                                                    data-status="{{ $item->status }}"
+                                                                    data-class_id="{{ $item->class_id }}" data-phone="{{ $item->phone }}"
+                                                                    data-gender="{{ $item->gender }}" data-nisn="{{ $item->nisn }}"
+                                                                    data-father_name="{{ $item->father_name }}"
+                                                                    data-parent_phone="{{ $item->parent_phone }}"
+                                                                    data-address="{{ $item->address }}" data-photo="{{ $item->photo }}"
+                                                                    data-classes="{{ $classes }}"
+                                                                    data-nip="{{ $item->nip }}"
+                                                                    data-class_guiding="{{ $item->classGuiding ? $item->classGuiding->id : null }}">
+                                                                    <i class="bx bx-edit-alt me-1">
+                                                                    </i>
+                                                                    Edit</a>
+                                                                <a type="button" class="btn btn-outline-danger" href="javascript:void(0);" data-bs-toggle="modal"
+                                                                data-bs-target="#modalDelete" data-id="{{ $item->id }}">
+                                                                <i class="bx bx-trash me-1"></i>Delete
+                                                            </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                    {{-- {{ $teachers->links() }} --}}
+                                </div>
+                            </div>
+                        </div>
     <!--/ Contextual Classes -->
 
 
@@ -331,33 +370,8 @@
             });
         });
     </script>
-@endsection
-@section('custom_js')
-    <!-- jquery -->
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <!-- jquery datatable -->
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
-
-    <!-- script tambahan  -->
-    <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js">
-    </script>
-
-    <!-- fungsi datatable -->
-    <script>
-        $(document).ready(function () {
-            $('#table_id').DataTable({
-                // script untuk membuat export data 
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
-                ]
-            })
-        });
-
-    </script>
-@endsection
+                </div>
+			</div>
+            @include('admin.layout.footer')
+		</div>
+</div>
