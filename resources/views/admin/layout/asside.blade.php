@@ -77,7 +77,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a data-toggle="collapse" href="#forms">
+                    <a href="{{ route('admin.course.index') }}">
                         <i class="fas fa-pen-square"></i>
                         <p>Mata Pelajaran</p>
                         <span class="#"></span>

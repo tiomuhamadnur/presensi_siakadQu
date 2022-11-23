@@ -114,7 +114,7 @@
                                                     <td class="text-center">
                                                                 <a type="button" class="btn btn-outline-secondary" href="javascript:void(0);" data-toggle="modal"
                                                                 data-target="#modalDelete" data-id="{{ $item->id }}">
-                                                                <i class="bx bx-trash me-1"></i>Tampil
+                                                                <i class="fa fa-eye"></i>
                                                                 </a>
                                                                 <a type="button" class="btn btn-outline-warning" href="javascript:void(0);" data-bs-toggle="modal"
                                                                     data-bs-target="#modalUpdate" data-name="{{ $item->name }}"
@@ -128,12 +128,12 @@
                                                                     data-classes="{{ $classes }}"
                                                                     data-nip="{{ $item->nip }}"
                                                                     data-class_guiding="{{ $item->classGuiding ? $item->classGuiding->id : null }}">
-                                                                    <i class="bx bx-edit-alt me-1">
+                                                                    <i class="fa fa-edit">
                                                                     </i>
-                                                                    Edit</a>
+                                                                    </a>
                                                                 <a type="button" class="btn btn-outline-danger" href="javascript:void(0);" data-toggle="modal"
                                                                 data-target="#modalDelete" data-id="{{ $item->id }}">
-                                                                <i class="bx bx-trash me-1"></i>Delete
+                                                                <i class="fa fa-trash"></i>
                                                             </a>
                                                     </td>
                                                 </tr>
