@@ -60,14 +60,13 @@
                 <div class="page-inner py-5">
                         <!-- Contextual Classes -->
                         <div class="container-xxl flex-grow-1 container-p-y" style="min-height: 400px;">
-                            <div class="card">
+                            <div class="card mt--4">
                                 <div class="row card-header">
                                     <div class="col-4 d-flex justify-content-start flex-column">
                                         <h5 class="">Data Guru</h5>
                                     </div>
                                     <div class="col-8 d-flex align-items-end flex-column" style="padding-right: 4%;">
-                                        <button type="button" class="btn btn-icon btn-outline-primary" data-bs-toggle="modal"
-                                            data-bs-target="#modalStore">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalStore">
                                             +<span class="tf-icons bx bx-plus"></span>
                                         </button>
                                     </div>
@@ -113,8 +112,8 @@
                                                     {{-- <td>{{ $item->gender }}</td> --}}
                                                     {{-- <td>{{ $item->address }}</td> --}}
                                                     <td class="text-center">
-                                                                <a type="button" class="btn btn-outline-secondary" href="javascript:void(0);" data-bs-toggle="modal"
-                                                                data-bs-target="#modalDelete" data-id="{{ $item->id }}">
+                                                                <a type="button" class="btn btn-outline-secondary" href="javascript:void(0);" data-toggle="modal"
+                                                                data-target="#modalDelete" data-id="{{ $item->id }}">
                                                                 <i class="bx bx-trash me-1"></i>Tampil
                                                                 </a>
                                                                 <a type="button" class="btn btn-outline-warning" href="javascript:void(0);" data-bs-toggle="modal"
@@ -132,8 +131,8 @@
                                                                     <i class="bx bx-edit-alt me-1">
                                                                     </i>
                                                                     Edit</a>
-                                                                <a type="button" class="btn btn-outline-danger" href="javascript:void(0);" data-bs-toggle="modal"
-                                                                data-bs-target="#modalDelete" data-id="{{ $item->id }}">
+                                                                <a type="button" class="btn btn-outline-danger" href="javascript:void(0);" data-toggle="modal"
+                                                                data-target="#modalDelete" data-id="{{ $item->id }}">
                                                                 <i class="bx bx-trash me-1"></i>Delete
                                                             </a>
                                                     </td>
@@ -200,7 +199,7 @@
                                 </div>
                                 <div class="col mb-1">
                                     <label for="emailWithTitle" class="form-label">Alamat</label>
-                                    <textarea id="update_address" class="form-control" name="address" placeholder="Masukan Alamat Siswa"></textarea>
+                                    <textarea id="update_address" class="form-control" name="address" placeholder="Masukan Alamat"></textarea>
                                 </div>
                             </div>
                             <div class="row g-2">
@@ -278,7 +277,7 @@
                                 </div>
                                 <div class="col mb-1">
                                     <label for="emailWithTitle" class="form-label">Alamat</label>
-                                    <textarea id="" class="form-control" name="address" placeholder="Masukan Alamat Siswa"></textarea>
+                                    <textarea id="" class="form-control" name="address" placeholder="Masukan Alamat"></textarea>
                                 </div>
                             </div>
                             <div class="row g-2">
@@ -289,7 +288,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
                                 Tutup
                             </button>
                             <button type="submit" class="btn btn-primary">Simpan</button>

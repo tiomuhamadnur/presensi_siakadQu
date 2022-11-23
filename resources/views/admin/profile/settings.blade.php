@@ -22,7 +22,7 @@
                     <div class="row mt--2">
                         <div class="col-md-12">
                             <div class="card mb-4">
-                                <h5 class="card-header">Detail Profile</h5>
+                                <h5 class="card-header">Detail Profil</h5>
                                 <!-- Account -->
                                 <form id="formAccountSettings" method="POST" action="{{ route('admin.profile.update') }}"
                                     enctype="multipart/form-data">

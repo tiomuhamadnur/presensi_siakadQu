@@ -2,7 +2,7 @@
         <!-- Logo Header -->
         <div class="logo-header" data-background-color="orange">
 
-            <a href="index.html" class="logo">
+            <a href="/admin" class="logo">
                 <img src="../assets/img/logo.png" style="width: 140px; justify-content: center;" alt="navbar brand" class="navbar-brand">
             </a>
             <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">

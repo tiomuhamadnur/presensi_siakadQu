@@ -1,4 +1,35 @@
-@extends('admin.layout.base')
+
+@include('admin.layout.base')
+@section('custom_js')
+    <!-- jquery -->
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <!-- jquery datatable -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
+    <!-- script tambahan  -->
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js">
+    </script>
+    
+
+    <!-- fungsi datatable -->
+    <script>
+        $(document).ready(function () {
+            $('#table_id').DataTable({
+                // script untuk membuat export data 
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            })
+        });
+
+    </script>
+@endsection
 @section('custom_css')
     <!-- datatable style -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
@@ -7,118 +38,254 @@
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <!-- css tambahan  -->
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css">
+    
 @endsection
 
-@section('navbar')
-    @include('admin.layout.navbar')
-    @include('admin.layout.toast')
-@endsection
-
-@section('content')
-    <!-- Contextual Classes -->
-    <div class="container-xxl flex-grow-1 container-p-y" style="min-height: 400px;">
-        <div class="card">
-            <div class="row card-header">
-                <div class="col-4 d-flex justify-content-start flex-column">
-                    <h5 class="">Data User</h5>
-                </div>
-                <div class="col-8 d-flex align-items-end flex-column" style="padding-right: 4%;">
-                    <button type="button" class="btn btn-icon btn-outline-primary" data-bs-toggle="modal"
-                        data-bs-target="#modalStore">
-                        <span class="tf-icons bx bx-plus"></span>
-                    </button>
-                </div>
-            </div>
-
-            <div class="table-responsive text-nowrap table-min-height">
-                <table class="table" id="table_id">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>NIK</th>
-                            <th>TTL</th>
-                            <th>name</th>
-                            <th>Kelas</th>
-                            <th>email</th>
-                            <th>Status</th>
-                            <th>Hp</th>
-                            <th>Kelamin</th>
-                            <th>NISN</th>
-                            <th>Nama Ayah</th>
-                            <th>Hp Orang Tua</th>
-                            <th>Alamat</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="table-border-bottom-0">
-                        @php
-                            $no = 1;
-                        @endphp
-                        @foreach ($students as $item)
-                            <tr class="table-default">
-                                <td>{{ $no++ }}</td>
-                                <td>{{ $item->nik }}</td>
-                                <td>{{ $item->born_at }},
-                                    {{ \Carbon\Carbon::parse($item->birthday)->isoFormat('DD-MM-YYYY') }}
-                                </td>
-                                <td><i class="fab fa-sketch fa-lg text-warning me-3"></i>
-                                    <strong>{{ $item->name }}</strong>
-                                </td>
-                                <td>{{ $item->class ? $item->class->name : null }}</td>
-                                <td>{{ $item->email }}</td>
-                                <td>
-                                    @if ($item->deleted_at)
-                                        <span class="badge bg-label-danger me-1">Deleted</span>
-                                    @else
-                                        <span class="badge bg-label-primary me-1">Active</span>
-                                    @endif
-                                </td>
-                                <td>{{ $item->phone }}</td>
-                                <td>{{ $item->gender }}</td>
-                                <td>{{ $item->nisn }}</td>
-                                <td>{{ $item->father_name }}</td>
-                                <td>{{ $item->parent_phone }}</td>
-                                <td>{{ $item->address }}</td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                            data-bs-toggle="dropdown">
-                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
-                                                data-bs-target="#modalUpdate" data-name="{{ $item->name }}"
-                                                data-email="{{ $item->email }}" data-id="{{ $item->id }}"
-                                                data-status="{{ $item->status }}" data-class_id="{{ $item->class_id }}"
-                                                data-phone="{{ $item->phone }}" data-gender="{{ $item->gender }}"
-                                                data-nisn="{{ $item->nisn }}"
-                                                data-father_name="{{ $item->father_name }}"
-                                                data-parent_phone="{{ $item->parent_phone }}"
-                                                data-address="{{ $item->address }}" data-photo="{{ $item->photo }}"
-                                                data-classes="{{ $classes }}" data-item="{{ $item }}">
-                                                <i class="bx bx-edit-alt me-1">
-                                                </i>
-                                                Edit</a>
-                                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
-                                                data-bs-target="#modalDelete" data-id="{{ $item->id }}">
-                                                <i class="bx bx-trash me-1"></i>Delete
-                                            </a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                {{-- {{ $students->links() }} --}}
-            </div>
-        </div>
+<div class="wrapper">
+    <div class="main-header">
+        @include('admin.layout.navbar')
     </div>
+        @include('admin.layout.asside')
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'><link rel="stylesheet" href="./style.css">
+
+        <div class="main-panel">
+			<div class="content">
+				<div class="panel-header bg-primary-gradient">
+					<div class="page-inner py-5">
+						<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+							<div>
+								<h2 class="text-white pb-2 fw-bold mt--2">Siswa</h2>
+								<h2 class="text-white op-9 mb-2">Sistem Administrasi Akademi </h2>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="page-inner mt--5">
+					<div class="row mt--2">
+						<div class="col-md-4">
+							<div class="card gr-2">
+								<div class="card-body" style="border-bottom: 20px;">
+									<div class="card-title text-center">VII A</div>
+                                    <div class="container-card d-flex flex-wrap justify-content-around">
+                                        <button data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-dark">Wali</button>
+                                        <button type="button" class="btn btn-outline-dark">Siswa</button>
+                                    </div>
+									<div class="d-flex flex-wrap justify-content-around pb-2 pt-4">
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div class="card gr-2">
+								<div class="card-body" style="border-bottom: 20px;">
+									<div class="card-title text-center">VII B</div>
+                                    <div class="container-card d-flex flex-wrap justify-content-around">
+                                        <button data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-dark">Wali</button>
+                                        <button type="button" class="btn btn-outline-dark">Siswa</button>
+                                    </div>
+									<div class="d-flex flex-wrap justify-content-around pb-2 pt-4">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="card gr-2">
+								<div class="card-body" style="border-bottom: 20px;">
+									<div class="card-title text-center">VIII A</div>
+                                    <div class="container-card d-flex flex-wrap justify-content-around">
+                                        <button data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-dark">Wali</button>
+                                        <button type="button" class="btn btn-outline-dark">Siswa</button>
+                                    </div>
+									<div class="d-flex flex-wrap justify-content-around pb-2 pt-4">
+									</div>
+								</div>
+							</div>
+						</div>
+                        <div class="col-md-4">
+							<div class="card full-height">
+								<div class="card-body" style="border-bottom: 20px;">
+									<div class="card-title text-center">VIII B</div>
+                                    <div class="container-card d-flex flex-wrap justify-content-around">
+                                        <button data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-dark">Wali</button>
+                                        <button type="button" class="btn btn-outline-dark">Siswa</button>
+                                    </div>
+									<div class="d-flex flex-wrap justify-content-around pb-2 pt-4">
+									</div>
+								</div>
+							</div>
+						</div>
+                        <div class="col-md-4">
+							<div class="card full-height">
+								<div class="card-body" style="border-bottom: 20px;">
+									<div class="card-title text-center">X</div>
+                                    <div class="container-card d-flex flex-wrap justify-content-around">
+                                        <button data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-dark">Wali</button>
+                                        <button type="button" class="btn btn-outline-dark">Siswa</button>
+                                    </div>
+									<div class="d-flex flex-wrap justify-content-around pb-2 pt-4">
+									</div>
+								</div>
+							</div>
+						</div>
+                        <div class="col-md-4">
+							<div class="card full-height">
+								<div class="card-body" style="border-bottom: 20px;">
+									<div class="card-title text-center">XI</div>
+                                        <div class="container-card d-flex flex-wrap justify-content-around">
+                                            <button data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-dark">Wali</button>
+                                            <button type="button" class="btn btn-outline-dark">Siswa</button>
+                                        </div>
+									<div class="d-flex flex-wrap justify-content-around pb-2 pt-4">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+                <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Data Wali Kelas</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ...
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+			</div>
+            @include('admin.layout.footer')
+		</div>
+{{-- 
+        <div class="main-panel">
+			<div class="content">
+				<div class="panel-header bg-primary-gradient">
+					<div class="page-inner py-5">
+						<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+							<div>
+								<h2 class="text-white pb-2 fw-bold mt--2">Guru & Wali Kelas</h2>
+								<h2 class="text-white op-9 mb-2">Sistem Administrasi Akademi Daarul Qur'an</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+                <div class="page-inner py-5">
+                        <!-- Contextual Classes -->
+                        {{-- <div class="container-xxl flex-grow-1 container-p-y" style="min-height: 400px;">
+                            <div class="card">
+                                <div class="row card-header">
+                                    <div class="col-4 d-flex justify-content-start flex-column">
+                                        <h5 class="">Data User</h5>
+                                    </div>
+                                    <div class="col-8 d-flex align-items-end flex-column" style="padding-right: 4%;">
+                                        <button type="button" class="btn btn-icon btn-outline-primary" data-bs-toggle="modal"
+                                            data-bs-target="#modalStore">
+                                            <span class="tf-icons bx bx-plus"></span>
+                                        </button>
+                                    </div>
+                                </div>
+
+
+                    {{-- -----SHOW MURID---- --}}
+                                {{-- <div class="table-responsive text-nowrap table-min-height">
+                                    <table class="table" id="table_id">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>NIK</th>
+                                                <th>TTL</th>
+                                                <th>name</th>
+                                                <th>Kelas</th>
+                                                <th>email</th>
+                                                <th>Status</th>
+                                                <th>Hp</th>
+                                                <th>Kelamin</th>
+                                                <th>NISN</th>
+                                                <th>Nama Ayah</th>
+                                                <th>Hp Orang Tua</th>
+                                                <th>Alamat</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="table-border-bottom-0">
+                                            @php
+                                                $no = 1;
+                                            @endphp
+                                            @foreach ($students as $item)
+                                                <tr class="table-default">
+                                                    <td>{{ $no++ }}</td>
+                                                    <td>{{ $item->nik }}</td>
+                                                    <td>{{ $item->born_at }},
+                                                        {{ \Carbon\Carbon::parse($item->birthday)->isoFormat('DD-MM-YYYY') }}
+                                                    </td>
+                                                    <td><i class="fab fa-sketch fa-lg text-warning me-3"></i>
+                                                        <strong>{{ $item->name }}</strong>
+                                                    </td>
+                                                    <td>{{ $item->class ? $item->class->name : null }}</td>
+                                                    <td>{{ $item->email }}</td>
+                                                    <td>
+                                                        @if ($item->deleted_at)
+                                                            <span class="badge bg-label-danger me-1">Deleted</span>
+                                                        @else
+                                                            <span class="badge bg-label-primary me-1">Active</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>{{ $item->phone }}</td>
+                                                    <td>{{ $item->gender }}</td>
+                                                    <td>{{ $item->nisn }}</td>
+                                                    <td>{{ $item->father_name }}</td>
+                                                    <td>{{ $item->parent_phone }}</td>
+                                                    <td>{{ $item->address }}</td>
+                                                    <td>
+                                                        <div class="dropdown">
+                                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                                                data-bs-toggle="dropdown">
+                                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                                            </button>
+                                                            <div class="dropdown-menu">
+                                                                <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
+                                                                    data-bs-target="#modalUpdate" data-name="{{ $item->name }}"
+                                                                    data-email="{{ $item->email }}" data-id="{{ $item->id }}"
+                                                                    data-status="{{ $item->status }}" data-class_id="{{ $item->class_id }}"
+                                                                    data-phone="{{ $item->phone }}" data-gender="{{ $item->gender }}"
+                                                                    data-nisn="{{ $item->nisn }}"
+                                                                    data-father_name="{{ $item->father_name }}"
+                                                                    data-parent_phone="{{ $item->parent_phone }}"
+                                                                    data-address="{{ $item->address }}" data-photo="{{ $item->photo }}"
+                                                                    data-classes="{{ $classes }}" data-item="{{ $item }}">
+                                                                    <i class="bx bx-edit-alt me-1">
+                                                                    </i>
+                                                                    Edit</a>
+                                                                <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
+                                                                    data-bs-target="#modalDelete" data-id="{{ $item->id }}">
+                                                                    <i class="bx bx-trash me-1"></i>Delete
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                    {{-- {{ $students->links() }} 
+                                </div> 
+                            </div>
+                        </div> --}}
+                        
     <!--/ Contextual Classes -->
 
 
     <!-- Update Admin Vertically Centered Modal -->
-    <div class="col-lg-4 col-md-6">
+    {{-- <div class="col-lg-4 col-md-6">
         <!-- Modal -->
         <div class="modal fade" id="modalUpdate" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -222,6 +389,7 @@
             </div>
         </div>
     </div>
+
 
     <!-- Add Admin Vertically Centered Modal -->
     <div class="col-lg-4 col-md-6">
@@ -404,34 +572,7 @@
             });
         });
     </script>
-@endsection
-
-@section('custom_js')
-    <!-- jquery -->
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <!-- jquery datatable -->
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
-
-    <!-- script tambahan  -->
-    <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js">
-    </script>
-
-    <!-- fungsi datatable -->
-    <script>
-        $(document).ready(function () {
-            $('#table_id').DataTable({
-                // script untuk membuat export data 
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
-                ]
-            })
-        });
-
-    </script>
-@endsection
+                </div>
+			</div>
+		</div>
+</div> --}}

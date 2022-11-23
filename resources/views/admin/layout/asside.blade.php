@@ -70,7 +70,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.class.index') }}" >
+                    <a href="{{ route('admin.student.index') }}" >
                         <i class="fas fa-users"></i>
                         <p>Siswa</p>
                         <span class="#"></span>
