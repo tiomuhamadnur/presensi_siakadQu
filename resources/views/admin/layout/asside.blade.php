@@ -77,6 +77,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('admin.dashboard') }}" >
+                        <i class="fas fa-bars"></i>
+                        <p>Kelas (On Progress)</p>
+                        <span class="#"></span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('admin.course.index') }}">
                         <i class="fas fa-pen-square"></i>
                         <p>Mata Pelajaran</p>

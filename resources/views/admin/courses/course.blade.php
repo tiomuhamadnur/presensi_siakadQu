@@ -57,7 +57,7 @@
 						</div>
 					</div>
 				</div>
-                <div class="page-inner py-5">
+                <div class="page-inner mt--5">
                         <!-- Contextual Classes -->
     <!--/ Contextual Classes -->    
     <div class="container-xxl flex-grow-1 container-p-y" style="min-height: 400px;">
@@ -120,7 +120,7 @@
                             </form>
                         </div>
                         <div class="col-2">
-                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                            <button type="button" class="btn btn-primary mr--2" data-toggle="modal"
                                 data-target="#modalStore">
                                 <span class="fa fa-plus"></span>
                             </button>

@@ -57,17 +57,17 @@
 						</div>
 					</div>
 				</div>
-                <div class="page-inner py-5">
+                <div class="page-inner mt--5">
                         <!-- Contextual Classes -->
                         <div class="container-xxl flex-grow-1 container-p-y" style="min-height: 400px;">
-                            <div class="card mt--4">
+                            <div class="card mt">
                                 <div class="row card-header">
                                     <div class="col-4 d-flex justify-content-start flex-column">
                                         <h5 class="">Data Guru</h5>
                                     </div>
                                     <div class="col-8 d-flex align-items-end flex-column" style="padding-right: 4%;">
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalStore">
-                                            +<span class="tf-icons bx bx-plus"></span>
+                                            <span class="fa fa-plus "></span>
                                         </button>
                                     </div>
                                 </div>
@@ -112,12 +112,8 @@
                                                     {{-- <td>{{ $item->gender }}</td> --}}
                                                     {{-- <td>{{ $item->address }}</td> --}}
                                                     <td class="text-center">
-                                                                <a type="button" class="btn btn-outline-secondary" href="javascript:void(0);" data-toggle="modal"
-                                                                data-target="#modalDelete" data-id="{{ $item->id }}">
-                                                                <i class="fa fa-eye"></i>
-                                                                </a>
-                                                                <a type="button" class="btn btn-outline-warning" href="javascript:void(0);" data-bs-toggle="modal"
-                                                                    data-bs-target="#modalUpdate" data-name="{{ $item->name }}"
+                                                                <a type="button" class="btn btn-outline-warning" href="javascript:void(0);" data-toggle="modal"
+                                                                    data-target="#modalUpdate" data-name="{{ $item->name }}"
                                                                     data-email="{{ $item->email }}" data-id="{{ $item->id }}"
                                                                     data-status="{{ $item->status }}"
                                                                     data-class_id="{{ $item->class_id }}" data-phone="{{ $item->phone }}"
@@ -155,7 +151,6 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalAdminTitle">Pratinjau Data</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form action="{{ route('admin.teacher.update') }}" method="POST">
                         @csrf
@@ -210,7 +205,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
                                 Tutup
                             </button>
                             <button type="submit" class="btn btn-primary">Simpan</button>
