@@ -156,9 +156,14 @@
                                         
 
                                         <div class="button text-center">
-                                            <a class="btn btn-outline-dark"
-                                                href="{{ route('admin.course.student.index', ['course_id' => $item->id]) }}">
-                                                <i class='fa fa-eye'></i>
+                                            <a class="btn btn-outline-dark" href="javascript:void(0);" data-toggle="modal"
+                                                data-target="#modalView" data-name="{{ $item->name }}"
+                                                data-id="{{ $item->id }}" data-teachers="{{ $teachers }}"
+                                                data-classes="{{ $classes }}"
+                                                data-teacher_id="{{ $item->teacher_id }}"
+                                                data-class_id="{{ $item->class_id }}">
+                                                <i class="fa fa-eye">
+                                                </i>
                                             </a>
 
                                             <a class="btn btn-outline-warning" href="javascript:void(0);" data-toggle="modal"
@@ -192,7 +197,7 @@
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalAdminTitle">Pratinjau Data</h5>
+                        <h5 class="modal-title" id="modalAdminTitle">Edit Data</h5>
                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form action="{{ route('admin.course.update') }}" method="POST">
@@ -201,13 +206,13 @@
                         <div class="modal-body">
                             <div class="row g-2">
                                 <div class="col mb-1">
-                                    <label for="" class="form-label">Nama Matpel</label>
+                                    <label for="" class="form-label">Mata Pelajaran</label>
                                     <input type="text" id="update_name" class="form-control" name="name"
                                         placeholder="Masukan Nama Mata Pelajaran" />
                                     <input type="hidden" id="update_id" class="form-control" name="id" />
                                 </div>
                                 <div class="col mb-1">
-                                    <label for="" class="form-label">Pengampu</label>
+                                    <label for="" class="form-label">Guru Pengampu</label>
                                     <select name="teacher_id" class="form-control" id="update_teacher_id">
 
                                     </select>
@@ -233,6 +238,54 @@
             </div>
         </div>
     </div>
+        <!-- View Admin Vertically Centered Modal -->
+        <div class="col-lg-4 col-md-6">
+            <!-- Modal -->
+            <div class="modal fade" id="modalView" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalAdminTitle">Pratinjau Data</h5>
+                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ route('admin.course.update') }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <div class="modal-body">
+                                <div class="row g-2">
+                                    <div class="col mb-1">
+                                        <label for="" class="form-label">Mata Pelajaran</label>
+                                        <input type="text" id="update_name" class="form-control" name="name"
+                                            placeholder="Masukan Nama Mata Pelajaran" />
+                                        <input type="hidden" id="update_id" class="form-control" name="id" />
+                                    </div>
+                                    <div class="col mb-1">
+                                        <label for="" class="form-label">Guru Pengampu</label>
+                                        <select name="teacher_id" class="form-control" id="update_teacher_id">
+    
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="col mb-1">
+                                        <label for="" class="form-label">Kelas</label>
+                                        <select name="class_id" class="form-control" id="update_class_id">
+    
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+                                    Tutup
+                                </button>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     <!-- Add Admin Vertically Centered Modal -->
     <div class="col-lg-4 col-md-6">
         <!-- Modal -->
@@ -249,12 +302,12 @@
                         <div class="modal-body">
                             <div class="row g-2">
                                 <div class="col mb-1">
-                                    <label for="" class="form-label">Nama Matpel</label>
+                                    <label for="" class="form-label">Mata Pelajaran</label>
                                     <input type="text" id="name" class="form-control" name="name"
                                         placeholder="Masukan Nama Mata Pelajaran" />
                                 </div>
                                 <div class="col mb-1">
-                                    <label for="" class="form-label">Pengampu</label>
+                                    <label for="" class="form-label">Guru Pengampu</label>
                                     <select name="teacher_id" class="form-control" id="teacher_id">
                                         @foreach ($teachers as $item)
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -288,14 +341,14 @@
     <script>
         $(document).ready(function() {
 
-            $('#modalDelete').on('show.bs.modal', function(e) {
+            $('#modalDelete').on('show.modal', function(e) {
                 var id = $(e.relatedTarget).data('id');
                 $('#delete_id').val(id);
                 $('#form_delete_id').attr('action', "{{ route('admin.course.delete') }}");
-            });
+            });s
 
 
-            $('#modalUpdate').on('show.bs.modal', function(e) {
+            $('#modalUpdate').on('show.modal', function(e) {
                 var id = $(e.relatedTarget).data('id');
                 var name = $(e.relatedTarget).data('name');
                 var teacher_id = $(e.relatedTarget).data('teacher_id');

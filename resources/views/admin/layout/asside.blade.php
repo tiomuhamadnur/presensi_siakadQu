@@ -140,7 +140,7 @@
 				
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
 			</div>
 		</div>
 	</div>
