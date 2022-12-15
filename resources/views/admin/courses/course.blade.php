@@ -77,7 +77,7 @@
                     <h5 class="">Data Mata Pelajaran</h5>
                 </div>
                 <div class="col-8 d-flex align-items-end flex-column" style="padding-right: 4%;">
-                    <div class="row" style="width: 40%">
+                    <div class="row" style="width: 60%">
                         <div class="col-10">
                             <form action="{{ route('admin.course.index') }}">
                                 <div class="input-group input-group-merge">
@@ -130,7 +130,7 @@
                             </form>
                         </div>
                         <div class="col-2">
-                            <button type="button" class="btn btn-primary mr--2" data-toggle="modal"
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
                                 data-target="#modalStore">
                                 <span class="fa fa-plus"></span>
                             </button>
