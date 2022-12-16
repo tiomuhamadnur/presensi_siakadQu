@@ -26,6 +26,37 @@
 	<link rel="stylesheet" href="../assets/css/demo.css">
 </head>
 <body>
+	    <!-- Layout wrapper -->
+
+						{{-- Delete Modal --}}
+						<div class="modal fade" id="modalDelete" tabindex="-1" aria-hidden="true">
+							<div class="modal-dialog modal-sm" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel2">Konfirmasi Hapus Data</h5>
+								</div>
+								<form id="form_delete_id" action="#" method="POST">
+								 @csrf
+								 @method('DELETE')
+								<div class="modal-body">
+									<div class="row">
+										<div class="col mb-3">
+											<h5>Apakah Anda Yakin untuk menghapus Data ini?</h5>
+										<input type="text" name="id" id="delete_id" hidden class="form-control">
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">
+								<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Batal</button>
+								<button type="submit" class="btn btn-danger">Hapus</button>
+								</div>
+								</form>
+							</div>
+							</div>
+						</div>
+						{{-- END MODAL DELETE --}}
+					  <!-- / Footer -->
+					  <div class="content-backdrop fade"></div>
 
     <script src="../assets/js/core/jquery.3.2.1.min.js"></script>
 	<script src="../assets/js/core/popper.min.js"></script>

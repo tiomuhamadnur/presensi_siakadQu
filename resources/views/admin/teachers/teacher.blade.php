@@ -77,7 +77,7 @@
                                     </div>
                                     <div class="col-8 d-flex align-items-end flex-column" style="padding-right: 4%;">
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalStore">
-                                            <span class="fa fa-plus"></span>
+                                            <span class="fa fa-plus "></span>
                                         </button>
                                     </div>
                                 </div>
@@ -150,6 +150,7 @@
                                 </div>
                             </div>
                         </div>
+                    
     <!--/ Contextual Classes -->
 
 
@@ -314,7 +315,7 @@
             });
 
 
-            $('#modalUpdate').on('show.bs.modal', function(e) {
+            $('#modalUpdate').on('show.modal', function(e) {
                 var name = $(e.relatedTarget).data('name');
                 var email = $(e.relatedTarget).data('email');
                 var id = $(e.relatedTarget).data('id');
